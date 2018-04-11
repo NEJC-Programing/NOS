@@ -1,4 +1,4 @@
-#include "../include/screen.h"
+#include "/include/screen.h"
 int cursorX = 0, cursorY = 0;
 const uint8 sw = 80,sh = 25,sd = 2; 
 int color = 0x0F;
@@ -18,10 +18,10 @@ void updateCursor()
 
     temp = cursorY * sw + cursorX-1;                                                      // Position = (y * width) +  x
 
-    outportb(0x3D4, 14);                                                                // CRT Control Register: Select Cursor Location
-    outportb(0x3D5, temp >> 8);                                                         // Send the high byte across the bus
-    outportb(0x3D4, 15);                                                                // CRT Control Register: Select Send Low byte
-    outportb(0x3D5, temp);                                                              // Send the Low byte of the cursor location
+    outb(0x3D4, 14);                                                                // CRT Control Register: Select Cursor Location
+    outb(0x3D5, temp >> 8);                                                         // Send the high byte across the bus
+    outb(0x3D4, 15);                                                                // CRT Control Register: Select Send Low byte
+    outb(0x3D5, temp);                                                              // Send the Low byte of the cursor location
 }
 void clearScreen()
 {
