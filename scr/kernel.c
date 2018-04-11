@@ -1,0 +1,5 @@
+
+void kstart(char *bootarg)
+{
+    
+}

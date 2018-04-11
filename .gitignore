@@ -22,6 +22,11 @@
 *.la
 *.lo
 
+# NOS Kernle
+*.nos
+NOS.kern
+*-NOS.kern
+
 # Shared objects (inc. Windows DLLs)
 *.dll
 *.so
