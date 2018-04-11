@@ -27,6 +27,9 @@
 NOS.kern
 *-NOS.kern
 
+# NOS Boot Kernel
+kernel.bin
+
 # Shared objects (inc. Windows DLLs)
 *.dll
 *.so
