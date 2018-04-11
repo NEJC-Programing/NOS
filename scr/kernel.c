@@ -17,6 +17,6 @@ void kstart(char *bootarg)
     }
     clearScreen();
     while(1){
-        print(inb(0x60));
+        print(inb(0x60)+"0");
     }
 }
