@@ -2,11 +2,21 @@
 void kstart(char *bootarg)
 {
     clearScreen();
-    print("noam\nnoam");
-    int i = 0;
+    print("noam\nNoam is The Best");
+    int i = 1;
+    while(i){
+        if(inb(0x60)==2){
+            i=0;
+        }
+    }
+    print("\rNHTHEBEST         \n");
+    while(i){
+        if(inb(0x60)==3){
+            i=0;
+        }
+    }
+    clearScreen();
     while(1){
-        print(i);
-        print("\n----\n");
-        i++;
+        print(inb(0x60));
     }
 }
