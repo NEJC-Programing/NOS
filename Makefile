@@ -15,9 +15,9 @@ all: kernel
 kernel: functions
 	$(ASSEMBLER) $(ASFLAGS) -o temp/obj/kasm.o scr/kernel.asm
 	$(COMPILER) $(CFLAGS) scr/kernel.c -o temp/obj/kc.o 
-	$(COMPILER) $(CFLAGS) scr/screen.c -o temp/obj/screen.o 
-	$(COMPILER) $(CFLAGS) scr/string.c -o temp/obj/string.o 
-	$(COMPILER) $(CFLAGS) scr/system.c -o temp/obj/system.o 
+	$(COMPILER) $(CFLAGS) scr/functions/screen.c -o temp/obj/screen.o 
+	$(COMPILER) $(CFLAGS) scr/functions/string.c -o temp/obj/string.o 
+	$(COMPILER) $(CFLAGS) scr/functions/system.c -o temp/obj/system.o 
 	
 	$(LINKER) $(LDFLAGS) -o $(OUTPUT) $(OBJS)
 	
