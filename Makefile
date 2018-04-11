@@ -1,7 +1,7 @@
 COMPILER = gcc
 LINKER = ld
 ASSEMBLER = nasm
-CFLAGS = -m32 -c -ffreestanding
+CFLAGS = -m32 -c -ffreestanding 
 ASFLAGS = -f elf32
 LDFLAGS = -m elf_i386 -T scr/link.ld
 EMULATOR = qemu/qemu-system-i386.exe
@@ -9,7 +9,7 @@ EMULATOR_FLAGS = -kernel
 kernel_file = nos\\kernel.bin
 
 OBJS = temp/obj/kasm.o temp/obj/kc.o
-OUTPUT = nos/kernel.bin temp/obj/system.o temp/obj/string.o temp/obj/screen.o 
+OUTPUT = nos/kernel.bin temp/obj/system.o temp/obj/string.o temp/obj/screen.o temp/obj/kb.o temp/obj/util.o 
 
 all: kernel test
 
@@ -19,6 +19,8 @@ kernel: functions
 	$(COMPILER) $(CFLAGS) scr/functions/screen.c -o temp/obj/screen.o 
 	$(COMPILER) $(CFLAGS) scr/functions/string.c -o temp/obj/string.o 
 	$(COMPILER) $(CFLAGS) scr/functions/system.c -o temp/obj/system.o 
+	$(COMPILER) $(CFLAGS) scr/functions/kb.c -o temp/obj/kb.o 
+	$(COMPILER) $(CFLAGS) scr/functions/util.c -o temp/obj/util.o 
 	
 	$(LINKER) $(LDFLAGS) -o $(OUTPUT) $(OBJS)
 	
