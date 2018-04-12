@@ -13,14 +13,6 @@ void kstart(void * bootarg)
     while(i!=300000000){
         i++;
     }
-<<<<<<< HEAD
-    clearScreen();
-    char text[] = "StringX";
-    while(1){
-        text[6] = inb(0x60)+ '0';
-        print(text);
-        print("\n");
-=======
     int f = 100000000;
     while(1){
     clearScreen();
@@ -39,7 +31,6 @@ void kstart(void * bootarg)
     i =0;
     while(i!=f){
         i++;
->>>>>>> 35b0669d4e1487bbf3bc85f3035090843218a8ff
     }
     f = f/2;}
     ss++;
