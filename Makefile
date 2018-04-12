@@ -9,7 +9,7 @@ EMULATOR_FLAGS = -kernel
 kernel_file = nos\\kernel.bin
 
 OBJS = temp/obj/kasm.o temp/obj/kc.o
-OUTPUT = nos/kernel.bin temp/obj/system.o temp/obj/string.o temp/obj/screen.o temp/obj/kb.o temp/obj/util.o 
+OUTPUT = nos/kernel.bin temp/obj/system.o temp/obj/string.o temp/obj/screen.o # temp/obj/kb.o temp/obj/util.o 
 
 all: kernel test
 

@@ -1,24 +1,65 @@
 #include "kernel.h"
-void kstart(char *bootarg)
+void kstart(void * bootarg)
 {
+    int ss =0;
     clearScreen();
-    print("noam\nNoam is The Best");
-    int i = 1;
-    while(i){
-        if(inb(0x60)==2){
-            i=0;
-        }
+    print("NHTHEBEST\nThis is NOS");
+    int i =0;
+    while(i!=300000000){
+        i++;
     }
-    print("\rNHTHEBEST         \n");
-    while(i){
-        if(inb(0x60)==3){
-            i=0;
-        }
+    print("\rThis is j");
+    i =0;
+    while(i!=300000000){
+        i++;
     }
-    clearScreen();
+    int f = 100000000;
     while(1){
-        //string noam = readStr();
-        //print(noam);
-        print("\n");
+    clearScreen();
+    i =0;
+    while(i!=f){
+        i++;
     }
+    nos();
+    i =0;
+    while(i!=f){
+        i++;
+    }
+    f = f/2;
+    if (ss <= 10){
+    jos();
+    i =0;
+    while(i!=f){
+        i++;
+    }
+    f = f/2;}
+    ss++;
+    if (ss == 20){
+        clearScreen();
+        nos();
+        asm("hlt");
+    }
+    }
+}
+void nos(){
+    print("$$\\   $$\\  $$$$$$\\   $$$$$$\\  \n");
+    print("$$$\\  $$ |$$  __$$\\ $$  __$$\\ \n");
+    print("$$$$\\ $$ |$$ /  $$ |$$ /  \\__|\n");
+    print("$$ $$\\$$ |$$ |  $$ |\\$$$$$$\\  \n");
+    print("$$ \\$$$$ |$$ |  $$ | \\____$$\\ \n");
+    print("$$ |\\$$$ |$$ |  $$ |$$\\   $$ |\n");
+    print("$$ | \\$$ | $$$$$$  |\\$$$$$$  |\n");
+    print("\\__|  \\__| \\______/  \\______/ \n");
+}
+void jos(){
+    clearScreen();
+    print("   $$$$$\\  $$$$$$\\   $$$$$$\\  \n");
+    print("   \\__$$ |$$  __$$\\ $$  __$$\\ \n");
+    print("      $$ |$$ /  $$ |$$ /  \\__|\n");
+    print("      $$ |$$ |  $$ |\\$$$$$$\\  \n");
+    print("$$\\   $$ |$$ |  $$ | \\____$$\\ \n");
+    print("$$ |  $$ |$$ |  $$ |$$\\   $$ |\n");
+    print("\\$$$$$$  | $$$$$$  |\\$$$$$$  |\n");
+    print(" \\______/  \\______/  \\______/ \n");
+
 }
