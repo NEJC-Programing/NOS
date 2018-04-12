@@ -16,7 +16,7 @@ all:$(OBJS)
 	mkdir nos/ -p
 	$(LINKER) $(LDFLAGS) -o $(OUTPUT) $(OBJS)
 	make test
-	clear
+	clear 
 
 scr/obj/kasm.o:
 	$(ASSEMBLER) $(ASFLAGS) -o scr/obj/kasm.o scr/src/kernel.asm
