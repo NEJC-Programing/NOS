@@ -5,7 +5,7 @@
 #include "../include/util.h"
 typedef void (*fat32ReadBlock(uint32 lba, uint8* buff));
 
-typedef uint16 size_t;
+typedef unsigned int size_t;
 
 typedef uint32 fat32Error;
 #define FAT32_NO_ERROR				0x00000000
