@@ -4,4 +4,5 @@
 #include "util.h"
 
 string readStr();
+
 #endif

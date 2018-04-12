@@ -1,5 +1,5 @@
 
-#include "include/kb.h"
+#include "../include/kb.h"
 string readStr()
 {
     char buff;
@@ -8,9 +8,9 @@ string readStr()
     uint8 reading = 1;
     while(reading)
     {
-        if(inb(0x64) & 0x1)                 
+        if(inportb(0x64) & 0x1)                 
         {
-            switch(inb(0x60))
+            switch(inportb(0x60))
             { 
       /*case 1:
                 printch('(char)27);           Escape button
