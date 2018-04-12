@@ -1,34 +1,53 @@
 COMPILER = gcc
 LINKER = ld
 ASSEMBLER = nasm
-CFLAGS = -m32 -c -ffreestanding 
+CFLAGS = -m32 -c -ffreestanding
 ASFLAGS = -f elf32
-LDFLAGS = -m elf_i386 -T scr/link.ld
+LDFLAGS = -m elf_i386 -T scr/src/link.ld
+
 EMULATOR = qemu/qemu-system-i386.exe
 EMULATOR_FLAGS = -kernel
-kernel_file = nos\\kernel.bin
 
-OBJS = temp/obj/kasm.o temp/obj/kc.o
-OUTPUT = nos/kernel.bin temp/obj/system.o temp/obj/string.o temp/obj/screen.o  temp/obj/kb.o temp/obj/util.o temp/obj/idt.o temp/obj/isr.o 
+OBJS = scr/obj/kasm.o scr/obj/kc.o scr/obj/idt.o scr/obj/isr.o scr/obj/kb.o scr/obj/screen.o scr/obj/string.o scr/obj/system.o scr/obj/util.o scr/obj/shell.o
+OUTPUT = nos/kernel.bin
 
-all: kernel test
 
-kernel: functions
-	$(ASSEMBLER) $(ASFLAGS) -o temp/obj/kasm.o scr/kernel.asm
-	$(COMPILER) $(CFLAGS) scr/kernel.c -o temp/obj/kc.o 
-	$(COMPILER) $(CFLAGS) scr/functions/screen.c -o temp/obj/screen.o 
-	$(COMPILER) $(CFLAGS) scr/functions/string.c -o temp/obj/string.o 
-	$(COMPILER) $(CFLAGS) scr/functions/system.c -o temp/obj/system.o 
-	$(COMPILER) $(CFLAGS) scr/functions/kb.c -o temp/obj/kb.o 
-	$(COMPILER) $(CFLAGS) scr/functions/util.c -o temp/obj/util.o 
-	$(COMPILER) $(CFLAGS) scr/functions/isr.c -o temp/obj/isr.o 
-	$(COMPILER) $(CFLAGS) scr/functions/idt.c -o temp/obj/idt.o 
-	
+all:$(OBJS)
+	mkdir nos/ -p
 	$(LINKER) $(LDFLAGS) -o $(OUTPUT) $(OBJS)
+	make test
+	clear
+
+scr/obj/kasm.o:
+	$(ASSEMBLER) $(ASFLAGS) -o scr/obj/kasm.o scr/src/kernel.asm
 	
-functions:
-	mkdir temp/obj -p
+scr/obj/kc.o:
+	$(COMPILER) $(CFLAGS) scr/src/kernel.c -o scr/obj/kc.o 
+	
+scr/obj/idt.o:
+	$(COMPILER) $(CFLAGS) scr/src/idt.c -o scr/obj/idt.o 
+
+scr/obj/kb.o:
+	$(COMPILER) $(CFLAGS) scr/src/kb.c -o scr/obj/kb.o
+
+scr/obj/isr.o:
+	$(COMPILER) $(CFLAGS) scr/src/isr.c -o scr/obj/isr.o
+
+scr/obj/screen.o:
+	$(COMPILER) $(CFLAGS) scr/src/screen.c -o scr/obj/screen.o
+
+scr/obj/string.o:
+	$(COMPILER) $(CFLAGS) scr/src/string.c -o scr/obj/string.o
+
+scr/obj/system.o:
+	$(COMPILER) $(CFLAGS) scr/src/system.c -o scr/obj/system.o
+
+scr/obj/util.o:
+	$(COMPILER) $(CFLAGS) scr/src/util.c -o scr/obj/util.o
+	
+scr/obj/shell.o:
+	$(COMPILER) $(CFLAGS) scr/src/shell.c -o scr/obj/shell.o
 
 test:
-	$(EMULATOR) $(EMULATOR_FLAGS) $(kernel_file)
+	$(EMULATOR) $(EMULATOR_FLAGS) $(OUTPUT)
 	clear
