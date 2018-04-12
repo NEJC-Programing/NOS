@@ -16,7 +16,10 @@ void kstart(char *bootarg)
         }
     }
     clearScreen();
+    char text[] = "StringX";
     while(1){
-        print(inb(0x60));
+        text[6] = inb(0x60)+ '0';
+        print(text);
+        print("\n");
     }
 }
