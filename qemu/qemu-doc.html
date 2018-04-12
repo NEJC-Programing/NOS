@@ -2,10 +2,10 @@
 <html>
 <!-- Created by GNU Texinfo 6.3, http://www.gnu.org/software/texinfo/ -->
 <head>
-<title>QEMU version 2.11.0 User Documentation</title>
+<title>QEMU version 2.11.91 User Documentation</title>
 
-<meta name="description" content="QEMU version 2.11.0 User Documentation">
-<meta name="keywords" content="QEMU version 2.11.0 User Documentation">
+<meta name="description" content="QEMU version 2.11.91 User Documentation">
+<meta name="keywords" content="QEMU version 2.11.91 User Documentation">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
@@ -46,7 +46,7 @@ ul.no-bullet {list-style: none}
 </head>
 
 <body lang="en">
-<h1 class="settitle" align="center">QEMU version 2.11.0 User Documentation</h1>
+<h1 class="settitle" align="center">QEMU version 2.11.91 User Documentation</h1>
 
 
 
@@ -79,12 +79,12 @@ ul.no-bullet {list-style: none}
       <li><a name="toc-i386-target-only" href="#i386-target-only">2.3.5 i386 target only</a></li>
       <li><a name="toc-Network-options" href="#Network-options">2.3.6 Network options</a></li>
       <li><a name="toc-Character-device-options" href="#Character-device-options">2.3.7 Character device options</a></li>
-      <li><a name="toc-Device-URL-Syntax" href="#Device-URL-Syntax">2.3.8 Device URL Syntax</a></li>
-      <li><a name="toc-Bluetooth_0028R_0029-options" href="#Bluetooth_0028R_0029-options">2.3.9 Bluetooth(R) options</a></li>
-      <li><a name="toc-TPM-device-options" href="#TPM-device-options">2.3.10 TPM device options</a></li>
-      <li><a name="toc-Linux_002fMultiboot-boot-specific" href="#Linux_002fMultiboot-boot-specific">2.3.11 Linux/Multiboot boot specific</a></li>
-      <li><a name="toc-Debug_002fExpert-options" href="#Debug_002fExpert-options">2.3.12 Debug/Expert options</a></li>
-      <li><a name="toc-Generic-object-creation" href="#Generic-object-creation">2.3.13 Generic object creation</a></li>
+      <li><a name="toc-Bluetooth_0028R_0029-options" href="#Bluetooth_0028R_0029-options">2.3.8 Bluetooth(R) options</a></li>
+      <li><a name="toc-TPM-device-options" href="#TPM-device-options">2.3.9 TPM device options</a></li>
+      <li><a name="toc-Linux_002fMultiboot-boot-specific" href="#Linux_002fMultiboot-boot-specific">2.3.10 Linux/Multiboot boot specific</a></li>
+      <li><a name="toc-Debug_002fExpert-options" href="#Debug_002fExpert-options">2.3.11 Debug/Expert options</a></li>
+      <li><a name="toc-Generic-object-creation" href="#Generic-object-creation">2.3.12 Generic object creation</a></li>
+      <li><a name="toc-Device-URL-Syntax" href="#Device-URL-Syntax">2.3.13 Device URL Syntax</a></li>
     </ul></li>
     <li><a name="toc-Keys-in-the-graphical-frontends" href="#pcsys_005fkeys">2.4 Keys in the graphical frontends</a></li>
     <li><a name="toc-Keys-in-the-character-backend-multiplexer" href="#mux_005fkeys">2.5 Keys in the character backend multiplexer</a></li>
@@ -116,7 +116,8 @@ ul.no-bullet {list-style: none}
       <li><a name="toc-iSCSI-LUNs" href="#disk_005fimages_005fiscsi">2.7.11 iSCSI LUNs</a></li>
       <li><a name="toc-GlusterFS-disk-images" href="#disk_005fimages_005fgluster">2.7.12 GlusterFS disk images</a></li>
       <li><a name="toc-Secure-Shell-_0028ssh_0029-disk-images" href="#disk_005fimages_005fssh">2.7.13 Secure Shell (ssh) disk images</a></li>
-      <li><a name="toc-Disk-image-file-locking" href="#disk_005fimage_005flocking">2.7.14 Disk image file locking</a></li>
+      <li><a name="toc-NVMe-disk-images" href="#disk_005fimages_005fnvme">2.7.14 NVMe disk images</a></li>
+      <li><a name="toc-Disk-image-file-locking" href="#disk_005fimage_005flocking">2.7.15 Disk image file locking</a></li>
     </ul></li>
     <li><a name="toc-Network-emulation" href="#pcsys_005fnetwork">2.8 Network emulation</a>
     <ul class="no-bullet">
@@ -228,49 +229,58 @@ ul.no-bullet {list-style: none}
   </ul></li>
   <li><a name="toc-Deprecated-features-1" href="#Deprecated-features">Appendix B Deprecated features</a>
   <ul class="no-bullet">
-    <li><a name="toc-System-emulator-command-line-arguments" href="#System-emulator-command-line-arguments">B.1 System emulator command line arguments</a>
+    <li><a name="toc-Build-options" href="#Build-options">B.1 Build options</a>
     <ul class="no-bullet">
-      <li><a name="toc-_002ddrive-boot_003don_007coff-_0028since-1_002e3_002e0_0029" href="#g_t_002ddrive-boot_003don_007coff-_0028since-1_002e3_002e0_0029">B.1.1 -drive boot=on|off (since 1.3.0)</a></li>
-      <li><a name="toc-_002dtdf-_0028since-1_002e3_002e0_0029" href="#g_t_002dtdf-_0028since-1_002e3_002e0_0029">B.1.2 -tdf (since 1.3.0)</a></li>
-      <li><a name="toc-_002dno_002dkvm_002dpit_002dreinjection-_0028since-1_002e3_002e0_0029" href="#g_t_002dno_002dkvm_002dpit_002dreinjection-_0028since-1_002e3_002e0_0029">B.1.3 -no-kvm-pit-reinjection (since 1.3.0)</a></li>
-      <li><a name="toc-_002dno_002dkvm_002dirqchip-_0028since-1_002e3_002e0_0029" href="#g_t_002dno_002dkvm_002dirqchip-_0028since-1_002e3_002e0_0029">B.1.4 -no-kvm-irqchip (since 1.3.0)</a></li>
-      <li><a name="toc-_002dno_002dkvm_002dpit-_0028since-1_002e3_002e0_0029" href="#g_t_002dno_002dkvm_002dpit-_0028since-1_002e3_002e0_0029">B.1.5 -no-kvm-pit (since 1.3.0)</a></li>
-      <li><a name="toc-_002dno_002dkvm-_0028since-1_002e3_002e0_0029" href="#g_t_002dno_002dkvm-_0028since-1_002e3_002e0_0029">B.1.6 -no-kvm (since 1.3.0)</a></li>
-      <li><a name="toc-_002dmon-default_003don-_0028since-2_002e4_002e0_0029" href="#g_t_002dmon-default_003don-_0028since-2_002e4_002e0_0029">B.1.7 -mon default=on (since 2.4.0)</a></li>
-      <li><a name="toc-_002dvnc-tls-_0028since-2_002e5_002e0_0029" href="#g_t_002dvnc-tls-_0028since-2_002e5_002e0_0029">B.1.8 -vnc tls (since 2.5.0)</a></li>
-      <li><a name="toc-_002dvnc-x509-_0028since-2_002e5_002e0_0029" href="#g_t_002dvnc-x509-_0028since-2_002e5_002e0_0029">B.1.9 -vnc x509 (since 2.5.0)</a></li>
-      <li><a name="toc-_002dvnc-x509verify-_0028since-2_002e5_002e0_0029" href="#g_t_002dvnc-x509verify-_0028since-2_002e5_002e0_0029">B.1.10 -vnc x509verify (since 2.5.0)</a></li>
-      <li><a name="toc-_002dtftp-_0028since-2_002e6_002e0_0029" href="#g_t_002dtftp-_0028since-2_002e6_002e0_0029">B.1.11 -tftp (since 2.6.0)</a></li>
-      <li><a name="toc-_002dbootp-_0028since-2_002e6_002e0_0029" href="#g_t_002dbootp-_0028since-2_002e6_002e0_0029">B.1.12 -bootp (since 2.6.0)</a></li>
-      <li><a name="toc-_002dredir-_0028since-2_002e6_002e0_0029" href="#g_t_002dredir-_0028since-2_002e6_002e0_0029">B.1.13 -redir (since 2.6.0)</a></li>
-      <li><a name="toc-_002dsmb-_0028since-2_002e6_002e0_0029" href="#g_t_002dsmb-_0028since-2_002e6_002e0_0029">B.1.14 -smb (since 2.6.0)</a></li>
-      <li><a name="toc-_002dnet-channel-_0028since-2_002e6_002e0_0029" href="#g_t_002dnet-channel-_0028since-2_002e6_002e0_0029">B.1.15 -net channel (since 2.6.0)</a></li>
-      <li><a name="toc-_002dnet-vlan-_0028since-2_002e9_002e0_0029" href="#g_t_002dnet-vlan-_0028since-2_002e9_002e0_0029">B.1.16 -net vlan (since 2.9.0)</a></li>
-      <li><a name="toc-_002ddrive-if_003dscsi-_0028since-2_002e9_002e0_0029" href="#g_t_002ddrive-if_003dscsi-_0028since-2_002e9_002e0_0029">B.1.17 -drive if=scsi (since 2.9.0)</a></li>
-      <li><a name="toc-_002dnet-dump-_0028since-2_002e10_002e0_0029" href="#g_t_002dnet-dump-_0028since-2_002e10_002e0_0029">B.1.18 -net dump (since 2.10.0)</a></li>
-      <li><a name="toc-_002dhdachs-_0028since-2_002e10_002e0_0029" href="#g_t_002dhdachs-_0028since-2_002e10_002e0_0029">B.1.19 -hdachs (since 2.10.0)</a></li>
-      <li><a name="toc-_002dusbdevice-_0028since-2_002e10_002e0_0029" href="#g_t_002dusbdevice-_0028since-2_002e10_002e0_0029">B.1.20 -usbdevice (since 2.10.0)</a></li>
-      <li><a name="toc-_002dnodefconfig-_0028since-2_002e11_002e0_0029" href="#g_t_002dnodefconfig-_0028since-2_002e11_002e0_0029">B.1.21 -nodefconfig (since 2.11.0)</a></li>
+      <li><a name="toc-GTK-2_002ex" href="#GTK-2_002ex">B.1.1 GTK 2.x</a></li>
+      <li><a name="toc-SDL-1_002e2" href="#SDL-1_002e2">B.1.2 SDL 1.2</a></li>
     </ul></li>
-    <li><a name="toc-qemu_002dimg-command-line-arguments" href="#qemu_002dimg-command-line-arguments">B.2 qemu-img command line arguments</a>
+    <li><a name="toc-System-emulator-command-line-arguments" href="#System-emulator-command-line-arguments">B.2 System emulator command line arguments</a>
     <ul class="no-bullet">
-      <li><a name="toc-convert-_002ds-_0028since-2_002e0_002e0_0029" href="#convert-_002ds-_0028since-2_002e0_002e0_0029">B.2.1 convert -s (since 2.0.0)</a></li>
+      <li><a name="toc-_002dno_002dkvm_002dpit_002dreinjection-_0028since-1_002e3_002e0_0029" href="#g_t_002dno_002dkvm_002dpit_002dreinjection-_0028since-1_002e3_002e0_0029">B.2.1 -no-kvm-pit-reinjection (since 1.3.0)</a></li>
+      <li><a name="toc-_002dno_002dkvm_002dirqchip-_0028since-1_002e3_002e0_0029" href="#g_t_002dno_002dkvm_002dirqchip-_0028since-1_002e3_002e0_0029">B.2.2 -no-kvm-irqchip (since 1.3.0)</a></li>
+      <li><a name="toc-_002dno_002dkvm-_0028since-1_002e3_002e0_0029" href="#g_t_002dno_002dkvm-_0028since-1_002e3_002e0_0029">B.2.3 -no-kvm (since 1.3.0)</a></li>
+      <li><a name="toc-_002dvnc-tls-_0028since-2_002e5_002e0_0029" href="#g_t_002dvnc-tls-_0028since-2_002e5_002e0_0029">B.2.4 -vnc tls (since 2.5.0)</a></li>
+      <li><a name="toc-_002dvnc-x509-_0028since-2_002e5_002e0_0029" href="#g_t_002dvnc-x509-_0028since-2_002e5_002e0_0029">B.2.5 -vnc x509 (since 2.5.0)</a></li>
+      <li><a name="toc-_002dvnc-x509verify-_0028since-2_002e5_002e0_0029" href="#g_t_002dvnc-x509verify-_0028since-2_002e5_002e0_0029">B.2.6 -vnc x509verify (since 2.5.0)</a></li>
+      <li><a name="toc-_002dtftp-_0028since-2_002e6_002e0_0029" href="#g_t_002dtftp-_0028since-2_002e6_002e0_0029">B.2.7 -tftp (since 2.6.0)</a></li>
+      <li><a name="toc-_002dbootp-_0028since-2_002e6_002e0_0029" href="#g_t_002dbootp-_0028since-2_002e6_002e0_0029">B.2.8 -bootp (since 2.6.0)</a></li>
+      <li><a name="toc-_002dredir-_0028since-2_002e6_002e0_0029" href="#g_t_002dredir-_0028since-2_002e6_002e0_0029">B.2.9 -redir (since 2.6.0)</a></li>
+      <li><a name="toc-_002dsmb-_0028since-2_002e6_002e0_0029" href="#g_t_002dsmb-_0028since-2_002e6_002e0_0029">B.2.10 -smb (since 2.6.0)</a></li>
+      <li><a name="toc-_002dnet-vlan-_0028since-2_002e9_002e0_0029" href="#g_t_002dnet-vlan-_0028since-2_002e9_002e0_0029">B.2.11 -net vlan (since 2.9.0)</a></li>
+      <li><a name="toc-_002ddrive-cyls_003d_002e_002e_002e_002cheads_003d_002e_002e_002e_002csecs_003d_002e_002e_002e_002ctrans_003d_002e_002e_002e-_0028since-2_002e10_002e0_0029" href="#g_t_002ddrive-cyls_003d_002e_002e_002e_002cheads_003d_002e_002e_002e_002csecs_003d_002e_002e_002e_002ctrans_003d_002e_002e_002e-_0028since-2_002e10_002e0_0029">B.2.12 -drive cyls=...,heads=...,secs=...,trans=... (since 2.10.0)</a></li>
+      <li><a name="toc-_002ddrive-serial_003d_002e_002e_002e-_0028since-2_002e10_002e0_0029" href="#g_t_002ddrive-serial_003d_002e_002e_002e-_0028since-2_002e10_002e0_0029">B.2.13 -drive serial=... (since 2.10.0)</a></li>
+      <li><a name="toc-_002ddrive-addr_003d_002e_002e_002e-_0028since-2_002e10_002e0_0029" href="#g_t_002ddrive-addr_003d_002e_002e_002e-_0028since-2_002e10_002e0_0029">B.2.14 -drive addr=... (since 2.10.0)</a></li>
+      <li><a name="toc-_002dusbdevice-_0028since-2_002e10_002e0_0029" href="#g_t_002dusbdevice-_0028since-2_002e10_002e0_0029">B.2.15 -usbdevice (since 2.10.0)</a></li>
+      <li><a name="toc-_002dnodefconfig-_0028since-2_002e11_002e0_0029" href="#g_t_002dnodefconfig-_0028since-2_002e11_002e0_0029">B.2.16 -nodefconfig (since 2.11.0)</a></li>
+      <li><a name="toc-_002dballoon-_0028since-2_002e12_002e0_0029" href="#g_t_002dballoon-_0028since-2_002e12_002e0_0029">B.2.17 -balloon (since 2.12.0)</a></li>
+      <li><a name="toc-_002dmachine-s390_002dsquash_002dmcss_003don_007coff-_0028since-2_002e12_002e0_0029" href="#g_t_002dmachine-s390_002dsquash_002dmcss_003don_007coff-_0028since-2_002e12_002e0_0029">B.2.18 -machine s390-squash-mcss=on|off (since 2.12.0)</a></li>
+      <li><a name="toc-_002dfsdev-handle-_0028since-2_002e12_002e0_0029" href="#g_t_002dfsdev-handle-_0028since-2_002e12_002e0_0029">B.2.19 -fsdev handle (since 2.12.0)</a></li>
+      <li><a name="toc-_002dno_002dframe-_0028since-2_002e12_002e0_0029" href="#g_t_002dno_002dframe-_0028since-2_002e12_002e0_0029">B.2.20 -no-frame (since 2.12.0)</a></li>
+      <li><a name="toc-_002drtc_002dtd_002dhack-_0028since-2_002e12_002e0_0029" href="#g_t_002drtc_002dtd_002dhack-_0028since-2_002e12_002e0_0029">B.2.21 -rtc-td-hack (since 2.12.0)</a></li>
+      <li><a name="toc-_002dlocaltime-_0028since-2_002e12_002e0_0029" href="#g_t_002dlocaltime-_0028since-2_002e12_002e0_0029">B.2.22 -localtime (since 2.12.0)</a></li>
+      <li><a name="toc-_002dstartdate-_0028since-2_002e12_002e0_0029" href="#g_t_002dstartdate-_0028since-2_002e12_002e0_0029">B.2.23 -startdate (since 2.12.0)</a></li>
     </ul></li>
-    <li><a name="toc-System-emulator-human-monitor-commands" href="#System-emulator-human-monitor-commands">B.3 System emulator human monitor commands</a>
+    <li><a name="toc-qemu_002dimg-command-line-arguments" href="#qemu_002dimg-command-line-arguments">B.3 qemu-img command line arguments</a>
     <ul class="no-bullet">
-      <li><a name="toc-host_005fnet_005fadd-_0028since-2_002e10_002e0_0029" href="#host_005fnet_005fadd-_0028since-2_002e10_002e0_0029">B.3.1 host_net_add (since 2.10.0)</a></li>
-      <li><a name="toc-host_005fnet_005fremove-_0028since-2_002e10_002e0_0029" href="#host_005fnet_005fremove-_0028since-2_002e10_002e0_0029">B.3.2 host_net_remove (since 2.10.0)</a></li>
-      <li><a name="toc-usb_005fadd-_0028since-2_002e10_002e0_0029" href="#usb_005fadd-_0028since-2_002e10_002e0_0029">B.3.3 usb_add (since 2.10.0)</a></li>
-      <li><a name="toc-usb_005fdel-_0028since-2_002e10_002e0_0029" href="#usb_005fdel-_0028since-2_002e10_002e0_0029">B.3.4 usb_del (since 2.10.0)</a></li>
+      <li><a name="toc-convert-_002ds-_0028since-2_002e0_002e0_0029" href="#convert-_002ds-_0028since-2_002e0_002e0_0029">B.3.1 convert -s (since 2.0.0)</a></li>
     </ul></li>
-    <li><a name="toc-System-emulator-devices" href="#System-emulator-devices">B.4 System emulator devices</a>
+    <li><a name="toc-QEMU-Machine-Protocol-_0028QMP_0029-commands" href="#QEMU-Machine-Protocol-_0028QMP_0029-commands">B.4 QEMU Machine Protocol (QMP) commands</a>
     <ul class="no-bullet">
-      <li><a name="toc-ivshmem-_0028since-2_002e6_002e0_0029" href="#ivshmem-_0028since-2_002e6_002e0_0029">B.4.1 ivshmem (since 2.6.0)</a></li>
-      <li><a name="toc-spapr_002dpci_002dvfio_002dhost_002dbridge-_0028since-2_002e6_002e0_0029" href="#spapr_002dpci_002dvfio_002dhost_002dbridge-_0028since-2_002e6_002e0_0029">B.4.2 spapr-pci-vfio-host-bridge (since 2.6.0)</a></li>
+      <li><a name="toc-block_002ddirty_002dbitmap_002dadd-_0022autoload_0022-parameter-_0028since-2_002e12_002e0_0029" href="#block_002ddirty_002dbitmap_002dadd-_0022autoload_0022-parameter-_0028since-2_002e12_002e0_0029">B.4.1 block-dirty-bitmap-add &quot;autoload&quot; parameter (since 2.12.0)</a></li>
+      <li><a name="toc-query_002dcpus-_0028since-2_002e12_002e0_0029" href="#query_002dcpus-_0028since-2_002e12_002e0_0029">B.4.2 query-cpus (since 2.12.0)</a></li>
     </ul></li>
-    <li><a name="toc-System-emulator-machines" href="#System-emulator-machines">B.5 System emulator machines</a>
+    <li><a name="toc-System-emulator-devices" href="#System-emulator-devices">B.5 System emulator devices</a>
     <ul class="no-bullet">
-      <li><a name="toc-Xilinx-EP108-_0028since-2_002e11_002e0_0029" href="#Xilinx-EP108-_0028since-2_002e11_002e0_0029">B.5.1 Xilinx EP108 (since 2.11.0)</a></li>
+      <li><a name="toc-ivshmem-_0028since-2_002e6_002e0_0029" href="#ivshmem-_0028since-2_002e6_002e0_0029">B.5.1 ivshmem (since 2.6.0)</a></li>
+      <li><a name="toc-Page-size-support-_003c-4k-for-embedded-PowerPC-CPUs-_0028since-2_002e12_002e0_0029" href="#Page-size-support-_003c-4k-for-embedded-PowerPC-CPUs-_0028since-2_002e12_002e0_0029">B.5.2 Page size support &lt; 4k for embedded PowerPC CPUs (since 2.12.0)</a></li>
+    </ul></li>
+    <li><a name="toc-System-emulator-machines" href="#System-emulator-machines">B.6 System emulator machines</a>
+    <ul class="no-bullet">
+      <li><a name="toc-Xilinx-EP108-_0028since-2_002e11_002e0_0029" href="#Xilinx-EP108-_0028since-2_002e11_002e0_0029">B.6.1 Xilinx EP108 (since 2.11.0)</a></li>
+    </ul></li>
+    <li><a name="toc-Block-device-options-1" href="#Block-device-options-1">B.7 Block device options</a>
+    <ul class="no-bullet">
+      <li><a name="toc-_0022backing_0022_003a-_0022_0022-_0028since-2_002e12_002e0_0029" href="#g_t_0022backing_0022_003a-_0022_0022-_0028since-2_002e12_002e0_0029">B.7.1 &quot;backing&quot;: &quot;&quot; (since 2.12.0)</a></li>
     </ul></li>
   </ul></li>
   <li><a name="toc-License-1" href="#License">Appendix C License</a></li>
@@ -481,7 +491,7 @@ of QEMU will support machine types from many previous versions.
 </p><dl compact="compact">
 <dt><samp>accel=<var>accels1</var>[:<var>accels2</var>[:...]]</samp></dt>
 <dd><p>This is used to enable an accelerator. Depending on the target architecture,
-kvm, xen, hax or tcg can be available. By default, tcg is used. If there is
+kvm, xen, hax, hvf, whpx or tcg can be available. By default, tcg is used. If there is
 more than one accelerator specified, the next one is used if the previous one
 fails to initialize.
 </p></dd>
@@ -523,6 +533,12 @@ execution of DEA cryptographic functions.  The default is on.
 <dt><samp>s390-squash-mcss=on|off</samp></dt>
 <dd><p>Enables or disables squashing subchannels into the default css.
 The default is off.
+NOTE: This property is deprecated and will be removed in future releases.
+The &ldquo;s390-squash-mcss=on&ldquo; property has been obsoleted by allowing the
+cssid to be chosen freely. Instead of squashing subchannels into the
+default channel subsystem image for guests that do not support multiple
+channel subsystems, all devices can be put into the default channel
+subsystem image.
 </p></dd>
 <dt><samp>enforce-config-section=on|off</samp></dt>
 <dd><p>If <samp>enforce-config-section</samp> is set to <var>on</var>, force migration
@@ -530,6 +546,9 @@ code to send configuration section even if the machine-type sets the
 <samp>migration.send-configuration</samp> property to <var>off</var>.
 NOTE: this parameter is deprecated. Please use <samp>-global</samp>
 <samp>migration.send-configuration</samp>=<var>on|off</var> instead.
+</p></dd>
+<dt><samp>memory-encryption=<var></var></samp></dt>
+<dd><p>Memory encryption object to use. The default is none.
 </p></dd>
 </dl>
 </dd>
@@ -540,7 +559,7 @@ NOTE: this parameter is deprecated. Please use <samp>-global</samp>
 <dt><samp>-accel <var>name</var>[,prop=<var>value</var>[,...]]</samp></dt>
 <dd><a name="index-_002daccel"></a>
 <p>This is used to enable an accelerator. Depending on the target architecture,
-kvm, xen, hax or tcg can be available. By default, tcg is used. If there is
+kvm, xen, hax, hvf, whpx or tcg can be available. By default, tcg is used. If there is
 more than one accelerator specified, the next one is used if the previous one
 fails to initialize.
 </p><dl compact="compact">
@@ -788,13 +807,10 @@ require manually specifying clocking.
 <pre class="example">modprobe i810_audio clocking=48000
 </pre></div>
 </dd>
-<dt><samp>-balloon none</samp></dt>
-<dd><a name="index-_002dballoon"></a>
-<p>Disable balloon device.
-</p></dd>
 <dt><samp>-balloon virtio[,addr=<var>addr</var>]</samp></dt>
-<dd><p>Enable virtio balloon device (default), optionally with PCI address
-<var>addr</var>.
+<dd><a name="index-_002dballoon"></a>
+<p>Enable virtio balloon device, optionally with PCI address <var>addr</var>. This
+option is deprecated, use <samp>--device virtio-balloon</samp> instead.
 </p></dd>
 <dt><samp>-device <var>driver</var>[,<var>prop</var>[=<var>value</var>][,...]]</samp></dt>
 <dd><a name="index-_002ddevice"></a>
@@ -1038,8 +1054,8 @@ stacked on top of a protocol level block driver such as <code>file</code>.
 </dd>
 <dt><code>backing</code></dt>
 <dd><p>Reference to or definition of the backing file block device (default is taken
-from the image file). It is allowed to pass an empty string here in order to
-disable the default backing file.
+from the image file). It is allowed to pass <code>null</code> here in order to disable
+the default backing file.
 </p>
 </dd>
 <dt><code>lazy-refcounts</code></dt>
@@ -1143,8 +1159,8 @@ of available connectors of a given interface type.
 <dd><p>This option defines the type of the media: disk or cdrom.
 </p></dd>
 <dt><samp>cyls=<var>c</var>,heads=<var>h</var>,secs=<var>s</var>[,trans=<var>t</var>]</samp></dt>
-<dd><p>These options have the same definition as they have in <samp>-hdachs</samp>.
-These parameters are deprecated, use the corresponding parameters
+<dd><p>Force disk physical geometry and the optional BIOS translation (trans=none or
+lba). These parameters are deprecated, use the corresponding parameters
 of <code>-device</code> instead.
 </p></dd>
 <dt><samp>snapshot=<var>snapshot</var></samp></dt>
@@ -1316,14 +1332,6 @@ incremented:
 <p>Write to temporary files instead of disk image files. In this case,
 the raw disk image you use is not written back. You can however force
 the write back by pressing <tt class="key">C-a s</tt> (see <a href="#disk_005fimages">disk_images</a>).
-</p></dd>
-<dt><samp>-hdachs <var>c</var>,<var>h</var>,<var>s</var>,[,<var>t</var>]</samp></dt>
-<dd><a name="index-_002dhdachs"></a>
-<p>Force hard disk 0 physical geometry (1 &lt;= <var>c</var> &lt;= 16383, 1 &lt;=
-<var>h</var> &lt;= 16, 1 &lt;= <var>s</var> &lt;= 63) and optionally force the BIOS
-translation mode (<var>t</var>=none, lba or auto). Usually QEMU can guess
-all those parameters. This option is deprecated, please use
-<code>-device ide-hd,cyls=c,heads=h,secs=s,...</code> instead.
 </p>
 </dd>
 <dt><samp>-fsdev <var>fsdriver</var>,id=<var>id</var>,path=<var>path</var>,[security_model=<var>security_model</var>][,writeout=<var>writeout</var>][,readonly][,socket=<var>socket</var>|sock_fd=<var>sock_fd</var>][,fmode=<var>fmode</var>][,dmode=<var>dmode</var>]</samp></dt>
@@ -1464,6 +1472,10 @@ only with security models &quot;mapped-xattr&quot; and &quot;mapped-file&quot;.
 <dd><a name="index-_002dvirtfs_005fsynth"></a>
 <p>Create synthetic file system image
 </p></dd>
+<dt><samp>-iscsi</samp></dt>
+<dd><a name="index-_002discsi"></a>
+<p>Configure iSCSI session parameters.
+</p></dd>
 </dl>
 <a name="USB-options"></a>
 <h4 class="subsection">2.3.3 USB options</h4>
@@ -1489,33 +1501,9 @@ means QEMU is able to report the mouse position without having to grab the
 mouse. Also overrides the PS/2 mouse emulation when activated.
 </p>
 </dd>
-<dt><samp>disk:[format=<var>format</var>]:<var>file</var></samp></dt>
-<dd><p>Mass storage device based on file. The optional <var>format</var> argument
-will be used rather than detecting the format. Can be used to specify
-<code>format=raw</code> to avoid interpreting an untrusted format header.
-</p>
-</dd>
-<dt><samp>host:<var>bus</var>.<var>addr</var></samp></dt>
-<dd><p>Pass through the host device identified by <var>bus</var>.<var>addr</var> (Linux only).
-</p>
-</dd>
-<dt><samp>host:<var>vendor_id</var>:<var>product_id</var></samp></dt>
-<dd><p>Pass through the host device identified by <var>vendor_id</var>:<var>product_id</var>
-(Linux only).
-</p>
-</dd>
-<dt><samp>serial:[vendorid=<var>vendor_id</var>][,productid=<var>product_id</var>]:<var>dev</var></samp></dt>
-<dd><p>Serial converter to host character device <var>dev</var>, see <code>-serial</code> for the
-available devices.
-</p>
-</dd>
 <dt><samp>braille</samp></dt>
 <dd><p>Braille device.  This will use BrlAPI to display the braille output on a real
 or fake device.
-</p>
-</dd>
-<dt><samp>net:<var>options</var></samp></dt>
-<dd><p>Network adapter that supports CDC ethernet and RNDIS protocols.
 </p>
 </dd>
 </dl>
@@ -2064,10 +2052,11 @@ spec.
 <a name="Network-options"></a>
 <h4 class="subsection">2.3.6 Network options</h4>
 <dl compact="compact">
-<dt><samp>-net nic[,vlan=<var>n</var>][,macaddr=<var>mac</var>][,model=<var>type</var>] [,name=<var>name</var>][,addr=<var>addr</var>][,vectors=<var>v</var>]</samp></dt>
+<dt><samp>-net nic[,vlan=<var>n</var>][,netdev=<var>nd</var>][,macaddr=<var>mac</var>][,model=<var>type</var>] [,name=<var>name</var>][,addr=<var>addr</var>][,vectors=<var>v</var>]</samp></dt>
 <dd><a name="index-_002dnet"></a>
-<p>Create a new Network Interface Card and connect it to VLAN <var>n</var> (<var>n</var>
-= 0 is the default). The NIC is an e1000 by default on the PC
+<p>Configure or create an on-board (or machine default) Network Interface Card
+(NIC) and connect it either to VLAN <var>n</var> (<var>n</var> = 0 is the default), or
+to the netdev <var>nd</var>. The NIC is an e1000 by default on the PC
 target. Optionally, the MAC address can be changed to <var>mac</var>, the
 device address set to <var>addr</var> (PCI cards only),
 and a <var>name</var> can be assigned for use in monitor commands.
@@ -2298,8 +2287,8 @@ qemu-system-i386 linux.img -net nic -net tap
 <pre class="example">#launch a QEMU instance with two NICs, each one connected
 #to a TAP device
 qemu-system-i386 linux.img \
--net nic,vlan=0 -net tap,vlan=0,ifname=tap0 \
--net nic,vlan=1 -net tap,vlan=1,ifname=tap1
+-netdev tap,id=nd0,ifname=tap0 -device e1000,netdev=nd0 \
+-netdev tap,id=nd1,ifname=tap1 -device rtl8139,netdev=nd1
 </pre></div>
 
 <div class="example">
@@ -2417,7 +2406,7 @@ two systems. It is present in routers, firewalls and the Linux kernel
 </p>
 <p>This transport allows a VM to communicate to another VM, router or firewall directly.
 </p>
-</dd>
+<dl compact="compact">
 <dt><samp>src=<var>srcaddr</var></samp></dt>
 <dd><p>source address (mandatory)
 </p></dd>
@@ -2455,7 +2444,9 @@ networks which have packet reorder.
 </p></dd>
 <dt><samp>offset=<var>offset</var></samp></dt>
 <dd><p>Add an extra offset between header and data
-</p>
+</p></dd>
+</dl>
+
 <p>For example, to attach a VM running on host 4.3.2.1 via L2TPv3 to the bridge br-lan
 on the remote Linux host 1.2.3.4:
 </p><div class="example">
@@ -2496,13 +2487,15 @@ qemu-system-i386 linux.img -net nic -net vde,sock=/tmp/myswitch
 </pre></div>
 
 </dd>
-<dt><samp>-netdev hubport,id=<var>id</var>,hubid=<var>hubid</var></samp></dt>
+<dt><samp>-netdev hubport,id=<var>id</var>,hubid=<var>hubid</var>[,netdev=<var>nd</var>]</samp></dt>
 <dd>
 <p>Create a hub port on QEMU &quot;vlan&quot; <var>hubid</var>.
 </p>
 <p>The hubport netdev lets you connect a NIC to a QEMU &quot;vlan&quot; instead of a single
 netdev.  <code>-net</code> and <code>-device</code> with parameter <samp>vlan</samp> create the
-required hub automatically.
+required hub automatically. Alternatively, you can also connect the hubport
+to another netdev with ID <var>nd</var> by using the <samp>netdev=<var>nd</var></samp>
+option.
 </p>
 </dd>
 <dt><samp>-netdev vhost-user,chardev=<var>id</var>[,vhostforce=on|off][,queues=n]</samp></dt>
@@ -2524,17 +2517,18 @@ be created for multiqueue vhost-user.
 </pre></div>
 
 </dd>
-<dt><samp>-net dump[,vlan=<var>n</var>][,file=<var>file</var>][,len=<var>len</var>]</samp></dt>
-<dd><p>Dump network traffic on VLAN <var>n</var> to file <var>file</var> (<samp>qemu-vlan0.pcap</samp> by default).
-At most <var>len</var> bytes (64k by default) per packet are stored. The file format is
-libpcap, so it can be analyzed with tools such as tcpdump or Wireshark.
-Note: For devices created with &rsquo;-netdev&rsquo;, use &rsquo;-object filter-dump,...&rsquo; instead.
+<dt><samp>--nic [tap|bridge|user|l2tpv3|vde|netmap|vhost-user|socket][,...][,mac=macaddr]</samp></dt>
+<dd>
+<p>This option is a shortcut for setting both, the on-board (default) guest NIC
+hardware and the host network backend in one go. The host backend options are
+the same as with the corresponding <samp>--netdev</samp> option. The guest NIC
+hardware MAC address can be set with <samp>mac=<var>macaddr</var></samp>.
 </p>
 </dd>
-<dt><samp>-net none</samp></dt>
-<dd><p>Indicate that no network devices should be configured. It is used to
-override the default configuration (<samp>-net nic -net user</samp>) which
-is activated if no <samp>-net</samp> options are provided.
+<dt><samp>--nic none</samp></dt>
+<dd><p>Indicate that no network devices should be configured. It is used to override
+the default configuration (default NIC with <samp>--net user</samp> backend) which
+is activated if no other networking options are provided.
 </p></dd>
 </dl>
 <a name="Character-device-options"></a>
@@ -2542,7 +2536,7 @@ is activated if no <samp>-net</samp> options are provided.
 
 <p>The general form of a character device option is:
 </p><dl compact="compact">
-<dt><samp>-chardev <var>backend</var> ,id=<var>id</var> [,mux=on|off] [,<var>options</var>]</samp></dt>
+<dt><samp>-chardev <var>backend</var>,id=<var>id</var>[,mux=on|off][,<var>options</var>]</samp></dt>
 <dd><a name="index-_002dchardev"></a>
 <p>Backend is one of:
 <samp>null</samp>,
@@ -2561,11 +2555,11 @@ is activated if no <samp>-net</samp> options are provided.
 <samp>tty</samp>,
 <samp>parallel</samp>,
 <samp>parport</samp>,
-<samp>spicevmc</samp>.
+<samp>spicevmc</samp>,
 <samp>spiceport</samp>.
 The specific backend will determine the applicable options.
 </p>
-<p>Use &quot;-chardev help&quot; to print all available chardev backend types.
+<p>Use <code>-chardev help</code> to print all available chardev backend types.
 </p>
 <p>All devices must have an id, which can be any string up to 127 characters long.
 It is used to uniquely identify this device in other command line directives.
@@ -2620,15 +2614,18 @@ to a file to record all data transmitted via the backend. The <samp>logappend</s
 option controls whether the log file will be truncated or appended to when
 opened.
 </p>
-<p>Further options to each backend are described below.
-</p>
 </dd>
-<dt><samp>-chardev null ,id=<var>id</var></samp></dt>
+</dl>
+
+<p>The available backends are:
+</p>
+<dl compact="compact">
+<dt><samp>-chardev null,id=<var>id</var></samp></dt>
 <dd><p>A void device. This device will not emit any data, and will drop any data it
 receives. The null backend does not take any options.
 </p>
 </dd>
-<dt><samp>-chardev socket ,id=<var>id</var> [<var>TCP options</var> or <var>unix options</var>] [,server] [,nowait] [,telnet] [,reconnect=<var>seconds</var>] [,tls-creds=<var>id</var>]</samp></dt>
+<dt><samp>-chardev socket,id=<var>id</var>[,<var>TCP options</var> or <var>unix options</var>][,server][,nowait][,telnet][,reconnect=<var>seconds</var>][,tls-creds=<var>id</var>]</samp></dt>
 <dd>
 <p>Create a two-way stream socket, which can be either a TCP or a unix socket. A
 unix socket will be created if <samp>path</samp> is specified. Behaviour is
@@ -2654,7 +2651,7 @@ argument.
 <p>TCP and unix socket options are given below:
 </p>
 <dl compact="compact">
-<dt><samp>TCP options: port=<var>port</var> [,host=<var>host</var>] [,to=<var>to</var>] [,ipv4] [,ipv6] [,nodelay]</samp></dt>
+<dt><samp>TCP options: port=<var>port</var>[,host=<var>host</var>][,to=<var>to</var>][,ipv4][,ipv6][,nodelay]</samp></dt>
 <dd>
 <p><samp>host</samp> for a listening socket specifies the local address to be bound.
 For a connecting socket species the remote host to connect to. <samp>host</samp> is
@@ -2685,7 +2682,7 @@ required.
 </dl>
 
 </dd>
-<dt><samp>-chardev udp ,id=<var>id</var> [,host=<var>host</var>] ,port=<var>port</var> [,localaddr=<var>localaddr</var>] [,localport=<var>localport</var>] [,ipv4] [,ipv6]</samp></dt>
+<dt><samp>-chardev udp,id=<var>id</var>[,host=<var>host</var>],port=<var>port</var>[,localaddr=<var>localaddr</var>][,localport=<var>localport</var>][,ipv4][,ipv6]</samp></dt>
 <dd>
 <p>Sends all traffic from the guest to a remote host over UDP.
 </p>
@@ -2705,13 +2702,13 @@ available local port will be used.
 If neither is specified the device may use either protocol.
 </p>
 </dd>
-<dt><samp>-chardev msmouse ,id=<var>id</var></samp></dt>
+<dt><samp>-chardev msmouse,id=<var>id</var></samp></dt>
 <dd>
 <p>Forward QEMU&rsquo;s emulated msmouse events to the guest. <samp>msmouse</samp> does not
 take any options.
 </p>
 </dd>
-<dt><samp>-chardev vc ,id=<var>id</var> [[,width=<var>width</var>] [,height=<var>height</var>]] [[,cols=<var>cols</var>] [,rows=<var>rows</var>]]</samp></dt>
+<dt><samp>-chardev vc,id=<var>id</var>[[,width=<var>width</var>][,height=<var>height</var>]][[,cols=<var>cols</var>][,rows=<var>rows</var>]]</samp></dt>
 <dd>
 <p>Connect to a QEMU text console. <samp>vc</samp> may optionally be given a specific
 size.
@@ -2723,13 +2720,13 @@ the console, in pixels.
 console with the given dimensions.
 </p>
 </dd>
-<dt><samp>-chardev ringbuf ,id=<var>id</var> [,size=<var>size</var>]</samp></dt>
+<dt><samp>-chardev ringbuf,id=<var>id</var>[,size=<var>size</var>]</samp></dt>
 <dd>
 <p>Create a ring buffer with fixed size <samp>size</samp>.
 <var>size</var> must be a power of two and defaults to <code>64K</code>.
 </p>
 </dd>
-<dt><samp>-chardev file ,id=<var>id</var> ,path=<var>path</var></samp></dt>
+<dt><samp>-chardev file,id=<var>id</var>,path=<var>path</var></samp></dt>
 <dd>
 <p>Log all traffic received from the guest to a file.
 </p>
@@ -2738,7 +2735,7 @@ created if it does not already exist, and overwritten if it does. <samp>path</sa
 is required.
 </p>
 </dd>
-<dt><samp>-chardev pipe ,id=<var>id</var> ,path=<var>path</var></samp></dt>
+<dt><samp>-chardev pipe,id=<var>id</var>,path=<var>path</var></samp></dt>
 <dd>
 <p>Create a two-way connection to the guest. The behaviour differs slightly between
 Windows hosts and other hosts:
@@ -2756,7 +2753,7 @@ be present.
 required.
 </p>
 </dd>
-<dt><samp>-chardev console ,id=<var>id</var></samp></dt>
+<dt><samp>-chardev console,id=<var>id</var></samp></dt>
 <dd>
 <p>Send traffic from the guest to QEMU&rsquo;s standard output. <samp>console</samp> does not
 take any options.
@@ -2764,7 +2761,7 @@ take any options.
 <p><samp>console</samp> is only available on Windows hosts.
 </p>
 </dd>
-<dt><samp>-chardev serial ,id=<var>id</var> ,path=<samp>path</samp></samp></dt>
+<dt><samp>-chardev serial,id=<var>id</var>,path=<samp>path</samp></samp></dt>
 <dd>
 <p>Send traffic from the guest to a serial device on the host.
 </p>
@@ -2774,7 +2771,7 @@ not only serial lines.
 <p><samp>path</samp> specifies the name of the serial device to open.
 </p>
 </dd>
-<dt><samp>-chardev pty ,id=<var>id</var></samp></dt>
+<dt><samp>-chardev pty,id=<var>id</var></samp></dt>
 <dd>
 <p>Create a new pseudo-terminal on the host and connect to it. <samp>pty</samp> does
 not take any options.
@@ -2782,7 +2779,7 @@ not take any options.
 <p><samp>pty</samp> is not available on Windows hosts.
 </p>
 </dd>
-<dt><samp>-chardev stdio ,id=<var>id</var> [,signal=on|off]</samp></dt>
+<dt><samp>-chardev stdio,id=<var>id</var>[,signal=on|off]</samp></dt>
 <dd><p>Connect to standard input and standard output of the QEMU process.
 </p>
 <p><samp>signal</samp> controls if signals are enabled on the terminal, that includes
@@ -2790,12 +2787,12 @@ exiting QEMU with the key sequence <tt class="key">Control-c</tt>. This option i
 default, use <samp>signal=off</samp> to disable it.
 </p>
 </dd>
-<dt><samp>-chardev braille ,id=<var>id</var></samp></dt>
+<dt><samp>-chardev braille,id=<var>id</var></samp></dt>
 <dd>
 <p>Connect to a local BrlAPI server. <samp>braille</samp> does not take any options.
 </p>
 </dd>
-<dt><samp>-chardev tty ,id=<var>id</var> ,path=<var>path</var></samp></dt>
+<dt><samp>-chardev tty,id=<var>id</var>,path=<var>path</var></samp></dt>
 <dd>
 <p><samp>tty</samp> is only available on Linux, Sun, FreeBSD, NetBSD, OpenBSD and
 DragonFlyBSD hosts.  It is an alias for <samp>serial</samp>.
@@ -2803,8 +2800,8 @@ DragonFlyBSD hosts.  It is an alias for <samp>serial</samp>.
 <p><samp>path</samp> specifies the path to the tty. <samp>path</samp> is required.
 </p>
 </dd>
-<dt><samp>-chardev parallel ,id=<var>id</var> ,path=<var>path</var></samp></dt>
-<dt><samp>-chardev parport ,id=<var>id</var> ,path=<var>path</var></samp></dt>
+<dt><samp>-chardev parallel,id=<var>id</var>,path=<var>path</var></samp></dt>
+<dt><samp>-chardev parport,id=<var>id</var>,path=<var>path</var></samp></dt>
 <dd>
 <p><samp>parallel</samp> is only available on Linux, FreeBSD and DragonFlyBSD hosts.
 </p>
@@ -2814,7 +2811,7 @@ DragonFlyBSD hosts.  It is an alias for <samp>serial</samp>.
 required.
 </p>
 </dd>
-<dt><samp>-chardev spicevmc ,id=<var>id</var> ,debug=<var>debug</var>, name=<var>name</var></samp></dt>
+<dt><samp>-chardev spicevmc,id=<var>id</var>,debug=<var>debug</var>,name=<var>name</var></samp></dt>
 <dd>
 <p><samp>spicevmc</samp> is only available when spice support is built in.
 </p>
@@ -2825,7 +2822,7 @@ required.
 <p>Connect to a spice virtual machine channel, such as vdiport.
 </p>
 </dd>
-<dt><samp>-chardev spiceport ,id=<var>id</var> ,debug=<var>debug</var>, name=<var>name</var></samp></dt>
+<dt><samp>-chardev spiceport,id=<var>id</var>,debug=<var>debug</var>,name=<var>name</var></samp></dt>
 <dd>
 <p><samp>spiceport</samp> is only available when spice support is built in.
 </p>
@@ -2837,242 +2834,8 @@ required.
 identified by a name (preferably a fqdn).
 </p></dd>
 </dl>
-<a name="Device-URL-Syntax"></a>
-<h4 class="subsection">2.3.8 Device URL Syntax</h4>
-
-<p>In addition to using normal file images for the emulated storage devices,
-QEMU can also use networked resources such as iSCSI devices. These are
-specified using a special URL syntax.
-</p>
-<dl compact="compact">
-<dt><samp>iSCSI</samp></dt>
-<dd><p>iSCSI support allows QEMU to access iSCSI resources directly and use as
-images for the guest storage. Both disk and cdrom images are supported.
-</p>
-<p>Syntax for specifying iSCSI LUNs is
-&ldquo;iscsi://&lt;target-ip&gt;[:&lt;port&gt;]/&lt;target-iqn&gt;/&lt;lun&gt;&rdquo;
-</p>
-<p>By default qemu will use the iSCSI initiator-name
-&rsquo;iqn.2008-11.org.linux-kvm[:&lt;name&gt;]&rsquo; but this can also be set from the command
-line or a configuration file.
-</p>
-<p>Since version Qemu 2.4 it is possible to specify a iSCSI request timeout to detect
-stalled requests and force a reestablishment of the session. The timeout
-is specified in seconds. The default is 0 which means no timeout. Libiscsi
-1.15.0 or greater is required for this feature.
-</p>
-<p>Example (without authentication):
-</p><div class="example">
-<pre class="example">qemu-system-i386 -iscsi initiator-name=iqn.2001-04.com.example:my-initiator \
--cdrom iscsi://192.0.2.1/iqn.2001-04.com.example/2 \
--drive file=iscsi://192.0.2.1/iqn.2001-04.com.example/1
-</pre></div>
-
-<p>Example (CHAP username/password via URL):
-</p><div class="example">
-<pre class="example">qemu-system-i386 -drive file=iscsi://user%password@192.0.2.1/iqn.2001-04.com.example/1
-</pre></div>
-
-<p>Example (CHAP username/password via environment variables):
-</p><div class="example">
-<pre class="example">LIBISCSI_CHAP_USERNAME=&quot;user&quot; \
-LIBISCSI_CHAP_PASSWORD=&quot;password&quot; \
-qemu-system-i386 -drive file=iscsi://192.0.2.1/iqn.2001-04.com.example/1
-</pre></div>
-
-<p>iSCSI support is an optional feature of QEMU and only available when
-compiled and linked against libiscsi.
-</p>
-<p>iSCSI parameters such as username and password can also be specified via
-a configuration file. See qemu-doc for more information and examples.
-</p>
-</dd>
-<dt><samp>NBD</samp></dt>
-<dd><p>QEMU supports NBD (Network Block Devices) both using TCP protocol as well
-as Unix Domain Sockets.
-</p>
-<p>Syntax for specifying a NBD device using TCP
-&ldquo;nbd:&lt;server-ip&gt;:&lt;port&gt;[:exportname=&lt;export&gt;]&rdquo;
-</p>
-<p>Syntax for specifying a NBD device using Unix Domain Sockets
-&ldquo;nbd:unix:&lt;domain-socket&gt;[:exportname=&lt;export&gt;]&rdquo;
-</p>
-
-<p>Example for TCP
-</p><div class="example">
-<pre class="example">qemu-system-i386 --drive file=nbd:192.0.2.1:30000
-</pre></div>
-
-<p>Example for Unix Domain Sockets
-</p><div class="example">
-<pre class="example">qemu-system-i386 --drive file=nbd:unix:/tmp/nbd-socket
-</pre></div>
-
-</dd>
-<dt><samp>SSH</samp></dt>
-<dd><p>QEMU supports SSH (Secure Shell) access to remote disks.
-</p>
-<p>Examples:
-</p><div class="example">
-<pre class="example">qemu-system-i386 -drive file=ssh://user@host/path/to/disk.img
-qemu-system-i386 -drive file.driver=ssh,file.user=user,file.host=host,file.port=22,file.path=/path/to/disk.img
-</pre></div>
-
-<p>Currently authentication must be done using ssh-agent.  Other
-authentication methods may be supported in future.
-</p>
-</dd>
-<dt><samp>Sheepdog</samp></dt>
-<dd><p>Sheepdog is a distributed storage system for QEMU.
-QEMU supports using either local sheepdog devices or remote networked
-devices.
-</p>
-<p>Syntax for specifying a sheepdog device
-</p><div class="example">
-<pre class="example">sheepdog[+tcp|+unix]://[host:port]/vdiname[?socket=path][#snapid|#tag]
-</pre></div>
-
-<p>Example
-</p><div class="example">
-<pre class="example">qemu-system-i386 --drive file=sheepdog://192.0.2.1:30000/MyVirtualMachine
-</pre></div>
-
-<p>See also <a href="https://sheepdog.github.io/sheepdog/">https://sheepdog.github.io/sheepdog/</a>.
-</p>
-</dd>
-<dt><samp>GlusterFS</samp></dt>
-<dd><p>GlusterFS is a user space distributed file system.
-QEMU supports the use of GlusterFS volumes for hosting VM disk images using
-TCP, Unix Domain Sockets and RDMA transport protocols.
-</p>
-<p>Syntax for specifying a VM disk image on GlusterFS volume is
-</p><div class="example">
-<pre class="example">
-
-URI:
-gluster[+type]://[host[:port]]/volume/path[?socket=...][,debug=N][,logfile=...]
-
-JSON:
-'json:{&quot;driver&quot;:&quot;qcow2&quot;,&quot;file&quot;:{&quot;driver&quot;:&quot;gluster&quot;,&quot;volume&quot;:&quot;testvol&quot;,&quot;path&quot;:&quot;a.img&quot;,&quot;debug&quot;:N,&quot;logfile&quot;:&quot;...&quot;,
-&nbsp;                                &quot;server&quot;:[{&quot;type&quot;:&quot;tcp&quot;,&quot;host&quot;:&quot;...&quot;,&quot;port&quot;:&quot;...&quot;},
-&nbsp;                                          {&quot;type&quot;:&quot;unix&quot;,&quot;socket&quot;:&quot;...&quot;}]}}'
-</pre></div>
-
-
-<p>Example
-</p><div class="example">
-<pre class="example">URI:
-qemu-system-x86_64 --drive file=gluster://192.0.2.1/testvol/a.img,
-&nbsp;                              file.debug=9,file.logfile=/var/log/qemu-gluster.log
-
-JSON:
-qemu-system-x86_64 'json:{&quot;driver&quot;:&quot;qcow2&quot;,
-&nbsp;                         &quot;file&quot;:{&quot;driver&quot;:&quot;gluster&quot;,
-&nbsp;                                  &quot;volume&quot;:&quot;testvol&quot;,&quot;path&quot;:&quot;a.img&quot;,
-&nbsp;                                  &quot;debug&quot;:9,&quot;logfile&quot;:&quot;/var/log/qemu-gluster.log&quot;,
-&nbsp;                                  &quot;server&quot;:[{&quot;type&quot;:&quot;tcp&quot;,&quot;host&quot;:&quot;1.2.3.4&quot;,&quot;port&quot;:24007},
-&nbsp;                                            {&quot;type&quot;:&quot;unix&quot;,&quot;socket&quot;:&quot;/var/run/glusterd.socket&quot;}]}}'
-qemu-system-x86_64 -drive driver=qcow2,file.driver=gluster,file.volume=testvol,file.path=/path/a.img,
-&nbsp;                                     file.debug=9,file.logfile=/var/log/qemu-gluster.log,
-&nbsp;                                     file.server.0.type=tcp,file.server.0.host=1.2.3.4,file.server.0.port=24007,
-&nbsp;                                     file.server.1.type=unix,file.server.1.socket=/var/run/glusterd.socket
-</pre></div>
-
-<p>See also <a href="http://www.gluster.org">http://www.gluster.org</a>.
-</p>
-</dd>
-<dt><samp>HTTP/HTTPS/FTP/FTPS</samp></dt>
-<dd><p>QEMU supports read-only access to files accessed over http(s) and ftp(s).
-</p>
-<p>Syntax using a single filename:
-</p><div class="example">
-<pre class="example">&lt;protocol&gt;://[&lt;username&gt;[:&lt;password&gt;]@]&lt;host&gt;/&lt;path&gt;
-</pre></div>
-
-<p>where:
-</p><dl compact="compact">
-<dt><samp>protocol</samp></dt>
-<dd><p>&rsquo;http&rsquo;, &rsquo;https&rsquo;, &rsquo;ftp&rsquo;, or &rsquo;ftps&rsquo;.
-</p>
-</dd>
-<dt><samp>username</samp></dt>
-<dd><p>Optional username for authentication to the remote server.
-</p>
-</dd>
-<dt><samp>password</samp></dt>
-<dd><p>Optional password for authentication to the remote server.
-</p>
-</dd>
-<dt><samp>host</samp></dt>
-<dd><p>Address of the remote server.
-</p>
-</dd>
-<dt><samp>path</samp></dt>
-<dd><p>Path on the remote server, including any query string.
-</p></dd>
-</dl>
-
-<p>The following options are also supported:
-</p><dl compact="compact">
-<dt><samp>url</samp></dt>
-<dd><p>The full URL when passing options to the driver explicitly.
-</p>
-</dd>
-<dt><samp>readahead</samp></dt>
-<dd><p>The amount of data to read ahead with each range request to the remote server.
-This value may optionally have the suffix &rsquo;T&rsquo;, &rsquo;G&rsquo;, &rsquo;M&rsquo;, &rsquo;K&rsquo;, &rsquo;k&rsquo; or &rsquo;b&rsquo;. If it
-does not have a suffix, it will be assumed to be in bytes. The value must be a
-multiple of 512 bytes. It defaults to 256k.
-</p>
-</dd>
-<dt><samp>sslverify</samp></dt>
-<dd><p>Whether to verify the remote server&rsquo;s certificate when connecting over SSL. It
-can have the value &rsquo;on&rsquo; or &rsquo;off&rsquo;. It defaults to &rsquo;on&rsquo;.
-</p>
-</dd>
-<dt><samp>cookie</samp></dt>
-<dd><p>Send this cookie (it can also be a list of cookies separated by &rsquo;;&rsquo;) with
-each outgoing request.  Only supported when using protocols such as HTTP
-which support cookies, otherwise ignored.
-</p>
-</dd>
-<dt><samp>timeout</samp></dt>
-<dd><p>Set the timeout in seconds of the CURL connection. This timeout is the time
-that CURL waits for a response from the remote server to get the size of the
-image to be downloaded. If not set, the default timeout of 5 seconds is used.
-</p></dd>
-</dl>
-
-<p>Note that when passing options to qemu explicitly, <samp>driver</samp> is the value
-of &lt;protocol&gt;.
-</p>
-<p>Example: boot from a remote Fedora 20 live ISO image
-</p><div class="example">
-<pre class="example">qemu-system-x86_64 --drive media=cdrom,file=http://dl.fedoraproject.org/pub/fedora/linux/releases/20/Live/x86_64/Fedora-Live-Desktop-x86_64-20-1.iso,readonly
-
-qemu-system-x86_64 --drive media=cdrom,file.driver=http,file.url=http://dl.fedoraproject.org/pub/fedora/linux/releases/20/Live/x86_64/Fedora-Live-Desktop-x86_64-20-1.iso,readonly
-</pre></div>
-
-<p>Example: boot from a remote Fedora 20 cloud image using a local overlay for
-writes, copy-on-read, and a readahead of 64k
-</p><div class="example">
-<pre class="example">qemu-img create -f qcow2 -o backing_file='json:{&quot;file.driver&quot;:&quot;http&quot;,, &quot;file.url&quot;:&quot;https://dl.fedoraproject.org/pub/fedora/linux/releases/20/Images/x86_64/Fedora-x86_64-20-20131211.1-sda.qcow2&quot;,, &quot;file.readahead&quot;:&quot;64k&quot;}' /tmp/Fedora-x86_64-20-20131211.1-sda.qcow2
-
-qemu-system-x86_64 -drive file=/tmp/Fedora-x86_64-20-20131211.1-sda.qcow2,copy-on-read=on
-</pre></div>
-
-<p>Example: boot from an image stored on a VMware vSphere server with a self-signed
-certificate using a local overlay for writes, a readahead of 64k and a timeout
-of 10 seconds.
-</p><div class="example">
-<pre class="example">qemu-img create -f qcow2 -o backing_file='json:{&quot;file.driver&quot;:&quot;https&quot;,, &quot;file.url&quot;:&quot;https://user:password@vsphere.example.com/folder/test/test-flat.vmdk?dcPath=Datacenter&amp;dsName=datastore1&quot;,, &quot;file.sslverify&quot;:&quot;off&quot;,, &quot;file.readahead&quot;:&quot;64k&quot;,, &quot;file.timeout&quot;:10}' /tmp/test.qcow2
-
-qemu-system-x86_64 -drive file=/tmp/test.qcow2
-</pre></div>
-</dd>
-</dl>
 <a name="Bluetooth_0028R_0029-options"></a>
-<h4 class="subsection">2.3.9 Bluetooth(R) options</h4>
+<h4 class="subsection">2.3.8 Bluetooth(R) options</h4>
 <dl compact="compact">
 <dt><samp>-bt hci[...]</samp></dt>
 <dd><a name="index-_002dbt"></a>
@@ -3133,28 +2896,26 @@ currently:
 </dd>
 </dl>
 <a name="TPM-device-options"></a>
-<h4 class="subsection">2.3.10 TPM device options</h4>
+<h4 class="subsection">2.3.9 TPM device options</h4>
 
 <p>The general form of a TPM device option is:
 </p><dl compact="compact">
-<dt><samp>-tpmdev <var>backend</var> ,id=<var>id</var> [,<var>options</var>]</samp></dt>
+<dt><samp>-tpmdev <var>backend</var>,id=<var>id</var>[,<var>options</var>]</samp></dt>
 <dd><a name="index-_002dtpmdev"></a>
-<p>Backend type must be either one of the following:
-<samp>passthrough</samp>, <samp>emulator</samp>.
-</p>
+
 <p>The specific backend type will determine the applicable options.
 The <code>-tpmdev</code> option creates the TPM backend and requires a
 <code>-device</code> option that specifies the TPM frontend interface model.
 </p>
-<p>Options to each backend are described below.
+<p>Use <code>-tpmdev help</code> to print all available TPM backend types.
 </p>
-<p>Use &rsquo;help&rsquo; to print all available TPM backend types.
-</p><div class="example">
-<pre class="example">qemu -tpmdev help
-</pre></div>
-
 </dd>
-<dt><samp>-tpmdev passthrough, id=<var>id</var>, path=<var>path</var>, cancel-path=<var>cancel-path</var></samp></dt>
+</dl>
+
+<p>The available backends are:
+</p>
+<dl compact="compact">
+<dt><samp>-tpmdev passthrough,id=<var>id</var>,path=<var>path</var>,cancel-path=<var>cancel-path</var></samp></dt>
 <dd>
 <p>(Linux-host only) Enable access to the host&rsquo;s TPM using the passthrough
 driver.
@@ -3192,7 +2953,7 @@ If the TPM is left disabled and/or deactivated most TPM commands will fail.
 <code>tpmdev=tpm0</code> in the device option.
 </p>
 </dd>
-<dt><samp>-tpmdev emulator, id=<var>id</var>, chardev=<var>dev</var></samp></dt>
+<dt><samp>-tpmdev emulator,id=<var>id</var>,chardev=<var>dev</var></samp></dt>
 <dd>
 <p>(Linux-host only) Enable access to a TPM emulator using Unix domain socket based
 chardev backend.
@@ -3209,9 +2970,8 @@ chardev backend.
 
 </dd>
 </dl>
-
 <a name="Linux_002fMultiboot-boot-specific"></a>
-<h4 class="subsection">2.3.11 Linux/Multiboot boot specific</h4>
+<h4 class="subsection">2.3.10 Linux/Multiboot boot specific</h4>
 
 <p>When using these options, you can use a given Linux or Multiboot
 kernel without installing it in the disk image. It can be useful
@@ -3246,7 +3006,7 @@ on boot.
 </p></dd>
 </dl>
 <a name="Debug_002fExpert-options"></a>
-<h4 class="subsection">2.3.12 Debug/Expert options</h4>
+<h4 class="subsection">2.3.11 Debug/Expert options</h4>
 <dl compact="compact">
 <dt><samp>-fw_cfg [name=]<var>name</var>,file=<var>file</var></samp></dt>
 <dd><a name="index-_002dfw_005fcfg"></a>
@@ -3451,9 +3211,10 @@ Use <code>-monitor none</code> to disable the default monitor.
 <dd><a name="index-_002dqmp_002dpretty"></a>
 <p>Like -qmp but uses pretty JSON formatting.
 </p></dd>
-<dt><samp>-mon [chardev=]name[,mode=readline|control]</samp></dt>
+<dt><samp>-mon [chardev=]name[,mode=readline|control][,pretty[=on|off]]</samp></dt>
 <dd><a name="index-_002dmon"></a>
-<p>Setup monitor on chardev <var>name</var>.
+<p>Setup monitor on chardev <var>name</var>. <code>pretty</code> turns on JSON pretty printing
+easing human reading and debugging.
 </p></dd>
 <dt><samp>-debugcon <var>dev</var></samp></dt>
 <dd><a name="index-_002ddebugcon"></a>
@@ -3676,6 +3437,7 @@ The default is
 Other possible actions are:
 <code>shutdown</code> (attempt to gracefully shutdown the guest),
 <code>poweroff</code> (forcefully poweroff the guest),
+<code>inject-nmi</code> (inject a NMI into the guest),
 <code>pause</code> (pause the guest),
 <code>debug</code> (print a debug message and continue), or
 <code>none</code> (do nothing).
@@ -3885,7 +3647,7 @@ in <var>file</var>
 </p></dd>
 </dl>
 <a name="Generic-object-creation"></a>
-<h4 class="subsection">2.3.13 Generic object creation</h4>
+<h4 class="subsection">2.3.12 Generic object creation</h4>
 <dl compact="compact">
 <dt><samp>-object <var>typename</var>[,<var>prop1</var>=<var>value1</var>,...]</samp></dt>
 <dd><a name="index-_002dobject"></a>
@@ -3895,24 +3657,108 @@ property must be set.  These objects are placed in the
 &rsquo;/objects&rsquo; path.
 </p>
 <dl compact="compact">
-<dt><samp>-object memory-backend-file,id=<var>id</var>,size=<var>size</var>,mem-path=<var>dir</var>,share=<var>on|off</var>,discard-data=<var>on|off</var></samp></dt>
+<dt><samp>-object memory-backend-file,id=<var>id</var>,size=<var>size</var>,mem-path=<var>dir</var>,share=<var>on|off</var>,discard-data=<var>on|off</var>,merge=<var>on|off</var>,dump=<var>on|off</var>,prealloc=<var>on|off</var>,host-nodes=<var>host-nodes</var>,policy=<var>default|preferred|bind|interleave</var>,align=<var>align</var></samp></dt>
 <dd>
 <p>Creates a memory file backend object, which can be used to back
-the guest RAM with huge pages. The <samp>id</samp> parameter is a
-unique ID that will be used to reference this memory region
-when configuring the <samp>-numa</samp> argument. The <samp>size</samp>
-option provides the size of the memory region, and accepts
-common suffixes, eg <samp>500M</samp>. The <samp>mem-path</samp> provides
-the path to either a shared memory or huge page filesystem mount.
-The <samp>share</samp> boolean option determines whether the memory
+the guest RAM with huge pages.
+</p>
+<p>The <samp>id</samp> parameter is a unique ID that will be used to reference this
+memory region when configuring the <samp>-numa</samp> argument.
+</p>
+<p>The <samp>size</samp> option provides the size of the memory region, and accepts
+common suffixes, eg <samp>500M</samp>.
+</p>
+<p>The <samp>mem-path</samp> provides the path to either a shared memory or huge page
+filesystem mount.
+</p>
+<p>The <samp>share</samp> boolean option determines whether the memory
 region is marked as private to QEMU, or shared. The latter allows
 a co-operating external process to access the QEMU memory region.
-Setting the <samp>discard-data</samp> boolean option to <var>on</var>
+</p>
+<p>The <samp>share</samp> is also required for pvrdma devices due to
+limitations in the RDMA API provided by Linux.
+</p>
+<p>Setting share=on might affect the ability to configure NUMA
+bindings for the memory backend under some circumstances, see
+Documentation/vm/numa_memory_policy.txt on the Linux kernel
+source tree for additional details.
+</p>
+<p>Setting the <samp>discard-data</samp> boolean option to <var>on</var>
 indicates that file contents can be destroyed when QEMU exits,
 to avoid unnecessarily flushing data to the backing file.  Note
 that <samp>discard-data</samp> is only an optimization, and QEMU
 might not discard file contents if it aborts unexpectedly or is
 terminated using SIGKILL.
+</p>
+<p>The <samp>merge</samp> boolean option enables memory merge, also known as
+MADV_MERGEABLE, so that Kernel Samepage Merging will consider the pages for
+memory deduplication.
+</p>
+<p>Setting the <samp>dump</samp> boolean option to <var>off</var> excludes the memory from
+core dumps. This feature is also known as MADV_DONTDUMP.
+</p>
+<p>The <samp>prealloc</samp> boolean option enables memory preallocation.
+</p>
+<p>The <samp>host-nodes</samp> option binds the memory range to a list of NUMA host
+nodes.
+</p>
+<p>The <samp>policy</samp> option sets the NUMA policy to one of the following values:
+</p>
+<dl compact="compact">
+<dt><samp><var>default</var></samp></dt>
+<dd><p>default host policy
+</p>
+</dd>
+<dt><samp><var>preferred</var></samp></dt>
+<dd><p>prefer the given host node list for allocation
+</p>
+</dd>
+<dt><samp><var>bind</var></samp></dt>
+<dd><p>restrict memory allocation to the given host node list
+</p>
+</dd>
+<dt><samp><var>interleave</var></samp></dt>
+<dd><p>interleave memory allocations across the given host node list
+</p></dd>
+</dl>
+
+<p>The <samp>align</samp> option specifies the base address alignment when
+QEMU mmap(2) <samp>mem-path</samp>, and accepts common suffixes, eg
+<samp>2M</samp>. Some backend store specified by <samp>mem-path</samp>
+requires an alignment different than the default one used by QEMU, eg
+the device DAX /dev/dax0.0 requires 2M alignment rather than 4K. In
+such cases, users can specify the required alignment via this option.
+</p>
+</dd>
+<dt><samp>-object memory-backend-ram,id=<var>id</var>,merge=<var>on|off</var>,dump=<var>on|off</var>,share=<var>on|off</var>,prealloc=<var>on|off</var>,size=<var>size</var>,host-nodes=<var>host-nodes</var>,policy=<var>default|preferred|bind|interleave</var></samp></dt>
+<dd>
+<p>Creates a memory backend object, which can be used to back the guest RAM.
+Memory backend objects offer more control than the <samp>-m</samp> option that is
+traditionally used to define guest RAM. Please refer to
+<samp>memory-backend-file</samp> for a description of the options.
+</p>
+</dd>
+<dt><samp>-object memory-backend-memfd,id=<var>id</var>,merge=<var>on|off</var>,dump=<var>on|off</var>,prealloc=<var>on|off</var>,size=<var>size</var>,host-nodes=<var>host-nodes</var>,policy=<var>default|preferred|bind|interleave</var>,seal=<var>on|off</var>,hugetlb=<var>on|off</var>,hugetlbsize=<var>size</var></samp></dt>
+<dd>
+<p>Creates an anonymous memory file backend object, which allows QEMU to
+share the memory with an external process (e.g. when using
+vhost-user). The memory is allocated with memfd and optional
+sealing. (Linux only)
+</p>
+<p>The <samp>seal</samp> option creates a sealed-file, that will block
+further resizing the memory (&rsquo;on&rsquo; by default).
+</p>
+<p>The <samp>hugetlb</samp> option specify the file to be created resides in
+the hugetlbfs filesystem (since Linux 4.14).  Used in conjunction with
+the <samp>hugetlb</samp> option, the <samp>hugetlbsize</samp> option specify
+the hugetlb page size on systems that support multiple hugetlb page
+sizes (it must be a power of 2 value supported by the system).
+</p>
+<p>In some versions of Linux, the <samp>hugetlb</samp> option is incompatible
+with the <samp>seal</samp> option (requires at least Linux 4.16).
+</p>
+<p>Please refer to <samp>memory-backend-file</samp> for a description of the
+other options.
 </p>
 </dd>
 <dt><samp>-object rng-random,id=<var>id</var>,filename=<var>/dev/random</var></samp></dt>
@@ -4107,6 +3953,29 @@ which specify the queue number of cryptodev backend, the default of
 </pre></div>
 
 </dd>
+<dt><samp>-object cryptodev-vhost-user,id=<var>id</var>,chardev=<var>chardevid</var>[,queues=<var>queues</var>]</samp></dt>
+<dd>
+<p>Creates a vhost-user cryptodev backend, backed by a chardev <var>chardevid</var>.
+The <var>id</var> parameter is a unique ID that will be used to reference this
+cryptodev backend from the <samp>virtio-crypto</samp> device.
+The chardev should be a unix domain socket backed one. The vhost-user uses
+a specifically defined protocol to pass vhost ioctl replacement messages
+to an application on the other end of the socket.
+The <var>queues</var> parameter is optional, which specify the queue number
+of cryptodev backend for multiqueue vhost-user, the default of <var>queues</var> is 1.
+</p>
+<div class="example">
+<pre class="example">
+
+# qemu-system-x86_64 \
+[...] \
+-chardev socket,id=chardev0,path=/path/to/socket \
+-object cryptodev-vhost-user,id=cryptodev0,chardev=chardev0 \
+-device virtio-crypto-pci,id=crypto0,cryptodev=cryptodev0 \
+[...]
+</pre></div>
+
+</dd>
 <dt><samp>-object secret,id=<var>id</var>,data=<var>string</var>,format=<var>raw|base64</var>[,keyid=<var>secretid</var>,iv=<var>string</var>]</samp></dt>
 <dt><samp>-object secret,id=<var>id</var>,file=<var>filename</var>,format=<var>raw|base64</var>[,keyid=<var>secretid</var>,iv=<var>string</var>]</samp></dt>
 <dd>
@@ -4186,7 +4055,283 @@ data=$SECRET,iv=$(&lt;iv.b64)
 </pre></div>
 
 </dd>
+<dt><samp>-object sev-guest,id=<var>id</var>,cbitpos=<var>cbitpos</var>,reduced-phys-bits=<var>val</var>,[sev-device=<var>string</var>,policy=<var>policy</var>,handle=<var>handle</var>,dh-cert-file=<var>file</var>,session-file=<var>file</var>]</samp></dt>
+<dd>
+<p>Create a Secure Encrypted Virtualization (SEV) guest object, which can be used
+to provide the guest memory encryption support on AMD processors.
+</p>
+<p>When memory encryption is enabled, one of the physical address bit (aka the
+C-bit) is utilized to mark if a memory page is protected. The <samp>cbitpos</samp>
+is used to provide the C-bit position. The C-bit position is Host family dependent
+hence user must provide this value. On EPYC, the value should be 47.
+</p>
+<p>When memory encryption is enabled, we loose certain bits in physical address space.
+The <samp>reduced-phys-bits</samp> is used to provide the number of bits we loose in
+physical address space. Similar to C-bit, the value is Host family dependent.
+On EPYC, the value should be 5.
+</p>
+<p>The <samp>sev-device</samp> provides the device file to use for communicating with
+the SEV firmware running inside AMD Secure Processor. The default device is
+&rsquo;/dev/sev&rsquo;. If hardware supports memory encryption then /dev/sev devices are
+created by CCP driver.
+</p>
+<p>The <samp>policy</samp> provides the guest policy to be enforced by the SEV firmware
+and restrict what configuration and operational commands can be performed on this
+guest by the hypervisor. The policy should be provided by the guest owner and is
+bound to the guest and cannot be changed throughout the lifetime of the guest.
+The default is 0.
+</p>
+<p>If guest <samp>policy</samp> allows sharing the key with another SEV guest then
+<samp>handle</samp> can be use to provide handle of the guest from which to share
+the key.
+</p>
+<p>The <samp>dh-cert-file</samp> and <samp>session-file</samp> provides the guest owner&rsquo;s
+Public Diffie-Hillman key defined in SEV spec. The PDH and session parameters
+are used for establishing a cryptographic session with the guest owner to
+negotiate keys used for attestation. The file must be encoded in base64.
+</p>
+<p>e.g to launch a SEV guest
+</p><div class="example">
+<pre class="example"># $QEMU \
+......
+-object sev-guest,id=sev0,cbitpos=47,reduced-phys-bits=5 \
+-machine ...,memory-encryption=sev0
+.....
+
+</pre></div>
+</dd>
 </dl>
+
+</dd>
+</dl>
+
+
+<a name="Device-URL-Syntax"></a>
+<h4 class="subsection">2.3.13 Device URL Syntax</h4>
+
+
+<p>In addition to using normal file images for the emulated storage devices,
+QEMU can also use networked resources such as iSCSI devices. These are
+specified using a special URL syntax.
+</p>
+<dl compact="compact">
+<dt><samp>iSCSI</samp></dt>
+<dd><p>iSCSI support allows QEMU to access iSCSI resources directly and use as
+images for the guest storage. Both disk and cdrom images are supported.
+</p>
+<p>Syntax for specifying iSCSI LUNs is
+&ldquo;iscsi://&lt;target-ip&gt;[:&lt;port&gt;]/&lt;target-iqn&gt;/&lt;lun&gt;&rdquo;
+</p>
+<p>By default qemu will use the iSCSI initiator-name
+&rsquo;iqn.2008-11.org.linux-kvm[:&lt;name&gt;]&rsquo; but this can also be set from the command
+line or a configuration file.
+</p>
+<p>Since version Qemu 2.4 it is possible to specify a iSCSI request timeout to detect
+stalled requests and force a reestablishment of the session. The timeout
+is specified in seconds. The default is 0 which means no timeout. Libiscsi
+1.15.0 or greater is required for this feature.
+</p>
+<p>Example (without authentication):
+</p><div class="example">
+<pre class="example">qemu-system-i386 -iscsi initiator-name=iqn.2001-04.com.example:my-initiator \
+                 -cdrom iscsi://192.0.2.1/iqn.2001-04.com.example/2 \
+                 -drive file=iscsi://192.0.2.1/iqn.2001-04.com.example/1
+</pre></div>
+
+<p>Example (CHAP username/password via URL):
+</p><div class="example">
+<pre class="example">qemu-system-i386 -drive file=iscsi://user%password@192.0.2.1/iqn.2001-04.com.example/1
+</pre></div>
+
+<p>Example (CHAP username/password via environment variables):
+</p><div class="example">
+<pre class="example">LIBISCSI_CHAP_USERNAME=&quot;user&quot; \
+LIBISCSI_CHAP_PASSWORD=&quot;password&quot; \
+qemu-system-i386 -drive file=iscsi://192.0.2.1/iqn.2001-04.com.example/1
+</pre></div>
+
+</dd>
+<dt><samp>NBD</samp></dt>
+<dd><p>QEMU supports NBD (Network Block Devices) both using TCP protocol as well
+as Unix Domain Sockets.
+</p>
+<p>Syntax for specifying a NBD device using TCP
+&ldquo;nbd:&lt;server-ip&gt;:&lt;port&gt;[:exportname=&lt;export&gt;]&rdquo;
+</p>
+<p>Syntax for specifying a NBD device using Unix Domain Sockets
+&ldquo;nbd:unix:&lt;domain-socket&gt;[:exportname=&lt;export&gt;]&rdquo;
+</p>
+<p>Example for TCP
+</p><div class="example">
+<pre class="example">qemu-system-i386 --drive file=nbd:192.0.2.1:30000
+</pre></div>
+
+<p>Example for Unix Domain Sockets
+</p><div class="example">
+<pre class="example">qemu-system-i386 --drive file=nbd:unix:/tmp/nbd-socket
+</pre></div>
+
+</dd>
+<dt><samp>SSH</samp></dt>
+<dd><p>QEMU supports SSH (Secure Shell) access to remote disks.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example">qemu-system-i386 -drive file=ssh://user@host/path/to/disk.img
+qemu-system-i386 -drive file.driver=ssh,file.user=user,file.host=host,file.port=22,file.path=/path/to/disk.img
+</pre></div>
+
+<p>Currently authentication must be done using ssh-agent.  Other
+authentication methods may be supported in future.
+</p>
+</dd>
+<dt><samp>Sheepdog</samp></dt>
+<dd><p>Sheepdog is a distributed storage system for QEMU.
+QEMU supports using either local sheepdog devices or remote networked
+devices.
+</p>
+<p>Syntax for specifying a sheepdog device
+</p><div class="example">
+<pre class="example">sheepdog[+tcp|+unix]://[host:port]/vdiname[?socket=path][#snapid|#tag]
+</pre></div>
+
+<p>Example
+</p><div class="example">
+<pre class="example">qemu-system-i386 --drive file=sheepdog://192.0.2.1:30000/MyVirtualMachine
+</pre></div>
+
+<p>See also <a href="https://sheepdog.github.io/sheepdog/">https://sheepdog.github.io/sheepdog/</a>.
+</p>
+</dd>
+<dt><samp>GlusterFS</samp></dt>
+<dd><p>GlusterFS is a user space distributed file system.
+QEMU supports the use of GlusterFS volumes for hosting VM disk images using
+TCP, Unix Domain Sockets and RDMA transport protocols.
+</p>
+<p>Syntax for specifying a VM disk image on GlusterFS volume is
+</p><div class="example">
+<pre class="example">
+
+URI:
+gluster[+type]://[host[:port]]/volume/path[?socket=...][,debug=N][,logfile=...]
+
+JSON:
+'json:{&quot;driver&quot;:&quot;qcow2&quot;,&quot;file&quot;:{&quot;driver&quot;:&quot;gluster&quot;,&quot;volume&quot;:&quot;testvol&quot;,&quot;path&quot;:&quot;a.img&quot;,&quot;debug&quot;:N,&quot;logfile&quot;:&quot;...&quot;,
+&nbsp;                                &quot;server&quot;:[{&quot;type&quot;:&quot;tcp&quot;,&quot;host&quot;:&quot;...&quot;,&quot;port&quot;:&quot;...&quot;},
+&nbsp;                                          {&quot;type&quot;:&quot;unix&quot;,&quot;socket&quot;:&quot;...&quot;}]}}'
+</pre></div>
+
+
+<p>Example
+</p><div class="example">
+<pre class="example">URI:
+qemu-system-x86_64 --drive file=gluster://192.0.2.1/testvol/a.img,
+&nbsp;                              file.debug=9,file.logfile=/var/log/qemu-gluster.log
+
+JSON:
+qemu-system-x86_64 'json:{&quot;driver&quot;:&quot;qcow2&quot;,
+&nbsp;                         &quot;file&quot;:{&quot;driver&quot;:&quot;gluster&quot;,
+&nbsp;                                  &quot;volume&quot;:&quot;testvol&quot;,&quot;path&quot;:&quot;a.img&quot;,
+&nbsp;                                  &quot;debug&quot;:9,&quot;logfile&quot;:&quot;/var/log/qemu-gluster.log&quot;,
+&nbsp;                                  &quot;server&quot;:[{&quot;type&quot;:&quot;tcp&quot;,&quot;host&quot;:&quot;1.2.3.4&quot;,&quot;port&quot;:24007},
+&nbsp;                                            {&quot;type&quot;:&quot;unix&quot;,&quot;socket&quot;:&quot;/var/run/glusterd.socket&quot;}]}}'
+qemu-system-x86_64 -drive driver=qcow2,file.driver=gluster,file.volume=testvol,file.path=/path/a.img,
+&nbsp;                                     file.debug=9,file.logfile=/var/log/qemu-gluster.log,
+&nbsp;                                     file.server.0.type=tcp,file.server.0.host=1.2.3.4,file.server.0.port=24007,
+&nbsp;                                     file.server.1.type=unix,file.server.1.socket=/var/run/glusterd.socket
+</pre></div>
+
+<p>See also <a href="http://www.gluster.org">http://www.gluster.org</a>.
+</p>
+</dd>
+<dt><samp>HTTP/HTTPS/FTP/FTPS</samp></dt>
+<dd><p>QEMU supports read-only access to files accessed over http(s) and ftp(s).
+</p>
+<p>Syntax using a single filename:
+</p><div class="example">
+<pre class="example">&lt;protocol&gt;://[&lt;username&gt;[:&lt;password&gt;]@]&lt;host&gt;/&lt;path&gt;
+</pre></div>
+
+<p>where:
+</p><dl compact="compact">
+<dt><samp>protocol</samp></dt>
+<dd><p>&rsquo;http&rsquo;, &rsquo;https&rsquo;, &rsquo;ftp&rsquo;, or &rsquo;ftps&rsquo;.
+</p>
+</dd>
+<dt><samp>username</samp></dt>
+<dd><p>Optional username for authentication to the remote server.
+</p>
+</dd>
+<dt><samp>password</samp></dt>
+<dd><p>Optional password for authentication to the remote server.
+</p>
+</dd>
+<dt><samp>host</samp></dt>
+<dd><p>Address of the remote server.
+</p>
+</dd>
+<dt><samp>path</samp></dt>
+<dd><p>Path on the remote server, including any query string.
+</p></dd>
+</dl>
+
+<p>The following options are also supported:
+</p><dl compact="compact">
+<dt><samp>url</samp></dt>
+<dd><p>The full URL when passing options to the driver explicitly.
+</p>
+</dd>
+<dt><samp>readahead</samp></dt>
+<dd><p>The amount of data to read ahead with each range request to the remote server.
+This value may optionally have the suffix &rsquo;T&rsquo;, &rsquo;G&rsquo;, &rsquo;M&rsquo;, &rsquo;K&rsquo;, &rsquo;k&rsquo; or &rsquo;b&rsquo;. If it
+does not have a suffix, it will be assumed to be in bytes. The value must be a
+multiple of 512 bytes. It defaults to 256k.
+</p>
+</dd>
+<dt><samp>sslverify</samp></dt>
+<dd><p>Whether to verify the remote server&rsquo;s certificate when connecting over SSL. It
+can have the value &rsquo;on&rsquo; or &rsquo;off&rsquo;. It defaults to &rsquo;on&rsquo;.
+</p>
+</dd>
+<dt><samp>cookie</samp></dt>
+<dd><p>Send this cookie (it can also be a list of cookies separated by &rsquo;;&rsquo;) with
+each outgoing request.  Only supported when using protocols such as HTTP
+which support cookies, otherwise ignored.
+</p>
+</dd>
+<dt><samp>timeout</samp></dt>
+<dd><p>Set the timeout in seconds of the CURL connection. This timeout is the time
+that CURL waits for a response from the remote server to get the size of the
+image to be downloaded. If not set, the default timeout of 5 seconds is used.
+</p></dd>
+</dl>
+
+<p>Note that when passing options to qemu explicitly, <samp>driver</samp> is the value
+of &lt;protocol&gt;.
+</p>
+<p>Example: boot from a remote Fedora 20 live ISO image
+</p><div class="example">
+<pre class="example">qemu-system-x86_64 --drive media=cdrom,file=http://dl.fedoraproject.org/pub/fedora/linux/releases/20/Live/x86_64/Fedora-Live-Desktop-x86_64-20-1.iso,readonly
+
+qemu-system-x86_64 --drive media=cdrom,file.driver=http,file.url=http://dl.fedoraproject.org/pub/fedora/linux/releases/20/Live/x86_64/Fedora-Live-Desktop-x86_64-20-1.iso,readonly
+</pre></div>
+
+<p>Example: boot from a remote Fedora 20 cloud image using a local overlay for
+writes, copy-on-read, and a readahead of 64k
+</p><div class="example">
+<pre class="example">qemu-img create -f qcow2 -o backing_file='json:{&quot;file.driver&quot;:&quot;http&quot;,, &quot;file.url&quot;:&quot;https://dl.fedoraproject.org/pub/fedora/linux/releases/20/Images/x86_64/Fedora-x86_64-20-20131211.1-sda.qcow2&quot;,, &quot;file.readahead&quot;:&quot;64k&quot;}' /tmp/Fedora-x86_64-20-20131211.1-sda.qcow2
+
+qemu-system-x86_64 -drive file=/tmp/Fedora-x86_64-20-20131211.1-sda.qcow2,copy-on-read=on
+</pre></div>
+
+<p>Example: boot from an image stored on a VMware vSphere server with a self-signed
+certificate using a local overlay for writes, a readahead of 64k and a timeout
+of 10 seconds.
+</p><div class="example">
+<pre class="example">qemu-img create -f qcow2 -o backing_file='json:{&quot;file.driver&quot;:&quot;https&quot;,, &quot;file.url&quot;:&quot;https://user:password@vsphere.example.com/folder/test/test-flat.vmdk?dcPath=Datacenter&amp;dsName=datastore1&quot;,, &quot;file.sslverify&quot;:&quot;off&quot;,, &quot;file.readahead&quot;:&quot;64k&quot;,, &quot;file.timeout&quot;:10}' /tmp/test.qcow2
+
+qemu-system-x86_64 -drive file=/tmp/test.qcow2
+</pre></div>
 
 </dd>
 </dl>
@@ -4609,19 +4754,6 @@ intercepts at low level, such as <code>ctrl-alt-f1</code> in X Window.
 <dd><a name="index-sum"></a>
 <p>Compute the checksum of a memory region.
 </p></dd>
-<dt><samp>usb_add <var>devname</var></samp></dt>
-<dd><a name="index-usb_005fadd"></a>
-<p>Add the USB device <var>devname</var>. This command is deprecated, please
-use <code>device_add</code> instead. For details of available devices see
-<a href="#usb_005fdevices">usb_devices</a>
-</p></dd>
-<dt><samp>usb_del <var>devname</var></samp></dt>
-<dd><a name="index-usb_005fdel"></a>
-<p>Remove the USB device <var>devname</var> from the QEMU virtual USB
-hub. <var>devname</var> has the syntax <code>bus.addr</code>. Use the monitor
-command <code>info usb</code> to see the devices you can remove. This
-command is deprecated, please use <code>device_del</code> instead.
-</p></dd>
 <dt><samp>device_add <var>config</var></samp></dt>
 <dd><a name="index-device_005fadd"></a>
 <p>Add device.
@@ -4816,14 +4948,6 @@ using the specified target.
 <dd><a name="index-pcie_005faer_005finject_005ferror"></a>
 <p>Inject PCIe AER error
 </p></dd>
-<dt><samp>host_net_add</samp></dt>
-<dd><a name="index-host_005fnet_005fadd"></a>
-<p>Add host VLAN client. Deprecated, please use <code>netdev_add</code> instead.
-</p></dd>
-<dt><samp>host_net_remove</samp></dt>
-<dd><a name="index-host_005fnet_005fremove"></a>
-<p>Remove host VLAN client. Deprecated, please use <code>netdev_del</code> instead.
-</p></dd>
 <dt><samp>netdev_add</samp></dt>
 <dd><a name="index-netdev_005fadd"></a>
 <p>Add host network device.
@@ -4898,11 +5022,20 @@ option is included, all of the virtual machine&rsquo;s block devices that
 have an inserted media on them are automatically exported; in this case,
 the <samp>-w</samp> option makes the devices writable too.
 </p></dd>
-<dt><samp>nbd_server_add <var>device</var></samp></dt>
+<dt><samp>nbd_server_add <var>device</var> [ <var>name</var> ]</samp></dt>
 <dd><a name="index-nbd_005fserver_005fadd"></a>
 <p>Export a block device through QEMU&rsquo;s NBD server, which must be started
 beforehand with <code>nbd_server_start</code>.  The <samp>-w</samp> option makes the
-exported device writable too.
+exported device writable too.  The export name is controlled by <var>name</var>,
+defaulting to <var>device</var>.
+</p></dd>
+<dt><samp>nbd_server_remove [-f] <var>name</var></samp></dt>
+<dd><a name="index-nbd_005fserver_005fremove"></a>
+<p>Stop exporting a block device through QEMU&rsquo;s NBD server, which was
+previously started with <code>nbd_server_add</code>.  The <samp>-f</samp>
+option forces the server to drop the export immediately even if
+clients are connected; otherwise the command fails unless there are no
+clients.
 </p></dd>
 <dt><samp>nbd_server_stop</samp></dt>
 <dd><a name="index-nbd_005fserver_005fstop"></a>
@@ -5248,6 +5381,10 @@ as the -chardev command line switch (except for &quot;id&quot;).
 <p>Display the amount of initially allocated and present hotpluggable (if
 enabled) memory in bytes.
 </p></dd>
+<dt><samp>info sev</samp></dt>
+<dd><a name="index-info-sev"></a>
+<p>Show SEV information.
+</p></dd>
 </dl>
 </dd>
 </dl>
@@ -5430,38 +5567,9 @@ the <var>simple</var> tracing backend.
 <dd><p>is a disk image filename
 </p>
 </dd>
-<dt><var>&ndash;object <var>objectdef</var></var></dt>
-<dd>
-<p>is a QEMU user creatable object definition. See the <code>qemu(1)</code> manual
-page for a description of the object properties. The most common object
-type is a <code>secret</code>, which is used to supply passwords and/or encryption
-keys.
-</p>
-</dd>
-<dt><var>&ndash;image-opts</var></dt>
-<dd>
-<p>Indicates that the source <var>filename</var> parameter is to be interpreted as a
-full option string, not a plain filename. This parameter is mutually
-exclusive with the <var>-f</var> parameter.
-</p>
-</dd>
-<dt><var>&ndash;target-image-opts</var></dt>
-<dd>
-<p>Indicates that the <var>output_filename</var> parameter(s) are to be interpreted as
-a full option string, not a plain filename. This parameter is mutually
-exclusive with the <var>-O</var> parameters. It is currently required to also use
-the <var>-n</var> parameter to skip image creation. This restriction may be relaxed
-in a future release.
-</p>
-</dd>
 <dt><var>fmt</var></dt>
 <dd><p>is the disk image format. It is guessed automatically in most cases. See below
 for a description of the supported disk formats.
-</p>
-</dd>
-<dt><var>&ndash;backing-chain</var></dt>
-<dd><p>will enumerate information about backing files in a disk image chain. Refer
-below for further description.
 </p>
 </dd>
 <dt><var>size</var></dt>
@@ -5476,52 +5584,100 @@ and T (terabyte, 1024G) are supported.  <code>b</code> is ignored.
 </dd>
 <dt><var>output_fmt</var></dt>
 <dd><p>is the destination format
-</p></dd>
+</p>
+</dd>
 <dt><var>options</var></dt>
 <dd><p>is a comma separated list of format specific options in a
 name=value format. Use <code>-o ?</code> for an overview of the options supported
 by the used format or see the format descriptions below for details.
-</p></dd>
+</p>
+</dd>
 <dt><var>snapshot_param</var></dt>
 <dd><p>is param used for internal snapshot, format is
 &rsquo;snapshot.id=[ID],snapshot.name=[NAME]&rsquo; or &rsquo;[ID_OR_NAME]&rsquo;
-</p></dd>
+</p>
+</dd>
 <dt><var>snapshot_id_or_name</var></dt>
 <dd><p>is deprecated, use snapshot_param instead
 </p>
 </dd>
-<dt><var>-c</var></dt>
+</dl>
+
+<dl compact="compact">
+<dt><samp>--object <var>objectdef</var></samp></dt>
+<dd><p>is a QEMU user creatable object definition. See the <code>qemu(1)</code> manual
+page for a description of the object properties. The most common object
+type is a <code>secret</code>, which is used to supply passwords and/or encryption
+keys.
+</p>
+</dd>
+<dt><samp>--image-opts</samp></dt>
+<dd><p>Indicates that the source <var>filename</var> parameter is to be interpreted as a
+full option string, not a plain filename. This parameter is mutually
+exclusive with the <var>-f</var> parameter.
+</p>
+</dd>
+<dt><samp>--target-image-opts</samp></dt>
+<dd><p>Indicates that the <var>output_filename</var> parameter(s) are to be interpreted as
+a full option string, not a plain filename. This parameter is mutually
+exclusive with the <var>-O</var> parameters. It is currently required to also use
+the <var>-n</var> parameter to skip image creation. This restriction may be relaxed
+in a future release.
+</p>
+</dd>
+<dt><samp>--force-share (-U)</samp></dt>
+<dd><p>If specified, <code>qemu-img</code> will open the image in shared mode, allowing
+other QEMU processes to open it in write mode. For example, this can be used to
+get the image information (with &rsquo;info&rsquo; subcommand) when the image is used by a
+running guest.  Note that this could produce inconsistent results because of
+concurrent metadata changes, etc. This option is only allowed when opening
+images in read-only mode.
+</p>
+</dd>
+<dt><samp>--backing-chain</samp></dt>
+<dd><p>will enumerate information about backing files in a disk image chain. Refer
+below for further description.
+</p>
+</dd>
+<dt><samp>-c</samp></dt>
 <dd><p>indicates that target image must be compressed (qcow format only)
-</p></dd>
-<dt><var>-h</var></dt>
+</p>
+</dd>
+<dt><samp>-h</samp></dt>
 <dd><p>with or without a command shows help and lists the supported formats
-</p></dd>
-<dt><var>-p</var></dt>
+</p>
+</dd>
+<dt><samp>-p</samp></dt>
 <dd><p>display progress bar (compare, convert and rebase commands only).
 If the <var>-p</var> option is not used for a command that supports it, the
 progress is reported when the process receives a <code>SIGUSR1</code> or
 <code>SIGINFO</code> signal.
-</p></dd>
-<dt><var>-q</var></dt>
+</p>
+</dd>
+<dt><samp>-q</samp></dt>
 <dd><p>Quiet mode - do not print any output (except errors). There&rsquo;s no progress bar
 in case both <var>-q</var> and <var>-p</var> options are used.
-</p></dd>
-<dt><var>-S <var>size</var></var></dt>
+</p>
+</dd>
+<dt><samp>-S <var>size</var></samp></dt>
 <dd><p>indicates the consecutive number of bytes that must contain only zeros
 for qemu-img to create a sparse image during conversion. This value is rounded
 down to the nearest 512 bytes. You may use the common size suffixes like
 <code>k</code> for kilobytes.
-</p></dd>
-<dt><var>-t <var>cache</var></var></dt>
+</p>
+</dd>
+<dt><samp>-t <var>cache</var></samp></dt>
 <dd><p>specifies the cache mode that should be used with the (destination) file. See
 the documentation of the emulator&rsquo;s <code>-drive cache=...</code> option for allowed
 values.
-</p></dd>
-<dt><var>-T <var>src_cache</var></var></dt>
+</p>
+</dd>
+<dt><samp>-T <var>src_cache</var></samp></dt>
 <dd><p>specifies the cache mode that should be used with the source file(s). See
 the documentation of the emulator&rsquo;s <code>-drive cache=...</code> option for allowed
 values.
-</p></dd>
+</p>
+</dd>
 </dl>
 
 <p>Parameters to snapshot subcommand:
@@ -7041,9 +7197,48 @@ print a warning when <code>fsync</code> is not supported:
 supported.
 </p>
 <hr>
+<a name="disk_005fimages_005fnvme"></a>
+<a name="NVMe-disk-images"></a>
+<h4 class="subsection">2.7.14 NVMe disk images</h4>
+
+<p>NVM Express (NVMe) storage controllers can be accessed directly by a userspace
+driver in QEMU.  This bypasses the host kernel file system and block layers
+while retaining QEMU block layer functionalities, such as block jobs, I/O
+throttling, image formats, etc.  Disk I/O performance is typically higher than
+with <code>-drive file=/dev/sda</code> using either thread pool or linux-aio.
+</p>
+<p>The controller will be exclusively used by the QEMU process once started. To be
+able to share storage between multiple VMs and other applications on the host,
+please use the file based protocols.
+</p>
+<p>Before starting QEMU, bind the host NVMe controller to the host vfio-pci
+driver.  For example:
+</p>
+<div class="example">
+<pre class="example"># modprobe vfio-pci
+# lspci -n -s 0000:06:0d.0
+06:0d.0 0401: 1102:0002 (rev 08)
+# echo 0000:06:0d.0 &gt; /sys/bus/pci/devices/0000:06:0d.0/driver/unbind
+# echo 1102 0002 &gt; /sys/bus/pci/drivers/vfio-pci/new_id
+
+# qemu-system-x86_64 -drive file=nvme://<var>host</var>:<var>bus</var>:<var>slot</var>.<var>func</var>/<var>namespace</var>
+</pre></div>
+
+<p>Alternative syntax using properties:
+</p>
+<div class="example">
+<pre class="example">qemu-system-x86_64 -drive file.driver=nvme,file.device=<var>host</var>:<var>bus</var>:<var>slot</var>.<var>func</var>,file.namespace=<var>namespace</var>
+</pre></div>
+
+<p><var>host</var>:<var>bus</var>:<var>slot</var>.<var>func</var> is the NVMe controller&rsquo;s PCI device
+address on the host.
+</p>
+<p><var>namespace</var> is the NVMe namespace number, starting from 1.
+</p>
+<hr>
 <a name="disk_005fimage_005flocking"></a>
 <a name="Disk-image-file-locking"></a>
-<h4 class="subsection">2.7.14 Disk image file locking</h4>
+<h4 class="subsection">2.7.15 Disk image file locking</h4>
 
 <p>By default, QEMU tries to protect image files from unexpected concurrent
 access, as long as it&rsquo;s supported by the block protocol driver and host
@@ -7064,6 +7259,16 @@ shortcomings of the POSIX locking API.
 <p>QEMU transparently handles lock handover during shared storage migration.  For
 shared virtual disk images between multiple VMs, the &quot;share-rw&quot; device option
 should be used.
+</p>
+<p>By default, the guest has exclusive write access to its disk image. If the
+guest can safely share the disk image with other writers the <code>-device
+...,share-rw=on</code> parameter can be used.  This is only safe if the guest is
+running software, such as a cluster file system, that coordinates disk accesses
+to avoid corruption.
+</p>
+<p>Note that share-rw=on only declares the guest&rsquo;s ability to share the disk.
+Some QEMU features, such as image file formats, require exclusive write access
+to the disk image and this is unaffected by the share-rw=on option.
 </p>
 <p>Alternatively, locking can be fully disabled by &quot;locking=off&quot; block device
 option. In the command line, the option is usually in the form of
@@ -9390,67 +9595,55 @@ they were first deprecated in the 2.10.0 release.
 <p>What follows is a list of all features currently marked as
 deprecated.
 </p>
+<a name="Build-options"></a>
+<h3 class="section">B.1 Build options</h3>
+
+<a name="GTK-2_002ex"></a>
+<h4 class="subsection">B.1.1 GTK 2.x</h4>
+
+<p>Previously QEMU has supported building against both GTK 2.x
+and 3.x series APIs. Support for the GTK 2.x builds will be
+discontinued, so maintainers should switch to using GTK 3.x,
+which is the default.
+</p>
+<a name="SDL-1_002e2"></a>
+<h4 class="subsection">B.1.2 SDL 1.2</h4>
+
+<p>Previously QEMU has supported building against both SDL 1.2
+and 2.0 series APIs. Support for the SDL 1.2 builds will be
+discontinued, so maintainers should switch to using SDL 2.0,
+which is the default.
+</p>
 <a name="System-emulator-command-line-arguments"></a>
-<h3 class="section">B.1 System emulator command line arguments</h3>
+<h3 class="section">B.2 System emulator command line arguments</h3>
 
-<a name="g_t_002ddrive-boot_003don_007coff-_0028since-1_002e3_002e0_0029"></a>
-<h4 class="subsection">B.1.1 -drive boot=on|off (since 1.3.0)</h4>
-
-<p>The &ldquo;boot=on|off&rdquo; option to the &ldquo;-drive&rdquo; argument is
-ignored. Applications should use the &ldquo;bootindex=N&rdquo; parameter
-to set an absolute ordering between devices instead.
-</p>
-<a name="g_t_002dtdf-_0028since-1_002e3_002e0_0029"></a>
-<h4 class="subsection">B.1.2 -tdf (since 1.3.0)</h4>
-
-<p>The &ldquo;-tdf&rdquo; argument is ignored. The behaviour implemented
-by this argument is now the default when using the KVM PIT,
-but can be requested explicitly using
-&ldquo;-global kvm-pit.lost_tick_policy=slew&rdquo;.
-</p>
 <a name="g_t_002dno_002dkvm_002dpit_002dreinjection-_0028since-1_002e3_002e0_0029"></a>
-<h4 class="subsection">B.1.3 -no-kvm-pit-reinjection (since 1.3.0)</h4>
+<h4 class="subsection">B.2.1 -no-kvm-pit-reinjection (since 1.3.0)</h4>
 
 <p>The &ldquo;-no-kvm-pit-reinjection&rdquo; argument is now a
 synonym for setting &ldquo;-global kvm-pit.lost_tick_policy=discard&rdquo;.
 </p>
 <a name="g_t_002dno_002dkvm_002dirqchip-_0028since-1_002e3_002e0_0029"></a>
-<h4 class="subsection">B.1.4 -no-kvm-irqchip (since 1.3.0)</h4>
+<h4 class="subsection">B.2.2 -no-kvm-irqchip (since 1.3.0)</h4>
 
 <p>The &ldquo;-no-kvm-irqchip&rdquo; argument is now a synonym for
 setting &ldquo;-machine kernel_irqchip=off&rdquo;.
 </p>
-<a name="g_t_002dno_002dkvm_002dpit-_0028since-1_002e3_002e0_0029"></a>
-<h4 class="subsection">B.1.5 -no-kvm-pit (since 1.3.0)</h4>
-
-<p>The &ldquo;-no-kvm-pit&rdquo; argument is ignored. It is no longer
-possible to disable the KVM PIT directly.
-</p>
 <a name="g_t_002dno_002dkvm-_0028since-1_002e3_002e0_0029"></a>
-<h4 class="subsection">B.1.6 -no-kvm (since 1.3.0)</h4>
+<h4 class="subsection">B.2.3 -no-kvm (since 1.3.0)</h4>
 
 <p>The &ldquo;-no-kvm&rdquo; argument is now a synonym for setting
 &ldquo;-machine accel=tcg&rdquo;.
 </p>
-<a name="g_t_002dmon-default_003don-_0028since-2_002e4_002e0_0029"></a>
-<h4 class="subsection">B.1.7 -mon default=on (since 2.4.0)</h4>
-
-<p>The &ldquo;default&rdquo; option to the &ldquo;-mon&rdquo; argument is
-now ignored. When multiple monitors were enabled, it
-indicated which monitor would receive log messages
-from the various subsystems. This feature is no longer
-required as messages are now only sent to the monitor
-in response to explicitly monitor commands.
-</p>
 <a name="g_t_002dvnc-tls-_0028since-2_002e5_002e0_0029"></a>
-<h4 class="subsection">B.1.8 -vnc tls (since 2.5.0)</h4>
+<h4 class="subsection">B.2.4 -vnc tls (since 2.5.0)</h4>
 
 <p>The &ldquo;-vnc tls&rdquo; argument is now a synonym for setting
 &ldquo;-object tls-creds-anon,id=tls0&rdquo; combined with
 &ldquo;-vnc tls-creds=tls0&rsquo;
 </p>
 <a name="g_t_002dvnc-x509-_0028since-2_002e5_002e0_0029"></a>
-<h4 class="subsection">B.1.9 -vnc x509 (since 2.5.0)</h4>
+<h4 class="subsection">B.2.5 -vnc x509 (since 2.5.0)</h4>
 
 <p>The &ldquo;-vnc x509=/path/to/certs&rdquo; argument is now a
 synonym for setting
@@ -9458,7 +9651,7 @@ synonym for setting
 combined with &ldquo;-vnc tls-creds=tls0&rsquo;
 </p>
 <a name="g_t_002dvnc-x509verify-_0028since-2_002e5_002e0_0029"></a>
-<h4 class="subsection">B.1.10 -vnc x509verify (since 2.5.0)</h4>
+<h4 class="subsection">B.2.6 -vnc x509verify (since 2.5.0)</h4>
 
 <p>The &ldquo;-vnc x509verify=/path/to/certs&rdquo; argument is now a
 synonym for setting
@@ -9466,70 +9659,73 @@ synonym for setting
 combined with &ldquo;-vnc tls-creds=tls0&rsquo;
 </p>
 <a name="g_t_002dtftp-_0028since-2_002e6_002e0_0029"></a>
-<h4 class="subsection">B.1.11 -tftp (since 2.6.0)</h4>
+<h4 class="subsection">B.2.7 -tftp (since 2.6.0)</h4>
 
-<p>The &ldquo;-tftp /some/dir&rdquo; argument is now a synonym for setting
-the &ldquo;-netdev user,tftp=/some/dir&rsquo; argument. The new syntax
-allows different settings to be provided per NIC.
+<p>The &ldquo;-tftp /some/dir&rdquo; argument is replaced by either
+&ldquo;-netdev user,id=x,tftp=/some/dir &rdquo; (for pluggable NICs, accompanied
+with &ldquo;-device ...,netdev=x&rdquo;), or &ldquo;-nic user,tftp=/some/dir&rdquo;
+(for embedded NICs). The new syntax allows different settings to be
+provided per NIC.
 </p>
 <a name="g_t_002dbootp-_0028since-2_002e6_002e0_0029"></a>
-<h4 class="subsection">B.1.12 -bootp (since 2.6.0)</h4>
+<h4 class="subsection">B.2.8 -bootp (since 2.6.0)</h4>
 
-<p>The &ldquo;-bootp /some/file&rdquo; argument is now a synonym for setting
-the &ldquo;-netdev user,bootp=/some/file&rsquo; argument. The new syntax
-allows different settings to be provided per NIC.
+<p>The &ldquo;-bootp /some/file&rdquo; argument is replaced by either
+&ldquo;-netdev user,id=x,bootp=/some/file &rdquo; (for pluggable NICs, accompanied
+with &ldquo;-device ...,netdev=x&rdquo;), or &ldquo;-nic user,bootp=/some/file&rdquo;
+(for embedded NICs). The new syntax allows different settings to be
+provided per NIC.
 </p>
 <a name="g_t_002dredir-_0028since-2_002e6_002e0_0029"></a>
-<h4 class="subsection">B.1.13 -redir (since 2.6.0)</h4>
+<h4 class="subsection">B.2.9 -redir (since 2.6.0)</h4>
 
-<p>The &ldquo;-redir ARGS&rdquo; argument is now a synonym for setting
-the &ldquo;-netdev user,hostfwd=ARGS&rdquo; argument instead. The new
-syntax allows different settings to be provided per NIC.
+<p>The &ldquo;-redir [tcp|udp]:hostport:[guestaddr]:guestport&rdquo; argument is
+replaced by either
+&ldquo;-netdev user,id=x,hostfwd=[tcp|udp]:[hostaddr]:hostport-[guestaddr]:guestport&rdquo;
+(for pluggable NICs, accompanied with &ldquo;-device ...,netdev=x&rdquo;) or
+&ldquo;-nic user,hostfwd=[tcp|udp]:[hostaddr]:hostport-[guestaddr]:guestport&rdquo;
+(for embedded NICs). The new syntax allows different settings to be
+provided per NIC.
 </p>
 <a name="g_t_002dsmb-_0028since-2_002e6_002e0_0029"></a>
-<h4 class="subsection">B.1.14 -smb (since 2.6.0)</h4>
+<h4 class="subsection">B.2.10 -smb (since 2.6.0)</h4>
 
-<p>The &ldquo;-smb /some/dir&rdquo; argument is now a synonym for setting
-the &ldquo;-netdev user,smb=/some/dir&rdquo; argument instead. The new
-syntax allows different settings to be provided per NIC.
-</p>
-<a name="g_t_002dnet-channel-_0028since-2_002e6_002e0_0029"></a>
-<h4 class="subsection">B.1.15 -net channel (since 2.6.0)</h4>
-
-<p>The &ldquo;&ndash;net channel,ARGS&rdquo; argument is now a synonym for setting
-the &ldquo;-netdev user,guestfwd=ARGS&rdquo; argument instead.
+<p>The &ldquo;-smb /some/dir&rdquo; argument is replaced by either
+&ldquo;-netdev user,id=x,smb=/some/dir &rdquo; (for pluggable NICs, accompanied
+with &ldquo;-device ...,netdev=x&rdquo;), or &ldquo;-nic user,smb=/some/dir&rdquo;
+(for embedded NICs). The new syntax allows different settings to be
+provided per NIC.
 </p>
 <a name="g_t_002dnet-vlan-_0028since-2_002e9_002e0_0029"></a>
-<h4 class="subsection">B.1.16 -net vlan (since 2.9.0)</h4>
+<h4 class="subsection">B.2.11 -net vlan (since 2.9.0)</h4>
 
-<p>The &ldquo;-net vlan=NN&rdquo; argument is partially replaced with the
-new &ldquo;-netdev&rdquo; argument. The remaining use cases will no
-longer be directly supported in QEMU.
+<p>The &ldquo;-net vlan=NN&rdquo; argument was mostly used to attach separate
+network backends to different virtual NICs.  This is the default
+behavior for &ldquo;-netdev&rdquo; and &ldquo;-nic&rdquo;.  You can connect multiple
+&ldquo;-netdev&rdquo; and &ldquo;-nic&rdquo; devices to the same network using the
+&quot;hubport&quot; network backend, created with &ldquo;-netdev hubport,hubid=NN,...&rdquo;
+and &ldquo;-nic hubport,hubid=NN&rdquo;.
 </p>
-<a name="g_t_002ddrive-if_003dscsi-_0028since-2_002e9_002e0_0029"></a>
-<h4 class="subsection">B.1.17 -drive if=scsi (since 2.9.0)</h4>
+<a name="g_t_002ddrive-cyls_003d_002e_002e_002e_002cheads_003d_002e_002e_002e_002csecs_003d_002e_002e_002e_002ctrans_003d_002e_002e_002e-_0028since-2_002e10_002e0_0029"></a>
+<h4 class="subsection">B.2.12 -drive cyls=...,heads=...,secs=...,trans=... (since 2.10.0)</h4>
 
-<p>The &ldquo;-drive if=scsi&rdquo; argument is replaced by the the
-&ldquo;-device BUS-TYPE&rdquo; argument combined with &ldquo;-drive if=none&rdquo;.
+<p>The drive geometry arguments are replaced by the the geometry arguments
+that can be specified with the &ldquo;-device&rdquo; parameter.
 </p>
-<a name="g_t_002dnet-dump-_0028since-2_002e10_002e0_0029"></a>
-<h4 class="subsection">B.1.18 -net dump (since 2.10.0)</h4>
+<a name="g_t_002ddrive-serial_003d_002e_002e_002e-_0028since-2_002e10_002e0_0029"></a>
+<h4 class="subsection">B.2.13 -drive serial=... (since 2.10.0)</h4>
 
-<p>The &ldquo;&ndash;net dump&rdquo; argument is now replaced with the
-&ldquo;-object filter-dump&rdquo; argument which works in combination
-with the modern &ldquo;-netdev&ldquo; backends instead.
+<p>The drive serial argument is replaced by the the serial argument
+that can be specified with the &ldquo;-device&rdquo; parameter.
 </p>
-<a name="g_t_002dhdachs-_0028since-2_002e10_002e0_0029"></a>
-<h4 class="subsection">B.1.19 -hdachs (since 2.10.0)</h4>
+<a name="g_t_002ddrive-addr_003d_002e_002e_002e-_0028since-2_002e10_002e0_0029"></a>
+<h4 class="subsection">B.2.14 -drive addr=... (since 2.10.0)</h4>
 
-<p>The &ldquo;-hdachs&rdquo; argument is now a synonym for setting
-the &ldquo;cyls&rdquo;, &ldquo;heads&rdquo;, &ldquo;secs&rdquo;, and &ldquo;trans&rdquo; properties
-on the &ldquo;ide-hd&rdquo; device using the &ldquo;-device&rdquo; argument.
-The new syntax allows different settings to be provided
-per disk.
+<p>The drive addr argument is replaced by the the addr argument
+that can be specified with the &ldquo;-device&rdquo; parameter.
 </p>
 <a name="g_t_002dusbdevice-_0028since-2_002e10_002e0_0029"></a>
-<h4 class="subsection">B.1.20 -usbdevice (since 2.10.0)</h4>
+<h4 class="subsection">B.2.15 -usbdevice (since 2.10.0)</h4>
 
 <p>The &ldquo;-usbdevice DEV&rdquo; argument is now a synonym for setting
 the &ldquo;-device usb-DEV&rdquo; argument instead. The deprecated syntax
@@ -9538,65 +9734,113 @@ If using the new syntax, USB support must be explicitly
 enabled via the &ldquo;-machine usb=on&rdquo; argument.
 </p>
 <a name="g_t_002dnodefconfig-_0028since-2_002e11_002e0_0029"></a>
-<h4 class="subsection">B.1.21 -nodefconfig (since 2.11.0)</h4>
+<h4 class="subsection">B.2.16 -nodefconfig (since 2.11.0)</h4>
 
 <p>The &ldquo;-nodefconfig&ldquo; argument is a synonym for &ldquo;-no-user-config&ldquo;.
 </p>
+<a name="g_t_002dballoon-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.2.17 -balloon (since 2.12.0)</h4>
+
+<p>The <samp>--balloon virtio</samp> argument has been superseded by
+<samp>--device virtio-balloon</samp>.
+</p>
+<a name="g_t_002dmachine-s390_002dsquash_002dmcss_003don_007coff-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.2.18 -machine s390-squash-mcss=on|off (since 2.12.0)</h4>
+
+<p>The &ldquo;s390-squash-mcss=on&ldquo; property has been obsoleted by allowing the
+cssid to be chosen freely. Instead of squashing subchannels into the
+default channel subsystem image for guests that do not support multiple
+channel subsystems, all devices can be put into the default channel
+subsystem image.
+</p>
+<a name="g_t_002dfsdev-handle-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.2.19 -fsdev handle (since 2.12.0)</h4>
+
+<p>The &ldquo;handle&rdquo; fsdev backend does not support symlinks and causes the 9p
+filesystem in the guest to fail a fair amount of tests from the PJD POSIX
+filesystem test suite. Also it requires the CAP_DAC_READ_SEARCH capability,
+which is not the recommended way to run QEMU. This backend should not be
+used and it will be removed with no replacement.
+</p>
+<a name="g_t_002dno_002dframe-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.2.20 -no-frame (since 2.12.0)</h4>
+
+<p>The <code>--no-frame</code> argument works with SDL 1.2 only. The other user
+interfaces never implemented this in the first place. So this will be
+removed together with SDL 1.2 support.
+</p>
+<a name="g_t_002drtc_002dtd_002dhack-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.2.21 -rtc-td-hack (since 2.12.0)</h4>
+
+<p>The <code>-rtc-td-hack</code> option has been replaced by
+<code>-rtc driftfix=slew</code>.
+</p>
+<a name="g_t_002dlocaltime-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.2.22 -localtime (since 2.12.0)</h4>
+
+<p>The <code>-localtime</code> option has been replaced by <code>-rtc base=localtime</code>.
+</p>
+<a name="g_t_002dstartdate-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.2.23 -startdate (since 2.12.0)</h4>
+
+<p>The <code>-startdate</code> option has been replaced by <code>-rtc base=<var>date</var></code>.
+</p>
 <a name="qemu_002dimg-command-line-arguments"></a>
-<h3 class="section">B.2 qemu-img command line arguments</h3>
+<h3 class="section">B.3 qemu-img command line arguments</h3>
 
 <a name="convert-_002ds-_0028since-2_002e0_002e0_0029"></a>
-<h4 class="subsection">B.2.1 convert -s (since 2.0.0)</h4>
+<h4 class="subsection">B.3.1 convert -s (since 2.0.0)</h4>
 
 <p>The &ldquo;convert -s snapshot_id_or_name&rdquo; argument is obsoleted
 by the &ldquo;convert -l snapshot_param&rdquo; argument instead.
 </p>
-<a name="System-emulator-human-monitor-commands"></a>
-<h3 class="section">B.3 System emulator human monitor commands</h3>
+<a name="QEMU-Machine-Protocol-_0028QMP_0029-commands"></a>
+<h3 class="section">B.4 QEMU Machine Protocol (QMP) commands</h3>
 
-<a name="host_005fnet_005fadd-_0028since-2_002e10_002e0_0029"></a>
-<h4 class="subsection">B.3.1 host_net_add (since 2.10.0)</h4>
+<a name="block_002ddirty_002dbitmap_002dadd-_0022autoload_0022-parameter-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.4.1 block-dirty-bitmap-add &quot;autoload&quot; parameter (since 2.12.0)</h4>
 
-<p>The &ldquo;host_net_add&rdquo; command is replaced by the &ldquo;netdev_add&rdquo; command.
+<p>&quot;autoload&quot; parameter is now ignored. All bitmaps are automatically loaded
+from qcow2 images.
 </p>
-<a name="host_005fnet_005fremove-_0028since-2_002e10_002e0_0029"></a>
-<h4 class="subsection">B.3.2 host_net_remove (since 2.10.0)</h4>
+<a name="query_002dcpus-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.4.2 query-cpus (since 2.12.0)</h4>
 
-<p>The &ldquo;host_net_remove&rdquo; command is replaced by the &ldquo;netdev_del&rdquo; command.
-</p>
-<a name="usb_005fadd-_0028since-2_002e10_002e0_0029"></a>
-<h4 class="subsection">B.3.3 usb_add (since 2.10.0)</h4>
-
-<p>The &ldquo;usb_add&rdquo; command is replaced by the &ldquo;device_add&rdquo; command.
-</p>
-<a name="usb_005fdel-_0028since-2_002e10_002e0_0029"></a>
-<h4 class="subsection">B.3.4 usb_del (since 2.10.0)</h4>
-
-<p>The &ldquo;usb_del&rdquo; command is replaced by the &ldquo;device_del&rdquo; command.
+<p>The &ldquo;query-cpus&rdquo; command is replaced by the &ldquo;query-cpus-fast&rdquo; command.
 </p>
 <a name="System-emulator-devices"></a>
-<h3 class="section">B.4 System emulator devices</h3>
+<h3 class="section">B.5 System emulator devices</h3>
 
 <a name="ivshmem-_0028since-2_002e6_002e0_0029"></a>
-<h4 class="subsection">B.4.1 ivshmem (since 2.6.0)</h4>
+<h4 class="subsection">B.5.1 ivshmem (since 2.6.0)</h4>
 
 <p>The &ldquo;ivshmem&rdquo; device type is replaced by either the &ldquo;ivshmem-plain&rdquo;
 or &ldquo;ivshmem-doorbell&ldquo; device types.
 </p>
-<a name="spapr_002dpci_002dvfio_002dhost_002dbridge-_0028since-2_002e6_002e0_0029"></a>
-<h4 class="subsection">B.4.2 spapr-pci-vfio-host-bridge (since 2.6.0)</h4>
+<a name="Page-size-support-_003c-4k-for-embedded-PowerPC-CPUs-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.5.2 Page size support &lt; 4k for embedded PowerPC CPUs (since 2.12.0)</h4>
 
-<p>The &ldquo;spapr-pci-vfio-host-bridge&rdquo; device type is replaced by
-the &ldquo;spapr-pci-host-bridge&rdquo; device type.
+<p>qemu-system-ppcemb will be removed. qemu-system-ppc (or qemu-system-ppc64)
+should be used instead. That means that embedded 4xx PowerPC CPUs will not
+support page sizes &lt; 4096 any longer.
 </p>
 <a name="System-emulator-machines"></a>
-<h3 class="section">B.5 System emulator machines</h3>
+<h3 class="section">B.6 System emulator machines</h3>
 
 <a name="Xilinx-EP108-_0028since-2_002e11_002e0_0029"></a>
-<h4 class="subsection">B.5.1 Xilinx EP108 (since 2.11.0)</h4>
+<h4 class="subsection">B.6.1 Xilinx EP108 (since 2.11.0)</h4>
 
 <p>The &ldquo;xlnx-ep108&rdquo; machine has been replaced by the &ldquo;xlnx-zcu102&rdquo; machine.
 The &ldquo;xlnx-zcu102&rdquo; machine has the same features and capabilites in QEMU.
+</p>
+<a name="Block-device-options-1"></a>
+<h3 class="section">B.7 Block device options</h3>
+
+<a name="g_t_0022backing_0022_003a-_0022_0022-_0028since-2_002e12_002e0_0029"></a>
+<h4 class="subsection">B.7.1 &quot;backing&quot;: &quot;&quot; (since 2.12.0)</h4>
+
+<p>In order to prevent QEMU from automatically opening an image&rsquo;s backing
+chain, use &ldquo;&quot;backing&quot;: null&rdquo; instead.
 </p>
 <hr>
 <a name="License"></a>
@@ -9723,8 +9967,6 @@ version 2. Parts of QEMU have specific licenses, see file
  &nbsp; 
 <a class="summary-letter" href="#Function-Index_fn_letter-T"><b>T</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Function-Index_fn_letter-U"><b>U</b></a>
- &nbsp; 
 <a class="summary-letter" href="#Function-Index_fn_letter-W"><b>W</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Function-Index_fn_letter-X"><b>X</b></a>
@@ -9777,13 +10019,13 @@ version 2. Parts of QEMU have specific licenses, see file
 <tr><td></td><td valign="top"><a href="#index-_002dglobal"><code>-global</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dh"><code>-h</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dhda"><code>-hda</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-_002dhdachs"><code>-hdachs</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dhdb"><code>-hdb</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dhdc"><code>-hdc</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dhdd"><code>-hdd</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dicount"><code>-icount</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dincoming"><code>-incoming</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dinitrd"><code>-initrd</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_002discsi"><code>-iscsi</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dk"><code>-k</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dkernel"><code>-kernel</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_002dL"><code>-L</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#sec_005finvocation">sec_invocation</a></td></tr>
@@ -9922,8 +10164,6 @@ version 2. Parts of QEMU have specific licenses, see file
 <tr><td></td><td valign="top"><a href="#index-help"><code>help</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-hostfwd_005fadd"><code>hostfwd_add</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-hostfwd_005fremove"><code>hostfwd_remove</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-host_005fnet_005fadd"><code>host_net_add</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-host_005fnet_005fremove"><code>host_net_remove</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th><a name="Function-Index_fn_letter-I">I</a></th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-i"><code>i</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
@@ -9973,6 +10213,7 @@ version 2. Parts of QEMU have specific licenses, see file
 <tr><td></td><td valign="top"><a href="#index-info-rocker_002dof_002ddpa_002dgroups"><code>info rocker-of-dpa-groups</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-info-rocker_002dports"><code>info rocker-ports</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-info-roms"><code>info roms</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-info-sev"><code>info sev</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-info-skeys"><code>info skeys</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-info-snapshots"><code>info snapshots</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-info-spice"><code>info spice</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
@@ -10013,6 +10254,7 @@ version 2. Parts of QEMU have specific licenses, see file
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th><a name="Function-Index_fn_letter-N">N</a></th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-nbd_005fserver_005fadd"><code>nbd_server_add</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-nbd_005fserver_005fremove"><code>nbd_server_remove</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-nbd_005fserver_005fstart"><code>nbd_server_start</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-nbd_005fserver_005fstop"><code>nbd_server_stop</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-netdev_005fadd"><code>netdev_add</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
@@ -10057,10 +10299,6 @@ version 2. Parts of QEMU have specific licenses, see file
 <tr><th><a name="Function-Index_fn_letter-T">T</a></th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-trace_002devent"><code>trace-event</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-trace_002dfile"><code>trace-file</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th><a name="Function-Index_fn_letter-U">U</a></th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-usb_005fadd"><code>usb_add</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-usb_005fdel"><code>usb_del</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th><a name="Function-Index_fn_letter-W">W</a></th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-watchdog_005faction"><code>watchdog_action</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#pcsys_005fmonitor">pcsys_monitor</a></td></tr>
@@ -10108,8 +10346,6 @@ version 2. Parts of QEMU have specific licenses, see file
 <a class="summary-letter" href="#Function-Index_fn_letter-S"><b>S</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Function-Index_fn_letter-T"><b>T</b></a>
- &nbsp; 
-<a class="summary-letter" href="#Function-Index_fn_letter-U"><b>U</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Function-Index_fn_letter-W"><b>W</b></a>
  &nbsp; 
