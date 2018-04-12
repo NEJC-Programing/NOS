@@ -1,18 +1,5 @@
 #include "../include/fs.h"
 
-
-#define BPB_BytsPerSec_Offset	0x0B
-#define BPB_SecPerClus_Offset	0x0D
-#define BPB_RsvdSecCnt_Offset	0x0E
-#define BPB_NumFATs_Offset	0x10
-#define BPB_FATSz32_Offset	0x24
-#define BPB_RootClus_Offset	0x2C
-#define BPB_Sanity_Offset	0x1FE
-
-void byteCopy(void* dst, void* src, size_t num);
-void extricateShort(uint16* dst, uint8* src);
-void extricateWord(uint32* dst, uint8* src);
-
 uint8 buffer[512];
 
 fat32Error fat32OpenDisk(fat32Disk* disk,fat32ReadBlock readBlock) {
