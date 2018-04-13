@@ -22,6 +22,10 @@ void launch_shell(int n)
 		    {
 		    	sum();
 		    }
+			else if(strEql(ch,"ret"))
+		    {
+		    	return;
+		    }
 		    else if(strEql(ch,"exit"))
 		    {
 		    	print("\nGood Bye!\n");

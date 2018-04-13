@@ -38,6 +38,10 @@ boot:
 	$(ASSEMBLER) -o nos/bootloader.bin scr/boot/bootloader_$(FS).asm
 	$(ASSEMBLER) -o nos/boot.bin scr/boot/boot_stage_2/stage_2_$(FS).asm
 
+disk:
+	$(ASSEMBLER) -o nos/nos.img scr/img.asm
+	mkdosfs -F 16 nos/nos.img
+
 test:
 	$(EMULATOR) $(EMULATOR_FLAGS) $(OUTPUT)
 	clear
