@@ -10,3 +10,13 @@ void outportb (uint16 _port, uint8 _data)
 {
 	__asm__ __volatile__ ("outb %1, %0" : : "dN" (_port), "a" (_data));
 }
+
+void NMI_enable(void)
+ {
+    outb(0x70, inb(0x70)&0x7F);
+ }
+ 
+ void NMI_disable(void)
+ {
+    outb(0x70, inb(0x70)|0x80);
+ }

@@ -11,6 +11,7 @@ EMULATOR_FLAGS = -kernel
 OBJS = scr/obj/kasm.o scr/obj/kc.o scr/obj/idt.o scr/obj/isr.o scr/obj/kb.o scr/obj/screen.o scr/obj/string.o scr/obj/system.o scr/obj/util.o scr/obj/shell.o #scr/obj/fs.o
 OUTPUT = nos/kernel.bin
 
+FS = fat16
 
 all:
 	make comp
@@ -34,7 +35,8 @@ comp:
 	$(COMPILER) $(CFLAGS) scr/src/fs.c -o scr/obj/fs.o
 
 boot:
-	$(ASSEMBLER) -o nos/bootloader.bin scr/boot/bootloader_fat16.asm
+	$(ASSEMBLER) -o nos/bootloader.bin scr/boot/bootloader_$(FS).asm
+	$(ASSEMBLER) -o nos/boot.bin scr/boot/boot_stage_2/stage_2_$(FS).asm
 
 test:
 	$(EMULATOR) $(EMULATOR_FLAGS) $(OUTPUT)
