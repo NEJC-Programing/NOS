@@ -16,6 +16,7 @@ all:
 	make comp
 	mkdir nos/ -p
 	$(LINKER) $(LDFLAGS) -o $(OUTPUT) $(OBJS)
+	make boot
 	make test
 	clear 
 
@@ -31,6 +32,9 @@ comp:
 	$(COMPILER) $(CFLAGS) scr/src/util.c -o scr/obj/util.o
 	$(COMPILER) $(CFLAGS) scr/src/shell.c -o scr/obj/shell.o
 	$(COMPILER) $(CFLAGS) scr/src/fs.c -o scr/obj/fs.o
+
+boot:
+	$(ASSEMBLER) -o nos/bootloader.bin scr/boot/bootloader_fat16.asm
 
 test:
 	$(EMULATOR) $(EMULATOR_FLAGS) $(OUTPUT)
