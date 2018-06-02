@@ -22,5 +22,5 @@ void set_screen_color_from_color_code(int color_code);
 void set_screen_color(int text_color,int bg_color);
 void print_colored(string ch,int text_color,int bg_color);
 
-
+void SetCursor(int x, int y);
 #endif

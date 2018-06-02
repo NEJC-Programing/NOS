@@ -6,4 +6,10 @@ uint16 strlength(string ch);
 
 uint8 strEql(string ch1,string ch2);
 
+uint8 strEqle(string ch1,string ch2, int chars);
+
+string remove_form_start(string str, int chars_to_remove);
+
+string remove_from_end(string str, int chars_to_remove);
+
 #endif

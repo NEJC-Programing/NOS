@@ -127,3 +127,9 @@ void print_colored(string ch,int text_color,int bg_color)
 	print(ch);
 	set_screen_color_from_color_code(current_color);
 }
+
+void SetCursor(int x, int y){
+        cursorX = x;
+        cursorY = y;
+        updateCursor();
+}
