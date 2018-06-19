@@ -13,4 +13,5 @@ void NMI_enable(void);
 
 void NMI_disable(void);
 
+extern void entering_v86(uint32 ss, uint32 esp, uint32 cs, uint32 eip);
 #endif
