@@ -239,7 +239,7 @@
 ;messages that needs to be shown
 
      msgProgress db ".", 0x00
-     msgFailure  db 0x0D, 0x0A, "Kernel loading failed...", 0x0D, 0x0A, 0x00
+     msgFailure  db 0x0D, 0x0A, "Stage2 loading failed...", 0x0D, 0x0A, 0x00
      msgCRLF     db 0x0D, 0x0A, 0x00
      
           TIMES 510-($-$$) DB 0

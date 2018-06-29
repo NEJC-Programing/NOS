@@ -69,32 +69,36 @@
 ;---------------------------------------------------
 ; Disk description table
 ;---------------------------------------------------
-
+[ORG 0x0000]
     jmp short entryPoint                        ; Jump over OEM / BIOS param block
-    nop
 
-    %define OEMName           bp+0x03           ; Disk label
-    %define bytesPerSector    bp+0x0b           ; Bytes per sector
-    %define sectorsPerCluster bp+0x0d           ; Sectors per cluster
-    %define reservedSectors   bp+0x0e           ; Reserved sectors
-    %define fats              bp+0x10           ; Number of fats
-    %define rootDirEntries    bp+0x11           ; Number of entries in root dir
-    %define sectors           bp+0x13           ; Logical sectors
-    %define mediaType         bp+0x15           ; Media descriptor byte
-    %define fatSectors        bp+0x16           ; Sectors per FAT
-    %define sectorsPerTrack   bp+0x18           ; Sectors per track
-    %define heads             bp+0x1a           ; Number of sides/heads
-    %define hiddenSectors     bp+0x1c           ; Hidden sectors
-    %define hugeSectors       bp+0x20           ; LBA sectors
-    %define biosDriveNum      bp+0x24           ; Drive number
-    %define reserved          bp+0x25           ; This is not used
-    %define bootSignature     bp+0x26           ; Drive signature
-    %define volumeId          bp+0x27           ; Volume ID
-    %define volumeLabel       bp+0x2b           ; Volume Label
-    %define fatTypeLabel      bp+0x36           ; File system type
-    
-    times 0x3b db 0x00
+     OEMName               db 		"NOS"
+     bytesPerSector        dw 		0x0200
+     sectorsPerCluster     db 		0x08
+     reservedSectors       dw 		0x0020
+     fats                  db 		0x02
+     rootDirEntries        dw 		0x0000
+     sectors               dw 		0x0000
+     mediaType       db 		0xF8
+     fatSectors         dw 		0x0000
+     sectorsPerTrack       dw 		0x003D
+     heads        dw 		0x0002
+     HiddenSectors         dd 		0x00000000
+     TotalSectors     	   dd 		0x00FE3B1F		
+     hugeSectors      dd 		0x00000778
+     Flags                 dw 		0x0000
+     FSVersion             dw 		0x0000
+     RootDirectoryStart    dd 		0x00000002
+     FSInfoSector          dw 		0x0001
+     BackupBootSector      dw 		0x0006
 
+     TIMES 13 DB 0 ;jumping to next offset
+
+     DriveNumber           db 		0x00
+     Signature             db 		0x29
+     VolumeID              dd 		0xFFFFFFFF
+     VolumeLabel           db 		"NOS        "
+     SystemID              db 		"FAT32   "
 ;---------------------------------------------------
 ; Start of the main bootloader code and entry point
 ;---------------------------------------------------
@@ -410,7 +414,7 @@ print:
 
     filename       db "BOOT    BIN"             ; Kernel/Stage2 filename 
 
-    fileNotFound   db "File not found!", 13, 10, 0
+    fileNotFound   db "Stage2 not found!", 13, 10, 0
     diskError      db "Disk error!", 13, 10, 0
     
     userData       dw 0                         ; Start of the data sectors

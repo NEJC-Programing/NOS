@@ -15,11 +15,7 @@ void launch_shell()
 			else if(strEqle(ch, "prompt", 6))
 			{
 				string temp = remove_form_start(ch, 7);
-				print("\n");
-				print(temp);
-				print("\n");
-				print(int_to_string(strlength(temp)));
-				print("\n");
+				prompt = temp;
 			}
 		    else
 		    {
