@@ -12,7 +12,7 @@ OBJS = scr/obj/kasm.o scr/obj/kc.o scr/obj/idt.o scr/obj/isr.o scr/obj/kb.o scr/
 OUTPUT = nos/kernel.bin
 ELFOUT = nos/kernel.elf
 
-FS = fat32
+FS = fat16
 
 all:
 	make comp
