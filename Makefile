@@ -6,7 +6,7 @@ ASFLAGS = -f elf32
 LDFLAGS = -m elf_i386 -T scr/src/link.ld
 
 EMULATOR = qemu-system-i386
-EMULATOR_FLAGS = -kernel
+EMULATOR_FLAGS = -device isa-debug-exit,iobase=0xf4,iosize=0x04 -kernel
 
 OBJS = scr/obj/kasm.o scr/obj/kc.o scr/obj/idt.o scr/obj/isr.o scr/obj/kb.o scr/obj/screen.o scr/obj/string.o scr/obj/system.o scr/obj/util.o scr/obj/shell.o #scr/obj/fs.o
 OUTPUT = nos/kernel.bin
@@ -49,10 +49,33 @@ default:
 	make test
 	clear 
 all:
-	$(ASSEMBLER) $(ASFLAGS) scr/src/kernel.asm -o scr/obj/kasm.o
+	mkdir nos/ -p
+	$(ASSEMBLER) $(ASFLAGS) -o scr/obj/kasm.o scr/src/kernel.asm
+	$(COMPILER) $(CFLAGS) scr/src/kernel.c -o scr/obj/kc.o 
+	$(COMPILER) $(CFLAGS) scr/src/idt.c -o scr/obj/idt.o 
+	$(COMPILER) $(CFLAGS) scr/src/kb.c -o scr/obj/kb.o
+	$(COMPILER) $(CFLAGS) scr/src/isr.c -o scr/obj/isr.o
+	$(COMPILER) $(CFLAGS) scr/src/screen.c -o scr/obj/screen.o
+	$(COMPILER) $(CFLAGS) scr/src/string.c -o scr/obj/string.o
+	$(COMPILER) $(CFLAGS) scr/src/system.c -o scr/obj/system.o
+	$(COMPILER) $(CFLAGS) scr/src/util.c -o scr/obj/util.o
+	$(COMPILER) $(CFLAGS) scr/src/shell.c -o scr/obj/shell.o
+	$(COMPILER) $(CFLAGS) scr/src/fs.c -o scr/obj/fs.o
 	cat scr/src/kernel.asm | md5sum >md5/kernel.asm.md5
-	$(COMPILER) $(CFLAGS) scr/src/kernel.c -o scr/obj/kc.o
 	cat scr/src/kernel.c | md5sum >md5/kernel.c.md5
+	cat scr/src/idt.c | md5sum >md5/idt.c.md5
+	cat scr/src/kb.c | md5sum >md5/kb.c.md5
+	cat scr/src/isr.c | md5sum >md5/isr.c.md5
+	cat scr/src/screen.c | md5sum >md5/screen.c.md5
+	cat scr/src/string.c | md5sum >md5/string.c.md5
+	cat scr/src/system.c | md5sum >md5/system.c.md5
+	cat scr/src/util.c | md5sum >md5/util.c.md5
+	cat scr/src/shell.c | md5sum >md5/shell.c.md5
+	cat scr/src/fs.c | md5sum >md5/fs.c.md5
+	$(LINKER) $(LDFLAGS) -o $(ELFOUT) $(OBJS)
+	objcopy -O binary $(ELFOUT) $(OUTPUT)
+	make boot
+	make disk
 
 comp:
 	@if [ "$(kernel.asm1)" = "$(kernel.asm2)" ]; then\
