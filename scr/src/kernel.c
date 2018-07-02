@@ -8,6 +8,7 @@ kmain()
 {
 	isr_install();
 	clearScreen();
+	//int s = 1/0;
     launch_shell();    
 	print("\nout\n...");
 }

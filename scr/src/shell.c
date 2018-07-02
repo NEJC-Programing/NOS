@@ -16,6 +16,15 @@ void launch_shell()
 			{
 				string temp = remove_form_start(ch, 7);
 				prompt = temp;
+				panic(prompt);
+			}
+			else if(strEqle(ch, "reboot", 6))
+			{
+				reboot();
+			}
+			else if(strEqle(ch, "shutdown", 8))
+			{
+				shutdown();
 			}
 		    else
 		    {
@@ -28,6 +37,8 @@ void help()
 {
 	print("\n help      : Shows this messge");
 	print("\n prompt    : Changes the prompt");
+	print("\n reboot    : Reboots the pc");
+	print("\n shutdown  : Shutdowns the pc");
 	print("\n\n");
 }
 
