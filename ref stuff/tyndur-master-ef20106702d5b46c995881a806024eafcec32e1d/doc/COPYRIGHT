@@ -1,0 +1,172 @@
+tyndur is distributed under the following terms:
+
+  Copyright (c) 2006 The tyndur Project. All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+  1. Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+  2. Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in the
+     documentation and/or other materials provided with the distribution.
+  3. All advertising materials mentioning features or use of this software
+     must display the following acknowledgement:
+      This product includes software developed by the tyndur Project
+      and its contributors.
+  4. Neither the name of the tyndur Project nor the names of its
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+  ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+  TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR 
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+Parts of tyndur are derived from FreeBSD and are distributed under the FreeBSD terms:
+
+    Only paragraph 1 and 2 of the conditions and the disclaimer of the 
+    tyndur License apply to these files mutatis mutandis.
+
+    The copyright notices of these files are:
+    
+    Copyright (c) 1998 John D. Polstra.
+    All rights reserved.
+
+    Copyright (c) 1985 - 1993
+    The Regents of the University of California.  All rights reserved.
+    
+    Copyright (c) 2005 Pascal Gloor <pascal.gloor@spale.com>
+
+    Copyright (c) 1999 David E. O'Brien
+
+    Copyright (c) 2005 David Schultz <das@FreeBSD.ORG>
+    All rights reserved.
+
+    Copyright (c) 1998 Todd C. Miller <Todd.Miller@courtesan.com>
+    All rights reserved.
+
+    Copyright (c) 2001 Mike Barcroft <mike@FreeBSD.org>
+
+    Copyright (c) 1998 Softweyr LLC.  All rights reserved.
+
+    Copyright (c) 1992, 1993, 1994 Henry Spencer
+
+Parts of tyndur are derived from OpenBSD and are distrtributed under the OpenBSD terms:
+
+    Only paragraph 1, 2 and 4 of the conditions and the disclaimer of the
+    tyndur License apply to these files mutatis mutandis.
+
+    Copyright (c) 1987, 1993, 1994 The Regents of the University of California.
+    All rights reserved.
+
+    Copyright (c) 2002 Todd C. Miller <Todd.Miller@courtesan.com>
+
+
+
+
+Parts of tyndur are derived from NetBSD and are distributed under the NetBSD terms:
+
+  kernel/include/multiboot.h:
+
+    Copyright (c) 2005, 2006 The NetBSD Foundation, Inc.
+    All rights reserved.
+   
+    This code is derived from software contributed to The NetBSD Foundation
+    by Julio M. Merino Vidal.
+
+    This code is derived from software contributed to The NetBSD Foundation
+    by Dieter Baron and Thomas Klausner.
+
+    The tyndur License applies mutatis mutandis.
+
+
+Parts of tyndur are derived from software under the following license:
+    /*
+     * ----------------------------------------------------------------------------
+     * "THE BEER-WARE LICENSE" (Revision 42):
+     * <phk@FreeBSD.ORG> wrote this file.  As long as you retain this notice you
+     * can do whatever you want with this stuff. If we meet some day, and you think
+     * this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
+     * ----------------------------------------------------------------------------
+    */
+
+Parts of tyndur are derived from ZLib and are distributed under the Zlib terms:
+    modules/init/zlib, modules/init/include/:
+    
+    /* zlib.h -- interface of the 'zlib' general purpose compression library
+      version 1.2.2, October 3rd, 2004
+
+      Copyright (C) 1995-2004 Jean-loup Gailly and Mark Adler
+
+      This software is provided 'as-is', without any express or implied
+      warranty.  In no event will the authors be held liable for any damages
+      arising from the use of this software.
+
+      Permission is granted to anyone to use this software for any purpose,
+      including commercial applications, and to alter it and redistribute it
+      freely, subject to the following restrictions:
+
+      1. The origin of this software must not be misrepresented; you must not
+         claim that you wrote the original software. If you use this software
+         in a product, an acknowledgment in the product documentation would be
+         appreciated but is not required.
+      2. Altered source versions must be plainly marked as such, and must not be
+         misrepresented as being the original software.
+      3. This notice may not be removed or altered from any source distribution.
+        
+      Jean-loup Gailly jloup@gzip.org
+      Mark Adler madler@alumni.caltech.edu
+    */
+
+Portions of this software are copyright (c) 2007 The FreeType
+Project (www.freetype.org).  All rights reserved.
+
+Parts of tyndur are derived from software under the following license:
+
+    Copyright (C) 2008 Mathias Gottschlag
+    Copyright (C) 2009 Kevin Wolf
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to
+    deal in the Software without restriction, including without limitation the
+    rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+    sell copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+    IN THE SOFTWARE.
+
+Parts of tyndur are derived from software under the GNU Lesser General Public
+License:
+
+    Copyright (C) 2008  Janosch Gräf <janosch.graef@gmx.net>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.

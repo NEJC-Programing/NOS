@@ -46,18 +46,28 @@ void shutdown()
 	outb(0xf4, 0x00);// qemu
 }
 
-void panic(string reason)
+void panic(string reason, int bsod)
 {
-	clearScreen();
-	for(int i = 0; i<=3100; i++){
-		print_colored(" ", 0,1);
+	if (bsod){
+		clearScreen();
+		for(int i = 0; i<=3100; i++){ // blue screen
+			print_colored(" ", 0,1);
+		}
+		int start = 40-(int)((double)strlength(reason)/(double)2);
+		SetCursor(start, 12);
+		print_colored(reason,0xf,1);
+	}else{
+		SetCursor(0,0);// mac style
+		print(reason);
 	}
-	int start = 40-(int)((double)strlength(reason)/(double)2);
-	SetCursor(start, 12);
-	print_colored(reason,0xf,1);
 	//delay(12345);
 	//reboot();
 	asm("hlt");
+}
+
+void die(string reason)
+{
+	panic(reason, 1);
 }
 
 void delay(int time_ms)

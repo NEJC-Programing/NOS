@@ -4,11 +4,11 @@
 #include "../include/util.h"
 #include "../include/shell.h"
 #include "../include/fs.h"
-kmain()
+int kmain()
 {
 	isr_install();
 	clearScreen();
-	//int s = 1/0;
-    launch_shell();    
-	print("\nout\n...");
+	print("Welcome to NOS\nType \"help\" for help\n\n");
+    launch_shell();
+	die("out");
 }

@@ -1,0 +1,7 @@
+shopt -s extglob
+source $LOST_BUILDMK_ROOT/config.sh
+
+echo "LD   $1/apps/build"
+
+$LOST_TOOLS_LD -obuild $LDSCRIPT *.o lang/*.o --start-group $2 --end-group
+$LOST_TOOLS_STRIP -s build -o $1/apps/build

@@ -43,162 +43,162 @@ void isr_install() {
 /*Handlers*/
 void isr0()
 {
-    panic(exception_messages[0]);
+    panic(exception_messages[0],0);
    
 }
 void isr1()
 {
-    panic(exception_messages[1]);    
+    panic(exception_messages[1],0);    
 
 }
 void isr2()
 {
-    panic(exception_messages[2]);    
+    panic(exception_messages[2],0);    
 
 }
 void isr3()
 {
-    panic(exception_messages[3]);    
+    panic(exception_messages[3],0);    
 
 }
 void isr4()
 {
-    panic(exception_messages[4]);    
+    panic(exception_messages[4],0);    
 
 }
 void isr5()
 {
-    panic(exception_messages[5]);    
+    panic(exception_messages[5],0);    
 
 }
 void isr6()
 {
-    panic(exception_messages[6]);    
+    panic(exception_messages[6],0);    
 
 }
 void isr7()
 {
-    panic(exception_messages[7]);    
+    panic(exception_messages[7],0);    
 
 }
 void isr8()
 {
-    panic(exception_messages[8]);    
+    panic(exception_messages[8],0);    
 
 }
 void isr9()
 {
-    panic(exception_messages[9]);    
+    panic(exception_messages[9],0);    
 
 }
 void isr10()
 {
-    panic(exception_messages[10]);    
+    panic(exception_messages[10],0);    
 
 }
 void isr11()
 {
-    panic(exception_messages[11]);    
+    panic(exception_messages[11],0);    
 
 }
 void isr12()
 {
-    panic(exception_messages[12]);    
+    panic(exception_messages[12],0);    
 
 }
 void isr13()
 {
-    panic(exception_messages[13]);    
+    panic(exception_messages[13],0);    
 
 }
 void isr14()
 {
-    panic(exception_messages[14]);    
+    panic(exception_messages[14],0);    
 
 }
 void isr15()
 {
-    panic(exception_messages[15]);    
+    panic(exception_messages[15],0);    
 
 }
 void isr16()
 {
-    panic(exception_messages[16]);    
+    panic(exception_messages[16],0);    
 
 }
 void isr17()
 {
-    panic(exception_messages[17]);    
+    panic(exception_messages[17],0);    
 
 }
 void isr18()
 {
-    panic(exception_messages[18]);    
+    panic(exception_messages[18],0);    
 
 }
 void isr19()
 {
-    panic(exception_messages[19]);    
+    panic(exception_messages[19],0);    
 
 }
 void isr20()
 {
-    panic(exception_messages[20]);    
+    panic(exception_messages[20],0);    
 
 }
 void isr21()
 {
-    panic(exception_messages[21]);    
+    panic(exception_messages[21],0);    
 
 }
 void isr22()
 {
-    panic(exception_messages[22]);    
+    panic(exception_messages[22],0);    
 
 }
 void isr23()
 {
-    panic(exception_messages[23]);    
+    panic(exception_messages[23],0);    
 
 }
 void isr24()
 {
-    panic(exception_messages[24]);    
+    panic(exception_messages[24],0);    
 
 }
 void isr25()
 {
-    panic(exception_messages[25]);    
+    panic(exception_messages[25],0);    
 
 }
 void isr26()
 {
-    panic(exception_messages[26]);    
+    panic(exception_messages[26],0);    
 
 }
 void isr27()
 {
-    panic(exception_messages[27]);    
+    panic(exception_messages[27],0);    
 
 }
 void isr28()
 {
-    panic(exception_messages[28]);    
+    panic(exception_messages[28],0);    
 
 }
 void isr29()
 {
-    panic(exception_messages[29]);    
+    panic(exception_messages[29],0);    
 
 }
 void isr30()
 {
-    panic(exception_messages[30]);    
+    panic(exception_messages[30],0);    
 
 }
 void isr31()
 {
-    panic(exception_messages[31]);    
+    panic(exception_messages[31],0);    
 
 }
 

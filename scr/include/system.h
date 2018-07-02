@@ -19,5 +19,7 @@ void reboot();
 
 void shutdown();
 
-void panic(string reason);
+void panic(string reason, int bsod);
+
+void die(string reason);
 #endif
