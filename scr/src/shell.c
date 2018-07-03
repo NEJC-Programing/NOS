@@ -1,7 +1,8 @@
 #include "../include/shell.h"
-string prompt = "NOS> ";
 void launch_shell()
 {
+	string prompt = malloc(10);
+	prompt = "NOS> ";
 	string ch = (string) malloc(200); // util.h
 	void * temp_mem = malloc(1024);
 	int counter = 0;
@@ -15,8 +16,8 @@ void launch_shell()
 		    }
 			else if(strEqle(ch, "prompt ", 7))
 			{
-				string temp = remove_form_start(ch, 7);
-				prompt = temp;
+				prompt = clean(10);
+				prompt = remove_form_start(ch, 7);
 			}
 			else if(strEqle(ch, "reboot", 6))
 			{
@@ -28,9 +29,8 @@ void launch_shell()
 			}
 			else if (strEqle(ch, "echo ", 5))
 			{
-				string temp = remove_form_start(ch, 5);
 				print("\n");
-				print(temp);
+				print(remove_form_start(ch, 5));
 				print("\n");
 			}
 		    else

@@ -8,5 +8,5 @@ void memory_set(uint8 *dest, uint8 val, uint32 len);
 void int_to_ascii(int n, char str[]);  
 int str_to_int(string ch)  ;
 void * malloc(int nbytes);      
-
+void * clean(int size);
 #endif

@@ -78,14 +78,16 @@ string readStr()
                 i++;
                 break;
         case 14:
-                printch('\b');
-                i--;
-                if(i<0)
-                {
-                	i = 0;
+                if (i != 0){
+                        printch('\b');
+                        i--;
+                        if(i<0)
+                        {
+                        	i = 0;
+                        }
+                        buffstr[i+1] = 0;
+                        buffstr[i] = 0;
                 }
-                buffstr[i+1] = 0;
-                buffstr[i] = 0;
                 break;
        /* case 15:
                 printch('\t');          Tab button

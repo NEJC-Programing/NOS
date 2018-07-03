@@ -65,3 +65,13 @@ void * malloc(int nbytes)
 	char variable[nbytes];
 	return &variable;
 }
+
+void * clean(int size)
+{
+	char s[size];
+	for (int i = 0; i!=size;i++)
+	{
+		s[i] = 0x00;
+	}
+	return s;
+}
