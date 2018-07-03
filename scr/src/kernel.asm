@@ -6,14 +6,17 @@ section         .text
         dd      - (0x1BADB002+0x00)
         
 global start
-global entering_v86
+global entering_v86 
 extern isr_install
 extern kmain            ; this function is gonna be located in our c code(kernel.c)
 start:
     cli             ;clears the interrupts 
     call isr_install
     call kmain      ;send processor to continue execution from the kamin funtion in c code
-    hlt             ;halt the cpu(pause it from executing from this address
+    extern panic
+    call panic
+    mov ax, 0013h
+    int 10h
 
 ; extern void entering_v86(uint32_t ss, uint32_t esp, uint32_t cs, uint32_t eip);
 entering_v86:
