@@ -1,9 +1,0 @@
-{
-    "git.ignoreLimitWarning": true,
-    "files.associations": {
-        "kernel.h": "c",
-        "shell.h": "c",
-        "shell.h\u0000hell.h": "c",
-        "shell.h\u0000shell.h": "c"
-    }
-}
