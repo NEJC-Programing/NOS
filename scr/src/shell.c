@@ -3,6 +3,7 @@ string prompt = "NOS> ";
 void launch_shell()
 {
 	string ch = (string) malloc(200); // util.h
+	void * temp_mem = malloc(1024);
 	int counter = 0;
 	do
 	{
@@ -12,11 +13,10 @@ void launch_shell()
 		    {
 		        help();
 		    }
-			else if(strEqle(ch, "prompt", 6))
+			else if(strEqle(ch, "prompt ", 7))
 			{
 				string temp = remove_form_start(ch, 7);
 				prompt = temp;
-				panic(prompt);
 			}
 			else if(strEqle(ch, "reboot", 6))
 			{
@@ -25,6 +25,13 @@ void launch_shell()
 			else if(strEqle(ch, "shutdown", 8))
 			{
 				shutdown();
+			}
+			else if (strEqle(ch, "echo ", 5))
+			{
+				string temp = remove_form_start(ch, 5);
+				print("\n");
+				print(temp);
+				print("\n");
 			}
 		    else
 		    {
@@ -39,6 +46,7 @@ void help()
 	print("\n prompt    : Changes the prompt");
 	print("\n reboot    : Reboots the pc");
 	print("\n shutdown  : Shutdowns the pc");
+	print("\n echo      : Prints output");
 	print("\n\n");
 }
 
