@@ -38,11 +38,11 @@ uint8 strEqle(string ch1,string ch2, int chars)
 string remove_form_start(string str, int chars_to_remove)
 {
         int size = strlength(str);
-        print(int_to_string(size));
+        //print(int_to_string(size));
         string buff;
         int i = chars_to_remove;
         int j = 0;
-        print(int_to_string(size - i));
+       // print(int_to_string(size - i));
         while(i != size){
                 buff[j] = str[i];
                 i++;
