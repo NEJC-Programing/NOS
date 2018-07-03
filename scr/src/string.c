@@ -1,6 +1,5 @@
 #include "../include/string.h"
-uint16 strlength(string ch)
-{
+uint16 strlength(string ch){
         uint16 i = 0;           //Changed counter to 0
         while(ch[i++]);  
         return i-1;               //Changed counter to i instead of i--
@@ -50,6 +49,12 @@ string remove_form_start(string str, int chars_to_remove)
         }
         return buff;
 }
-string remove_from_end(string str, int chars_to_remove){
-        
+
+string first(string str, int ch){
+        string buff;
+        if (strlength(str)<=ch)
+                return str;
+        for(int i =0; i!=ch-1; i++)
+                buff[i]=str[i];
+        return buff;
 }

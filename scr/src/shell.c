@@ -1,21 +1,26 @@
 #include "../include/shell.h"
+string old;
+string new;
+string ch;
 void launch_shell()
 {
 	string prompt = malloc(10);
 	prompt = "NOS> ";
-	string ch = (string) malloc(200); // util.h
+	ch = (string) malloc(200); // util.h
 	void * temp_mem = malloc(1024);
 	int counter = 0;
 	do
 	{
 		print(prompt);
-		    ch = readStr(); //memory_copy(readStr(), ch,100);
+		    ch = readStrcmd(); //memory_copy(readStr(), ch,100);
+
 		    if(strEqle(ch, "help", 4))
 		        help();
 			else if(strEqle(ch, "prompt ", 7))
 			{
 				prompt = clean(10);
-				prompt = remove_form_start(ch, 7);
+				prompt = first(remove_form_start(ch, 7),10);
+				print("\n");
 			}
 			else if(strEqle(ch, "reboot", 6))
 				reboot();
@@ -39,6 +44,8 @@ void launch_shell()
 				print(ch);
 				print("\" is not a command\n");
 		    } 
+			old = clean(200);
+			old = ch;
 	} while (!strEql(ch,"exit"));
 }
 
@@ -53,3 +60,18 @@ void help()
 	print("\n\n");
 }
 
+void switch_old(){
+	new = clean(200);
+	new = ch;
+	ch=clean(200);
+	ch = old;
+}
+void switch_new(){
+	new = clean(200);
+	new = ch;
+	ch=clean(200);
+	ch = old;
+}
+void set_ch(int i, char ch){
+	ch[i] = ch;
+}

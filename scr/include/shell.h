@@ -9,4 +9,8 @@
 
 void launch_shell();
 
+void switch_old();
+
+void switch_new();
+void set_ch(int i, char ch);
 #endif
