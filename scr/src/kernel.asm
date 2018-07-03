@@ -1,16 +1,13 @@
-
-;   call graphics_mode  ; Uncomment if you want to switch to graphics mode 0x13
+[bits 16]
+sssssss:
+    mov si, disk_error
+    call print_string
+    call graphics_mode  ; Uncomment if you want to switch to graphics mode 0x13
     lgdt [gdtr]
     mov eax, cr0
     or al, 1
     mov cr0, eax
     jmp sss
-
-graphics_mode:
-    mov ax, 0013h
-    int 10h
-    ret
-
 
 gdt_start:
     dd 0                ; null descriptor--just fill 8 bytes
@@ -51,11 +48,13 @@ section         .text
         
 global start
 global entering_v86
+extern isr_install
 extern kmain            ; this function is gonna be located in our c code(kernel.c)
 start:
-        cli             ;clears the interrupts 
-        call kmain      ;send processor to continue execution from the kamin funtion in c code
-        hlt             ;halt the cpu(pause it from executing from this address
+    cli             ;clears the interrupts 
+    call isr_install
+    call kmain      ;send processor to continue execution from the kamin funtion in c code
+    hlt             ;halt the cpu(pause it from executing from this address
 
 ; extern void entering_v86(uint32_t ss, uint32_t esp, uint32_t cs, uint32_t eip);
 entering_v86:
@@ -69,3 +68,26 @@ entering_v86:
    push dword  [ebp+16]       ; eip
    iret
 
+[bits 16]
+disk_error	db "Floppy error! Press any key...", 0
+
+print_string:				; Output string in SI to screen
+	pusha
+
+	mov ah, 0Eh			; int 10h teletype function
+
+.repeat:
+	lodsb				; Get char from string
+	cmp al, 0
+	je .done			; If char is zero, end of string
+	int 10h				; Otherwise, print it
+	jmp short .repeat
+
+.done:
+	popa
+	ret
+
+graphics_mode:
+    mov ax, 0013h
+    int 10h
+    ret

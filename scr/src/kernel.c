@@ -6,9 +6,9 @@
 #include "../include/fs.h"
 int kmain()
 {
-	isr_install();
-	clearScreen();
+	//isr_install(); is called from asm
+	//clearScreen();
 	print("Welcome to NOS\nType \"help\" for help\n\n");
     launch_shell();
-	die("out");
+	//die("out");
 }
