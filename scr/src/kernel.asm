@@ -1,44 +1,3 @@
-[bits 16]
-sssssss:
-    mov si, disk_error
-    call print_string
-    call graphics_mode  ; Uncomment if you want to switch to graphics mode 0x13
-    lgdt [gdtr]
-    mov eax, cr0
-    or al, 1
-    mov cr0, eax
-    jmp sss
-
-gdt_start:
-    dd 0                ; null descriptor--just fill 8 bytes
-    dd 0
-
-gdt_code:
-    dw 0FFFFh           ; limit low
-    dw 0                ; base low
-    db 0                ; base middle
-    db 10011010b        ; access
-    db 11001111b        ; granularity
-    db 0                ; base high
-
-gdt_data:
-    dw 0FFFFh           ; limit low (Same as code)
-    dw 0                ; base low
-    db 0                ; base middle
-    db 10010010b        ; access
-    db 11001111b        ; granularity
-    db 0                ; base high
-end_of_gdt:
-
-gdtr:
-    dw end_of_gdt - gdt_start - 1   ; limit (Size of GDT)
-    dd gdt_start        ; base of GDT
-
-    CODE_SEG equ gdt_code - gdt_start
-    DATA_SEG equ gdt_data - gdt_start
-
-
-sss:
 bits    32
 section         .text
         align   4
@@ -59,7 +18,6 @@ start:
 ; extern void entering_v86(uint32_t ss, uint32_t esp, uint32_t cs, uint32_t eip);
 entering_v86:
    mov ebp, esp               ; save stack pointer
-
    push dword  [ebp+4]        ; ss
    push dword  [ebp+8]        ; esp
    pushfd                     ; eflags
@@ -67,27 +25,3 @@ entering_v86:
    push dword [ebp+12]        ; cs
    push dword  [ebp+16]       ; eip
    iret
-
-[bits 16]
-disk_error	db "Floppy error! Press any key...", 0
-
-print_string:				; Output string in SI to screen
-	pusha
-
-	mov ah, 0Eh			; int 10h teletype function
-
-.repeat:
-	lodsb				; Get char from string
-	cmp al, 0
-	je .done			; If char is zero, end of string
-	int 10h				; Otherwise, print it
-	jmp short .repeat
-
-.done:
-	popa
-	ret
-
-graphics_mode:
-    mov ax, 0013h
-    int 10h
-    ret
