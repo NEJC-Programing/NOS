@@ -1,4 +1,5 @@
-*.bin
 *.elf
 *.o
 *.md5
+*.bin
+*.img
