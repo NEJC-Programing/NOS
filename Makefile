@@ -86,109 +86,98 @@ all:
 	make disk
 
 comp:
-	@if [ "$(kernel.asm1)" = "$(kernel.asm2)" ]; then\
-		echo "kernel.asm is not changed";\
-	else\
-		echo "$(ASSEMBLER) $(ASFLAGS) scr/src/kernel.asm -o scr/obj/kasm.o";\
-		$(ASSEMBLER) $(ASFLAGS) scr/src/kernel.asm -o scr/obj/kasm.o;\
-		cat scr/src/kernel.asm | md5sum >md5/kernel.asm.md5;\
-	fi
+ifeq ("$(kernel.asm1)" , "$(kernel.asm2)")
+	@echo "kernel.asm is not changed"
+else
+	$(ASSEMBLER) $(ASFLAGS) scr/src/kernel.asm -o scr/obj/kasm.o
+	@cat scr/src/kernel.asm | md5sum >md5/kernel.asm.md5
+endif
 
-	@if [ "$(kernel.c1)" = "$(kernel.c2)" ]; then\
-		echo "kernel.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/kernel.c -o scr/obj/kc.o";\
-		$(COMPILER) $(CFLAGS) scr/src/kernel.c -o scr/obj/kc.o;\
-		cat scr/src/kernel.c | md5sum >md5/kernel.c.md5;\
-	fi
+ifeq ("$(kernel.c1)","$(kernel.c2)")
+	@echo "kernel.c is not changed"
+else
+	$(COMPILER) $(CFLAGS) scr/src/kernel.c -o scr/obj/kc.o
+	cat scr/src/kernel.c | md5sum >md5/kernel.c.md5
+endif
 
-	@if [ "$(idt.c1)" = "$(idt.c2)" ]; then\
-		echo "idt.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/idt.c -o scr/obj/idt.o";\
-		$(COMPILER) $(CFLAGS) scr/src/idt.c -o scr/obj/idt.o;\
-		cat scr/src/idt.c | md5sum >md5/idt.c.md5;\
-	fi
+ifeq ("$(idt.c1)","$(idt.c2)")
+	@echo "idt.c is not changed"
+else
+	$(COMPILER) $(CFLAGS) scr/src/idt.c -o scr/obj/idt.o
+	cat scr/src/idt.c | md5sum >md5/idt.c.md5
+endif
 	
-	@if [ "$(kb.c1)" = "$(kb.c2)" ]; then\
-		echo "kb.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/kb.c -o scr/obj/kb.o";\
-		$(COMPILER) $(CFLAGS) scr/src/kb.c -o scr/obj/kb.o;\
-		cat scr/src/kb.c | md5sum >md5/kb.c.md5;\
-	fi
+ifeq ("$(kb.c1)","$(kb.c2)")
+	@echo "kb.c is not changed"
+else
+	$(COMPILER) $(CFLAGS) scr/src/kb.c -o scr/obj/kb.o
+	cat scr/src/kb.c | md5sum >md5/kb.c.md5
+endif
 	
-	@if [ "$(isr.c1)" = "$(isr.c2)" ]; then\
-		echo "isr.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/isr.c -o scr/obj/isr.o";\
-		$(COMPILER) $(CFLAGS) scr/src/isr.c -o scr/obj/isr.o;\
-		cat scr/src/isr.c | md5sum >md5/isr.c.md5;\
-	fi
+ifeq ("$(isr.c1)","$(isr.c2)")
+	@echo "isr.c is not changed"
+else
+	$(COMPILER) $(CFLAGS) scr/src/isr.c -o scr/obj/isr.o
+	cat scr/src/isr.c | md5sum >md5/isr.c.md5
+endif
 
-	@if [ "$(screen.c1)" = "$(screen.c2)" ]; then\
-		echo "screen.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/screen.c -o scr/obj/screen.o";\
-		$(COMPILER) $(CFLAGS) scr/src/screen.c -o scr/obj/screen.o;\
-		cat scr/src/screen.c | md5sum >md5/screen.c.md5;\
-	fi
+ifeq ("$(screen.c1)","$(screen.c2)")
+	@echo "screen.c is not changed"
+else
+	$(COMPILER) $(CFLAGS) scr/src/screen.c -o scr/obj/screen.o
+	cat scr/src/screen.c | md5sum >md5/screen.c.md5
+endif
 
-	@if [ "$(string.c1)" = "$(string.c2)" ]; then\
-		echo "string.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/string.c -o scr/obj/string.o";\
-		$(COMPILER) $(CFLAGS) scr/src/string.c -o scr/obj/string.o;\
-		cat scr/src/string.c | md5sum >md5/string.c.md5;\
-	fi
+ifeq ("$(string.c1)","$(string.c2)")
+	@echo "string.c is not changed"
+else
+	$(COMPILER) $(CFLAGS) scr/src/string.c -o scr/obj/string.o
+	cat scr/src/string.c | md5sum >md5/string.c.md5
+endif
 
-	@if [ "$(system.c1)" = "$(system.c2)" ]; then\
-		echo "system.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/system.c -o scr/obj/system.o";\
-		$(COMPILER) $(CFLAGS) scr/src/system.c -o scr/obj/system.o;\
-		cat scr/src/system.c | md5sum >md5/system.c.md5;\
-	fi
+ifeq ("$(system.c1)","$(system.c2)")
+	@echo "system.c is not changed"
+else
+	$(COMPILER) $(CFLAGS) scr/src/system.c -o scr/obj/system.o
+	cat scr/src/system.c | md5sum >md5/system.c.md5
+endif
 
-	@if [ "$(util.c1)" = "$(util.c2)" ]; then\
-		echo "util.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/util.c -o scr/obj/util.o";\
-		$(COMPILER) $(CFLAGS) scr/src/util.c -o scr/obj/util.o;\
-		cat scr/src/util.c | md5sum >md5/util.c.md5;\
-	fi
+ifeq ("$(util.c1)","$(util.c2)")
+	@echo "util.c is not changed"
+else
+	$(COMPILER) $(CFLAGS) scr/src/util.c -o scr/obj/util.o
+	cat scr/src/util.c | md5sum >md5/util.c.md5
+endif
 
-	@if [ "$(shell.c1)" = "$(shell.c2)" ]; then\
-		echo "shell.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/shell.c -o scr/obj/shell.o";\
-		$(COMPILER) $(CFLAGS) scr/src/shell.c -o scr/obj/shell.o;\
-		cat scr/src/shell.c | md5sum >md5/shell.c.md5;\
-	fi
+ifeq ("$(shell.c1)","$(shell.c2)")
+	@echo "shell.c is not changed"
+else
+	$(COMPILER) $(CFLAGS) scr/src/shell.c -o scr/obj/shell.o
+	cat scr/src/shell.c | md5sum >md5/shell.c.md5
+endif
 
-	@if [ "$(fs.c1)" = "$(fs.c2)" ]; then\
-		echo "fs.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/fs.c -o scr/obj/fs.o";\
-		$(COMPILER) $(CFLAGS) scr/src/fs.c -o scr/obj/fs.o;\
-		cat scr/src/fs.c | md5sum >md5/fs.c.md5;\
-	fi\
+ifeq ("$(fs.c1)","$(fs.c2)")
+	@echo "fs.c is not changed"
+else
 
-	@if [ "$(graphics.c1)" = "$(graphics.c2)" ]; then\
-		echo "graphics.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/graphics.c -o scr/obj/graphics.o";\
-		$(COMPILER) $(CFLAGS) scr/src/graphics.c -o scr/obj/graphics.o;\
-		cat scr/src/graphics.c | md5sum >md5/graphics.c.md5;\
-	fi	
+	$(COMPILER) $(CFLAGS) scr/src/fs.c -o scr/obj/fs.o
+	cat scr/src/fs.c | md5sum >md5/fs.c.md5
+endif
 
-	@if [ "$(serial.c1)" = "$(serial.c2)" ]; then\
-		echo "serial.c is not changed";\
-	else\
-		echo "$(COMPILER) $(CFLAGS) scr/src/serial.c -o scr/obj/serial.o";\
-		$(COMPILER) $(CFLAGS) scr/src/serial.c -o scr/obj/serial.o;\
-		cat scr/src/serial.c | md5sum >md5/serial.c.md5;\
-	fi
+ifeq ("$(graphics.c1)","$(graphics.c2)")
+	@echo "graphics.c is not changed"
+else
+
+	$(COMPILER) $(CFLAGS) scr/src/graphics.c -o scr/obj/graphics.o
+	cat scr/src/graphics.c | md5sum >md5/graphics.c.md5
+endif	
+
+ifeq ("$(serial.c1)","$(serial.c2)")
+	@echo "serial.c is not changed"
+else
+	$(COMPILER) $(CFLAGS) scr/src/serial.c -o scr/obj/serial.o
+	cat scr/src/serial.c | md5sum >md5/serial.c.md5
+endif
 
 boot:
 	$(ASSEMBLER) -o nos/bootloader.bin scr/boot/bootloader_$(FS).asm
