@@ -1,7 +1,7 @@
 #include "system.h"
 #ifndef SERIAL_H
 #define SERIAL_H
-uint8 serial_received();
+int serial_received();
 
 char read_serial();
 

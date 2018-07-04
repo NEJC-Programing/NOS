@@ -86,77 +86,77 @@ all:
 	make disk
 
 comp:
-ifeq ("$(kernel.asm1)" , "$(kernel.asm2)")
+ifneq ("$(kernel.asm1)" , "$(kernel.asm2)")
 	@echo "kernel.asm is not changed"
 else
 	$(ASSEMBLER) $(ASFLAGS) scr/src/kernel.asm -o scr/obj/kasm.o
 	@cat scr/src/kernel.asm | md5sum >md5/kernel.asm.md5
 endif
 
-ifeq ("$(kernel.c1)","$(kernel.c2)")
+ifneq ("$(kernel.c1)","$(kernel.c2)")
 	@echo "kernel.c is not changed"
 else
 	$(COMPILER) $(CFLAGS) scr/src/kernel.c -o scr/obj/kc.o
 	cat scr/src/kernel.c | md5sum >md5/kernel.c.md5
 endif
 
-ifeq ("$(idt.c1)","$(idt.c2)")
+ifneq ("$(idt.c1)","$(idt.c2)")
 	@echo "idt.c is not changed"
 else
 	$(COMPILER) $(CFLAGS) scr/src/idt.c -o scr/obj/idt.o
 	cat scr/src/idt.c | md5sum >md5/idt.c.md5
 endif
 	
-ifeq ("$(kb.c1)","$(kb.c2)")
+ifneq ("$(kb.c1)","$(kb.c2)")
 	@echo "kb.c is not changed"
 else
 	$(COMPILER) $(CFLAGS) scr/src/kb.c -o scr/obj/kb.o
 	cat scr/src/kb.c | md5sum >md5/kb.c.md5
 endif
 	
-ifeq ("$(isr.c1)","$(isr.c2)")
+ifneq ("$(isr.c1)","$(isr.c2)")
 	@echo "isr.c is not changed"
 else
 	$(COMPILER) $(CFLAGS) scr/src/isr.c -o scr/obj/isr.o
 	cat scr/src/isr.c | md5sum >md5/isr.c.md5
 endif
 
-ifeq ("$(screen.c1)","$(screen.c2)")
+ifneq ("$(screen.c1)","$(screen.c2)")
 	@echo "screen.c is not changed"
 else
 	$(COMPILER) $(CFLAGS) scr/src/screen.c -o scr/obj/screen.o
 	cat scr/src/screen.c | md5sum >md5/screen.c.md5
 endif
 
-ifeq ("$(string.c1)","$(string.c2)")
+ifneq ("$(string.c1)","$(string.c2)")
 	@echo "string.c is not changed"
 else
 	$(COMPILER) $(CFLAGS) scr/src/string.c -o scr/obj/string.o
 	cat scr/src/string.c | md5sum >md5/string.c.md5
 endif
 
-ifeq ("$(system.c1)","$(system.c2)")
+ifneq ("$(system.c1)","$(system.c2)")
 	@echo "system.c is not changed"
 else
 	$(COMPILER) $(CFLAGS) scr/src/system.c -o scr/obj/system.o
 	cat scr/src/system.c | md5sum >md5/system.c.md5
 endif
 
-ifeq ("$(util.c1)","$(util.c2)")
+ifneq ("$(util.c1)","$(util.c2)")
 	@echo "util.c is not changed"
 else
 	$(COMPILER) $(CFLAGS) scr/src/util.c -o scr/obj/util.o
 	cat scr/src/util.c | md5sum >md5/util.c.md5
 endif
 
-ifeq ("$(shell.c1)","$(shell.c2)")
+ifneq ("$(shell.c1)","$(shell.c2)")
 	@echo "shell.c is not changed"
 else
 	$(COMPILER) $(CFLAGS) scr/src/shell.c -o scr/obj/shell.o
 	cat scr/src/shell.c | md5sum >md5/shell.c.md5
 endif
 
-ifeq ("$(fs.c1)","$(fs.c2)")
+ifneq ("$(fs.c1)","$(fs.c2)")
 	@echo "fs.c is not changed"
 else
 
@@ -164,7 +164,7 @@ else
 	cat scr/src/fs.c | md5sum >md5/fs.c.md5
 endif
 
-ifeq ("$(graphics.c1)","$(graphics.c2)")
+ifneq ("$(graphics.c1)","$(graphics.c2)")
 	@echo "graphics.c is not changed"
 else
 
@@ -172,7 +172,7 @@ else
 	cat scr/src/graphics.c | md5sum >md5/graphics.c.md5
 endif	
 
-ifeq ("$(serial.c1)","$(serial.c2)")
+ifneq ("$(serial.c1)","$(serial.c2)")
 	@echo "serial.c is not changed"
 else
 	$(COMPILER) $(CFLAGS) scr/src/serial.c -o scr/obj/serial.o
