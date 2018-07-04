@@ -15,6 +15,10 @@ typedef unsigned long long uint64;
 
 typedef char* string; 
 
+enum bool{
+    true = 1,
+    false = 0
+}
 
 #define low_16(address) (uint16)((address) & 0xFFFF)            
 #define high_16(address) (uint16)(((address) >> 16) & 0xFFFF)

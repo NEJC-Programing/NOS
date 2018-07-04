@@ -32,7 +32,7 @@ void NMI_disable(void)
 
 void reboot()
 {
-    uint8 good = 0x02;
+    uint8 good= 0x02;
     while (good & 0x02)
         good = inb(0x64);
     outb(0x64, 0xFE);
@@ -79,19 +79,4 @@ void delay(int time_ms)
 		i++;
 	}
 }
-void wait_for_key()
-{
-	delay(100000);
-	uint8 reading = 1;
-    while(reading)
-    {
-        if(inportb(0x64) & 0x1)                 
-        {
-            switch(inportb(0x60))
-            { 
-				default:
-					reading = 0;
-			}
-		}
-	}
-}
+

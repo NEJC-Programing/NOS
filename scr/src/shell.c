@@ -1,18 +1,19 @@
 #include "../include/shell.h"
-string old;
-string new;
-string ch;
+
 void launch_shell()
 {
+	serial_init();
 	string prompt = malloc(10);
 	prompt = "NOS> ";
-	ch = (string) malloc(200); // util.h
+	string ch = (string) malloc(200); // util.h
 	void * temp_mem = malloc(1024);
 	int counter = 0;
 	do
 	{
 		print(prompt);
-		    ch = readStrcmd(); //memory_copy(readStr(), ch,100);
+		write_serial("H");
+			ch = clean(200);
+		    ch = readStr(); //memory_copy(readStr(), ch,100);
 
 		    if(strEqle(ch, "help", 4))
 		        help();
@@ -44,8 +45,6 @@ void launch_shell()
 				print(ch);
 				print("\" is not a command\n");
 		    } 
-			old = clean(200);
-			old = ch;
 	} while (!strEql(ch,"exit"));
 }
 
@@ -60,18 +59,32 @@ void help()
 	print("\n\n");
 }
 
-void switch_old(){
-	new = clean(200);
-	new = ch;
-	ch=clean(200);
-	ch = old;
+int serial_received() {
+   return inb(0x3f8 + 5) & 1;
 }
-void switch_new(){
-	new = clean(200);
-	new = ch;
-	ch=clean(200);
-	ch = old;
+
+char read_serial() {
+   while (serial_received() == 0);
+   return inb(0x3f8);
 }
-void set_ch(int i, char ch){
-	ch[i] = ch;
+
+// Send
+
+int is_transmit_empty() {
+   return inb(0x3f8 + 5) & 0x20;
+}
+
+void write_serial(char a) {
+   while (is_transmit_empty() == 0);
+   outb(0x3f8,a);
+}
+
+void serial_init() {
+   outb(0x3f8 + 1, 0x00);
+   outb(0x3f8 + 3, 0x80);
+   outb(0x3f8 + 0, 0x03);
+   outb(0x3f8 + 1, 0x00);
+   outb(0x3f8 + 3, 0x03);
+   outb(0x3f8 + 2, 0xC7);
+   outb(0x3f8 + 4, 0x0B);
 }

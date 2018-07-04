@@ -39,6 +39,8 @@ fs.c1 = $(call md5,scr/src/fs.c)
 fs.c2 = $(shell cat md5/fs.c.md5)
 graphics.c1 = $(call md5,scr/src/graphics.c) 
 graphics.c2 = $(shell cat md5/graphics.c.md5)  
+serial.c1 = $(call md5,scr/src/serial.c) 
+serial.c2 = $(shell cat md5/serial.c.md5)  
 ##################################################################
 
 default:
@@ -64,6 +66,7 @@ all:
 	$(COMPILER) $(CFLAGS) scr/src/shell.c -o scr/obj/shell.o
 	$(COMPILER) $(CFLAGS) scr/src/fs.c -o scr/obj/fs.o
 	$(COMPILER) $(CFLAGS) scr/src/graphics.c -o scr/obj/graphics.o
+	$(COMPILER) $(CFLAGS) scr/src/serial.c -o scr/obj/serial.o
 	cat scr/src/kernel.asm | md5sum >md5/kernel.asm.md5
 	cat scr/src/kernel.c | md5sum >md5/kernel.c.md5
 	cat scr/src/idt.c | md5sum >md5/idt.c.md5
@@ -76,6 +79,7 @@ all:
 	cat scr/src/shell.c | md5sum >md5/shell.c.md5
 	cat scr/src/fs.c | md5sum >md5/fs.c.md5
 	cat scr/src/graphics.c | md5sum >md5/graphics.c.md5
+	cat scr/src/serial.c | md5sum >md5/serial.c.md5
 	$(LINKER) $(LDFLAGS) -o $(ELFOUT) $(OBJS)
 	objcopy -O binary $(ELFOUT) $(OUTPUT)
 	make boot
@@ -177,6 +181,14 @@ comp:
 		$(COMPILER) $(CFLAGS) scr/src/graphics.c -o scr/obj/graphics.o;\
 		cat scr/src/graphics.c | md5sum >md5/graphics.c.md5;\
 	fi	
+
+	@if [ "$(serial.c1)" = "$(serial.c2)" ]; then\
+		echo "serial.c is not changed";\
+	else\
+		echo "$(COMPILER) $(CFLAGS) scr/src/serial.c -o scr/obj/serial.o";\
+		$(COMPILER) $(CFLAGS) scr/src/serial.c -o scr/obj/serial.o;\
+		cat scr/src/serial.c | md5sum >md5/serial.c.md5;\
+	fi
 
 boot:
 	$(ASSEMBLER) -o nos/bootloader.bin scr/boot/bootloader_$(FS).asm
