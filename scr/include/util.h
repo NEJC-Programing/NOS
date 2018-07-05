@@ -10,4 +10,5 @@ int str_to_int(string ch);
 string int_to_string(int n);
 void * malloc(int nbytes);      
 void * clean(int size);
+char *strcpy(char *to, const char *from);
 #endif

@@ -43,7 +43,7 @@ serial.c1 = $(call md5,scr/src/serial.c)
 serial.c2 = $(shell cat md5/serial.c.md5)  
 ##################################################################
 
-default: comp
+default: all
 	mkdir nos/ -p
 	$(LINKER) $(LDFLAGS) -o $(ELFOUT) $(OBJS)
 	objcopy -O binary $(ELFOUT) $(OUTPUT)

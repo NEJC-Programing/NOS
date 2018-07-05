@@ -1165,7 +1165,7 @@ void set_text_mode(int hi_res)
 
 /*****************************************************************************
 *****************************************************************************/
-static void draw_x(void)
+void draw_x(void)
 {
 	unsigned x, y;
 
@@ -1179,9 +1179,15 @@ static void draw_x(void)
 		g_write_pixel((g_wd - g_ht) / 2 + y, y, 1);
 		g_write_pixel((g_ht + g_wd) / 2 - y, y, 2);
 	}
-	readStr();
-}
 
+}
+void clearScreen_vga()
+{
+	unsigned x, y;
+	for(y = 0; y < g_ht; y++)
+		for(x = 0; x < g_wd; x++)
+			g_write_pixel(x, y, 0);
+}
 void vga_setgmode(int mode)
  {
    if (mode==VGA_320X200X256)
@@ -1202,7 +1208,7 @@ void vga_setgmode(int mode)
       	g_write_pixel = write_pixel4p;
      };
  };
-void putpixel(int x, int y, char color){g_write_pixel(x,y,color);}
+
 void dex32vga_writepixel(int x,int y,char color)
  {
    g_write_pixel(x,y,color);
@@ -1250,4 +1256,41 @@ void dex32vga_waitretrace()
   while(inportb(0x3DA)&0x8);
   while(!(inportb(0x3DA)&0x8));
 };
+void PutPixel(int x, int y, char color){g_write_pixel(x,y,color);}
+void PutRect(int X, int Y, int Width, int Height, char color)
+{
+	if(Width>= g_wd)
+		Width = g_wd;
+	if(Height>= g_ht)
+		Height = g_ht;
+	for (int h = Y; h<=Height;h++)
+		for (int w = X; w<=Width; w++)
+			PutPixel(w,h,color);
+}
+void PutCercle(int X, int Y, int Width, int Height, char color, int fill)
+{
+	if(Width>= g_wd)
+		Width = g_wd;
+	if(Height>= g_ht)
+		Height = g_ht;
+	for (int h = Y; h<=Height;h++)
+		for (int w = X; w<=Width; w++)
+			PutPixel(w,h,color);
+}
 
+void PutBitmap(int x,int y,Bitmap bitmap)
+{
+	int w = bitmap.Width;
+	int h = bitmap.Height;
+	int cd = bitmap.ColorDepth;
+	char * pix = bitmap.Pixels;
+	int i = 0;
+	for (;y!=h;y++)
+	{
+		for(;x!=w;x++)
+		{
+			PutPixel(x,y,pix[i]);
+			i++;
+		}
+	}
+}

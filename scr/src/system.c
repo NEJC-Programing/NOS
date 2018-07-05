@@ -50,9 +50,10 @@ void panic(string reason, int bsod)
 {
 	if (bsod){
 		clearScreen();
-		for(int i = 0; i<=3100; i++){ // blue screen
-			print_colored(" ", 0,1);
-		}
+		clearScreen_vga();
+		vga_setgmode(1);
+		PutRect(0,0,1000000,10000000,0x09);//0x07 gray//0x09 light blue//0x3F white
+		sad();
 		int start = 40-(int)((double)strlength(reason)/(double)2);
 		SetCursor(start, 12);
 		print_colored(reason,0xf,1);
@@ -79,4 +80,36 @@ void delay(int time_ms)
 		i++;
 	}
 }
+void sleep(int s){delay(s);}
 
+void sad()
+{
+	PutPixel(20,30,0x3f);
+	PutPixel(21,30,0x3f);
+	PutPixel(22,30,0x3f);
+	PutPixel(20,29,0x3f);
+	PutPixel(21,29,0x3f);
+	PutPixel(22,29,0x3f);
+	PutPixel(20,60,0x3f);
+	PutPixel(21,60,0x3f);
+	PutPixel(22,60,0x3f);
+	PutPixel(20,59,0x3f);
+	PutPixel(21,59,0x3f);
+	PutPixel(22,59,0x3f);
+
+	PutPixel(50,30,0x3f);
+	PutPixel(50,31,0x3f);
+	PutPixel(49,32,0x3f);
+	PutPixel(48,33,0x3f);
+	PutPixel(47,34,0x3f);
+	PutPixel(47,35,0x3f);
+	PutPixel(46,36,0x3f);
+	PutPixel(45,37,0x3f);
+	PutPixel(44,38,0x3f);
+	PutPixel(44,39,0x3f);
+
+
+	PutPixel(40,45,0x3f);
+
+	PutPixel(50,59,0x3f);
+}

@@ -13,7 +13,9 @@ typedef unsigned int uint32;
 typedef signed long long int64;
 typedef unsigned long long uint64;
 
-typedef unsigned long DWORD;
+typedef unsigned short int WORD;
+typedef unsigned char BYTE;
+typedef unsigned int DWORD;
 
 typedef char* string; 
 

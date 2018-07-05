@@ -5,6 +5,10 @@ uint16 strlength(string ch){
         return i-1;               //Changed counter to i instead of i--
 }
 
+uint16 strlen(string ch)
+{
+        return strlength(ch);
+}
 
 
 uint8 strEql(string ch1,string ch2)                     
@@ -22,7 +26,20 @@ uint8 strEql(string ch1,string ch2)
         }
         return result;
 }
-
+uint8 strcmp(string ch1, string ch2){
+       uint8 result = 0;
+        uint8 size = strlength(ch1);
+        if(size != strlength(ch2)) result =0;
+        else 
+        {
+        uint8 i = 0;
+        for(i;i<=size;i++)
+        {
+                if(ch1[i] != ch2[i]) result = 1;
+        }
+        }
+        return result; 
+}
 uint8 strEqle(string ch1,string ch2, int chars)                     
 {
         uint8 result = 1;
@@ -58,3 +75,13 @@ string first(string str, int ch){
                 buff[i]=str[i];
         return buff;
 }
+char toupper(char c)
+ {
+  if (c>='a'&&c<='z') return (c-'a'+'A');
+  return c;
+ };
+ char tolower(char c)
+ {
+  if (c>='A'&&c<='Z') return (c-'A'+'a');
+  return c;
+ };

@@ -75,3 +75,18 @@ void * clean(int size)
 	}
 	return s;
 }
+void memcpy(char *source, char *dest, int nbytes)
+{
+	memory_copy(source,dest,nbytes);
+}
+void memset(uint8 *dest, uint8 val, uint32 len)
+{
+	memory_set(dest,val,len);
+}
+char *strcpy(char *to, const char *from)
+{
+  char *save = to;
+
+  for (; (*to = *from); ++from, ++to);
+  return save;
+};

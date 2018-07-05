@@ -2,6 +2,7 @@
 
 void launch_shell()
 {
+	//die();
 	string prompt = (string) malloc(10);
 	prompt = "NOS> ";
 	string ch = (string) malloc(200); // util.h
@@ -39,7 +40,13 @@ void launch_shell()
 			else if (strEqle(ch, "clear", 5))
 				clearScreen();
 			else if (strEqle(ch, "demo", 4))
-				demo_graphics();
+			{
+				vga_setgmode(1);
+				clearScreen_vga();
+				draw_x();
+
+				//set_text_mode(0);
+			}
 			else if (strlength(ch) == 0)
 				print("\n");
 		    else
@@ -61,6 +68,5 @@ void help()
 	print("\n cls\\clear : Clears Screen");
 	print("\n demo      : Graphics demo");
 	print("\n\n");
-	vga_setgmode(1);
 	set_text_mode(0);
 }
