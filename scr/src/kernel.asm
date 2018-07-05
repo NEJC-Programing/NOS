@@ -28,3 +28,28 @@ entering_v86:
    push dword [ebp+12]        ; cs
    push dword  [ebp+16]       ; eip
    iret
+
+
+global restoreflags
+restoreflags:
+push      ebp
+mov       ebp,esp
+mov	  eax,[ebp+8]
+push	  eax
+popf	
+pop       ebp
+ret 
+global storeflags
+storeflags:
+push      ebp
+mov       ebp,esp
+push      ecx
+pushf	
+pop	 eax
+mov	  [ebp-4],eax
+mov       eax,[ebp-4]
+mov       edx,[ebp+8]
+mov       [edx],eax
+pop       ecx
+pop       ebp
+ret 

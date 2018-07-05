@@ -38,8 +38,8 @@ void launch_shell()
 				clearScreen();
 			else if (strEqle(ch, "clear", 5))
 				clearScreen();
-			else if (strEqle(ch, "div", 3))
-				divide();
+			else if (strEqle(ch, "demo", 4))
+				demo_graphics();
 			else if (strlength(ch) == 0)
 				print("\n");
 		    else
@@ -59,21 +59,8 @@ void help()
 	print("\n shutdown  : Shutdowns the pc");
 	print("\n echo      : Prints output");
 	print("\n cls\\clear : Clears Screen");
-	print("\n div       : divide ");
+	print("\n demo      : Graphics demo");
 	print("\n\n");
-}
-
-void divide(){
-	string t = malloc(100);
-	string u = malloc(100);
-	print("\nwhat do you want do be the first #/... [");
-	memory_copy(readStr(), t,100);
-	print("\nwhat do you want do be the other .../# [");
-	memory_copy(readStr(), u,100);
-	double a = str_to_int(t);
-	double b = str_to_int(u);
-	a = a/b;
-	print("\n Answer=");
-	print(int_to_string(a));
-	print("\n");
+	vga_setgmode(1);
+	set_text_mode(0);
 }
