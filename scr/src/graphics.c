@@ -1316,10 +1316,14 @@ void PutChar(int x,int y,char ch){
 		0,0,0,0,0,0,0,0,0,
 	};
 
-	for (int c = 0; c < 9;c++)
-		for (int r = 0; r < 16; r++)
-			if (a[r+c])
+
+	for (int c = 0; c < 9;c++){
+		for (int r = 0; r < 16; r++){
+			if (a[r+c]){
 				PutPixel(x+c,y+r,0x3F);
-			else
+			} else{
 				PutPixel(x+c,y+r,0x00);
+			}
+		}
+	}
 }

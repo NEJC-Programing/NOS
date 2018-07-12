@@ -8,9 +8,9 @@ void launch_shell()
 	string ch = (string) malloc(200); // util.h
 	void * temp_mem = malloc(1024);
 	int counter = 0;
+	
 	do
 	{
-		print_colored("A",8,3);
 		print(prompt);
 			ch = clean(200);
 		    //ch = readStr(); //
@@ -44,9 +44,8 @@ void launch_shell()
 			{
 				vga_setgmode(1);
 				clearScreen();
-				draw_x();
+				PutRect(0,0,10,10,0x11);
 				PutChar(0,0,"x");
-				PutRect(10,10,9,16,0x0F);
 				//set_text_mode(0);
 			}
 			else if (strlength(ch) == 0)
