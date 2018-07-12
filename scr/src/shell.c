@@ -10,6 +10,7 @@ void launch_shell()
 	int counter = 0;
 	do
 	{
+		print_colored("A",8,3);
 		print(prompt);
 			ch = clean(200);
 		    //ch = readStr(); //
@@ -42,9 +43,10 @@ void launch_shell()
 			else if (strEqle(ch, "demo", 4))
 			{
 				vga_setgmode(1);
-				clearScreen_vga();
+				clearScreen();
 				draw_x();
-
+				PutChar(0,0,"x");
+				PutRect(10,10,9,16,0x0F);
 				//set_text_mode(0);
 			}
 			else if (strlength(ch) == 0)

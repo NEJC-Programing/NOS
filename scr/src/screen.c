@@ -2,6 +2,7 @@
 int cursorX = 0, cursorY = 0;
 const uint8 sw = 80,sh = 25,sd = 2; 
 int color = 0x0F;
+extern int Graphics_Mode;
 void clearLine(uint8 from,uint8 to)
 {
         uint16 i = sw * from * sd;
@@ -29,6 +30,7 @@ void clearScreen()
         cursorX = 0;
         cursorY = 0;
         updateCursor();
+        clearScreen_vga();
 }
 
 void scrollUp(uint8 lineNumber)
@@ -64,6 +66,8 @@ void newLineCheck()
 
 void printch(char c)
 {
+    if (Graphics_Mode)
+    {
     string vidmem = (string) 0xb8000;     
     switch(c)
     {
@@ -98,6 +102,10 @@ void printch(char c)
     }
     updateCursor();
     newLineCheck();
+    }else
+    {
+        
+    }
 }
 
 void print (string ch)
