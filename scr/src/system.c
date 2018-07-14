@@ -113,3 +113,12 @@ void sad()
 
 	PutPixel(50,59,0x3f);
 }
+
+BYTE xor_hash(BYTE * data)
+{
+	BYTE buff = data[0];
+	for (int i = 1; i<sizeof(data); i++){
+		buff = (char)(buff ^ data[i]);
+	}
+	return buff;
+}

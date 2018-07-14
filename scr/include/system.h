@@ -2,6 +2,7 @@
 #define SYSTEM_H
 #include "types.h"
 #include "graphics.h"
+#include "fs.h"
 uint8 inportb (uint16 _port);
 
 void outportb (uint16 _port, uint8 _data);
@@ -13,6 +14,8 @@ void outb (uint16 port, uint8 data);
 void NMI_enable(void);
 
 void NMI_disable(void);
+
+BYTE xor_hash(BYTE * data);
 
 extern void entering_v86(uint32 ss, uint32 esp, uint32 cs, uint32 eip);
 #endif

@@ -6,9 +6,7 @@ void launch_shell()
 	string prompt = (string) malloc(10);
 	prompt = "NOS> ";
 	string ch = (string) malloc(200); // util.h
-	void * temp_mem = malloc(1024);
 	int counter = 0;
-	
 	do
 	{
 		print(prompt);
