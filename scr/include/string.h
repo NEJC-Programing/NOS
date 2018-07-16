@@ -15,5 +15,6 @@ string remove_form_start(string str, int chars_to_remove);
 string first(string str, int ch);
 
 char toupper(char c);
- char tolower(char c);
+char tolower(char c);
+string uintToHexStr(unsigned int num);
 #endif

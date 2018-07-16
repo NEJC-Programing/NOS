@@ -8,7 +8,7 @@ LDFLAGS = -m elf_i386 -T scr/src/link.ld
 EMULATOR = qemu-system-i386
 EMULATOR_FLAGS = -device isa-debug-exit,iobase=0xf4,iosize=0x04 -kernel
 
-OBJS = scr/obj/kasm.o scr/obj/kc.o scr/obj/idt.o scr/obj/isr.o scr/obj/kb.o scr/obj/screen.o scr/obj/string.o scr/obj/system.o scr/obj/util.o scr/obj/shell.o scr/obj/fs.o scr/obj/graphics.o scr/obj/serial.o
+OBJS = scr/obj/kasm.o scr/obj/kc.o scr/obj/idt.o scr/obj/isr.o scr/obj/kb.o scr/obj/screen.o scr/obj/string.o scr/obj/system.o scr/obj/util.o scr/obj/shell.o scr/obj/fs.o scr/obj/graphics.o scr/obj/serial.o scr/obj/drivers.o
 OUTPUT = nos/kernel.bin
 ELFOUT = nos/kernel.elf
 
@@ -40,7 +40,9 @@ fs.c2 = $(shell cat md5/fs.c.md5)
 graphics.c1 = $(call md5,scr/src/graphics.c) 
 graphics.c2 = $(shell cat md5/graphics.c.md5)  
 serial.c1 = $(call md5,scr/src/serial.c) 
-serial.c2 = $(shell cat md5/serial.c.md5)  
+serial.c2 = $(shell cat md5/serial.c.md5) 
+drivers.c1 = $(call md5,scr/src/drivers.c) 
+drivers.c2 = $(shell cat md5/drivers.c.md5)  
 ##################################################################
 
 default: all
@@ -67,6 +69,7 @@ all:
 	$(COMPILER) $(CFLAGS) scr/src/fs.c -o scr/obj/fs.o
 	$(COMPILER) $(CFLAGS) scr/src/graphics.c -o scr/obj/graphics.o
 	$(COMPILER) $(CFLAGS) scr/src/serial.c -o scr/obj/serial.o
+	$(COMPILER) $(CFLAGS) scr/src/drivers.c -o scr/obj/drivers.o
 	@cat scr/src/kernel.asm | md5sum >md5/kernel.asm.md5
 	@cat scr/src/kernel.c | md5sum >md5/kernel.c.md5
 	@cat scr/src/idt.c | md5sum >md5/idt.c.md5
@@ -80,6 +83,7 @@ all:
 	@cat scr/src/fs.c | md5sum >md5/fs.c.md5
 	@cat scr/src/graphics.c | md5sum >md5/graphics.c.md5
 	@cat scr/src/serial.c | md5sum >md5/serial.c.md5
+	@cat scr/src/drivers.c | md5sum >md5/drivers.c.md5
 	$(LINKER) $(LDFLAGS) -o $(ELFOUT) $(OBJS)
 	objcopy -O binary $(ELFOUT) $(OUTPUT)
 	make boot
