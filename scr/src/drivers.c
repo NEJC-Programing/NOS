@@ -36,7 +36,7 @@ void send_eoi(uint8_t irq)
 //
 void set_int(int i, uint32_t addr)
 {
-	print("Installing INT#");print(int_to_string(i));print(" to address: 0x");print(uintToHexStr(addr)); print("\n");
+	printf("Installing INT#%d to address: 0x%x\n",i,addr);
 	set_idt_gate(i,addr);set_idt();
 }
 //

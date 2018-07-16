@@ -208,7 +208,7 @@ int printf (const char* str, ...) {
 				}
 				case 'x': {
 					int c = va_arg(ap, int);
-					print(uintToHexStr(c));
+					print(decToHexa((int)c));
 					i++;
 					continue;
 				}
