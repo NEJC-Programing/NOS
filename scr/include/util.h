@@ -11,4 +11,7 @@ string int_to_string(int n);
 void * malloc(int nbytes);      
 void * clean(int size);
 char *strcpy(char *to, const char *from);
+void memcpy(char *source, char *dest, int nbytes);
+void memset(uint8 *dest, uint8 val, uint32 len);
+char *strcpy(char *to, const char *from);
 #endif

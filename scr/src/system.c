@@ -61,8 +61,8 @@ void panic(string reason, int bsod)
 		SetCursor(0,0);// mac style
 		print(reason);
 	}
-	//delay(12345);
-	//reboot();
+	delay(10);
+	shutdown();
 	asm("hlt");
 }
 
@@ -71,13 +71,14 @@ void die(string reason)
 	panic(reason, 1);
 }
 
-void delay(int time_ms)
+void delay(int sec)
 {
-	time_ms = time_ms*100000;
-	int i = 0;
-	while(i != time_ms)
-	{
-		i++;
+	Date_and_Time time;
+	sec += Get_Date_and_Time().second;
+	int i;
+	while(i!=sec){
+		time=Get_Date_and_Time();
+		i = time.second;
 	}
 }
 void sleep(int s){delay(s);}

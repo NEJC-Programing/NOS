@@ -1,6 +1,0 @@
-shopt -s extglob
-source $LOST_BUILDMK_ROOT/config.sh
-
-echo "LD   $1/modules/pci"
-$LOST_TOOLS_LD -opci.mod $LDSCRIPT *.o --start-group $2 --end-group
-$LOST_TOOLS_STRIP -s pci.mod -o $1/modules/pci

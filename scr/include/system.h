@@ -18,6 +18,9 @@ void NMI_enable(void);
 void NMI_disable(void);
 
 BYTE xor_hash(BYTE * data);
-
+void reboot();
+void shutdown();
+void panic(string reason, int bsod);
+void delay(int sec);
 extern void entering_v86(uint32 ss, uint32 esp, uint32 cs, uint32 eip);
 #endif

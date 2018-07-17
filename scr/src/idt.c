@@ -8,7 +8,12 @@ void set_idt_gate(int n, uint32 handler) {
     idt[n].flags = 0x8E; 
     idt[n].high_offset = high_16(handler);
 }
-
+void set_int(int i, uint32_t addr)
+{
+	printf("Installing INT#%d to address: 0x%x\n", i, addr);
+	set_idt_gate(i, addr);
+    set_idt();
+}
 void set_idt() {
     idt_reg.base = (uint32) &idt;
     idt_reg.limit = IDT_ENTRIES * sizeof(idt_gate_t) - 1;

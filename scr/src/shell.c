@@ -43,6 +43,7 @@ void launch_shell()
 				vga_setgmode(1);
 				clearScreen();
 				PutRect(0,0,10,10,0x11);
+				PutCercle(30,30,50,50,0x01,1);
 				PutChar(0,0,"x");
 				//set_text_mode(0);
 			}

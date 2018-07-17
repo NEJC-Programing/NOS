@@ -1,4 +1,0 @@
-echo "AR   library.a"
-source $LOST_BUILDMK_ROOT/config.sh
-
-$LOST_TOOLS_AR rs library.a *.o */*.o

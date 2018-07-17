@@ -1,2 +1,0 @@
-cp libptcpip.a tcpip.ppu ../units
-cp libphttp.a http.ppu ../units

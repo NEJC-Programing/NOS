@@ -188,11 +188,12 @@ boot:
 
 disk:
 	dd if=/dev/zero of=nos/nos.img bs=16777216 count=1
-	mkdosfs -F 16 nos/nos.img
-	dd if=nos/bootloader.bin of=nos/nos.img bs=512 conv=notrunc
+	#mkdosfs -F 16 nos/nos.img
+	mkfs.ext2 nos/nos.img
+	#dd if=nos/bootloader.bin of=nos/nos.img bs=512 conv=notrunc
 
 test:
-	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT)
+	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) nos/nos.img
 	clear
 
 functions:

@@ -1,2 +1,0 @@
-cp libptyndur.a tyndur.ppu ../units
-cp libpmultilang.a multilang.ppu ../units

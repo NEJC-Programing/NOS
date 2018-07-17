@@ -14,11 +14,10 @@ typedef struct Bitmap{
 }Bitmap;
 
 void vga_setgmode(int mode);
-void set_plane(unsigned p);
 void PutPixel(int x, int y, char color);
 void set_text_mode(int hi_res);
 void PutRect(int X, int Y, int Width, int Height, char color);
 void PutBitmap(int x,int y,Bitmap bitmap);
-
+void PutCercle(int X, int Y, int Width, int Height, char color, int fill);
 
 #endif

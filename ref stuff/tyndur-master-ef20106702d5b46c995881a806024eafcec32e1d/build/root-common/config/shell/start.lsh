@@ -1,9 +1,0 @@
-#!file:/apps/sh
-
-set PATH file:/apps;file:/system/lpt-bin
-set TERM tyndur
-
-set -d LC_ALL de_DE.UTF-8
-set -d LANG de_DE.UTF-8
-
-cd file:/
