@@ -50,10 +50,10 @@ void panic(string reason, int bsod)
 {
 	if (bsod){
 		clearScreen();
-		clearScreen_vga();
-		vga_setgmode(1);
-		PutRect(0,0,1000000,10000000,0x09);//0x07 gray//0x09 light blue//0x3F white
-		sad();
+		//clearScreen_vga();
+		//vga_setgmode(1);
+		//PutRect(0,0,1000000,10000000,0x09);//0x07 gray//0x09 light blue//0x3F white
+		//sad();
 		int start = 40-(int)((double)strlength(reason)/(double)2);
 		SetCursor(start, 12);
 		print_colored(reason,0xf,1);
@@ -68,7 +68,7 @@ void panic(string reason, int bsod)
 
 void die(string reason)
 {
-	panic(reason, 1);
+	panic(reason, 0);
 }
 
 void delay(int sec)

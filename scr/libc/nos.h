@@ -1,5 +1,6 @@
 #ifndef NOS_H
 #define NOS_H
+typedef enum {false, true} bool;
 
 typedef signed char int8_t;
 typedef unsigned char uint8_t;

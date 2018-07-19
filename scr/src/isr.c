@@ -43,6 +43,8 @@ void isr_install() {
 /*Handlers*/
 void isr0()
 {
+    print_colored("Kernel {Div By 0} ",4,0);
+    return;
     panic(exception_messages[0],1);
    
 }

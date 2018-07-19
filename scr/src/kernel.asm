@@ -12,11 +12,9 @@ extern kmain            ; this function is gonna be located in our c code(kernel
 start:
     cli             ;clears the interrupts 
     call isr_install
-    call kmain      ;send processor to continue execution from the kamin funtion in c code
-    extern panic
-    call panic
-    mov ax, 0013h
-    int 10h
+    jmp kmain      ;send processor to continue execution from the kamin funtion in c code
+    extern die
+    call die
 
 ; extern void entering_v86(uint32_t ss, uint32_t esp, uint32_t cs, uint32_t eip);
 entering_v86:
@@ -53,3 +51,37 @@ mov       [edx],eax
 pop       ecx
 pop       ebp
 ret 
+
+global inw
+global inl
+global outw
+global outl
+
+inw:
+        xor eax, eax
+        xor edx, edx
+        mov dx, word [esp + 4]
+        in ax, dx
+        ret
+
+inl:
+        xor eax, eax
+        xor edx, edx
+        mov dx, word [esp + 4]
+        in eax, dx
+        ret
+outw:
+        xor eax, eax
+        xor edx, edx
+        mov dx, word [esp + 4]
+        mov ax, word [esp + 8]
+        out dx, ax
+        ret
+
+outl:
+        xor eax, eax
+        xor edx, edx
+        mov dx, word [esp + 4]
+        mov eax, [esp + 8]
+        out dx, eax
+        ret

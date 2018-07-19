@@ -32,6 +32,8 @@ typedef unsigned char BYTE;
 typedef unsigned int DWORD;
 
 typedef char* string; 
+typedef void NULL;
+typedef enum {false, true} bool;
 
 typedef struct _devmgr_generic {
 int size;           //size of this structure
