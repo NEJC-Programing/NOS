@@ -4,6 +4,7 @@
 #include "graphics.h"
 #include "fs.h"
 #include "drivers.h"
+#include "iqr.h"
 
 uint8 inportb (uint16 _port);
 

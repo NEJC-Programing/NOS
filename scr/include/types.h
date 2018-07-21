@@ -32,7 +32,7 @@ typedef unsigned char BYTE;
 typedef unsigned int DWORD;
 
 typedef char* string; 
-typedef void NULL;
+#define NULL 0
 typedef enum {false, true} bool;
 
 typedef struct _devmgr_generic {
@@ -68,5 +68,12 @@ typedef struct __Date_and_Time{
     unsigned char month;
     unsigned int  year;
 } Date_and_Time;
+
+struct regs {
+	unsigned int gs, fs, es, ds;
+	unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;
+	unsigned int int_no, err_code;
+	unsigned int eip, cs, eflags, useresp, ss;
+};
 
 #endif

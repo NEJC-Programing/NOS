@@ -4,11 +4,18 @@
 #include "system.h"
 #include "util.h"
 #include "drivers.h"
-int fat16_init(unsigned int partition_num);
-void fat16_display_vid(void);
-void fat16_display_root(void);
-void fat16_display_dir_entry(const char *name);
-
-size_t fat16_get_file_size(const char *filename);
-size_t fat16_load(const char *filename, void *buf, const size_t buf_size);
+struct dirent{
+    struct dirent *next;
+    char *name;
+    uint32_t byte_size;
+    uint8_t is_dir;
+    uint32_t cluster_no;
+};
+struct fs {
+	const char *fs_name;
+    int     (*fs_load)(const char *path, uint8_t *buf, uint32_t buf_size);
+    int     (*fs_store)(const char *path, uint8_t *buf);
+};
+int fat_load(const char *path, uint8_t *buf, uint32_t buf_size);
+int fat_store(const char *path, uint8_t *buf);
 #endif

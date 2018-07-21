@@ -24,11 +24,9 @@ void kmain()
 	printf("start = 0x%x  kmain = 0x%x\n",start,kmain);
 	driver_init();
 	syscall_init();
-	ata_init();
-	mbr_init();
-	fat16_init(0);
-	fat16_display_root();
-	fat16_display_vid();
+	timer_install();
+	ata_pio_install();
+	fs_init();
 	Date_and_Time s = Get_Date_and_Time();
 	printf("Date: %d/%d/%d\nTime: %d:%d \nSec: %d\n",s.day,s.month,s.year,s.hour,s.minute,s.second);
 	delay(3);
@@ -40,6 +38,11 @@ void kmain()
 	die("out");
 }
 
+
+void kprint(string text)
+{
+	print_colored(text,4,0);
+}
 uint32_t * Get_Syscall_Table()
 {
 	return syscalls;

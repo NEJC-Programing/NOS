@@ -22,708 +22,205 @@ int driver_add(driver_t driver)
 	return driver.driver_id;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////           TIMER            ////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* This will keep track of how many ticks that the system
+*  has been running for */
+unsigned int timer_ticks = 0;
+
+// allow kernel drivers to request callbacks when a timer
+// tick executes.
+#define NUM_TICK_HANDLERS 255
+
+typedef void (*tick_handler_func)();
+tick_handler_func tick_handlers[NUM_TICK_HANDLERS];
+unsigned int next_tick_handler_id;
+
+void timer_install_tick_handler(void (*tick_handler)()) {
+	tick_handlers[next_tick_handler_id++] = tick_handler;
+	print("new tick handler registered\n");
+}
+
+
+/* Handles the timer. In this case, it's very simple: We
+*  increment the 'timer_ticks' variable every time the
+*  timer fires. By default, the timer fires 18.222 times
+*  per second. */
+void timer_handler(struct regs *r) {
+	unsigned int i;
+
+	timer_ticks++;
+
+	// invoke everyone who has registered a timer tick handler
+	for (i = 0; i < next_tick_handler_id; i++)
+		tick_handlers[i]();
+
+	//if (timer_ticks % 18 == 0) {
+	//	kprintf("One second has passed. %i tick handlers installed.\n", next_tick_handler_id);
+	//}
+}
+
+/* This will continuously loop until the given time has been reached */
+void timer_wait(int ticks) {
+	unsigned long eticks;
+
+	eticks = timer_ticks + ticks;
+	while(timer_ticks < eticks);
+}
+
+void timer_install() {
+	/* Installs 'timer_handler' to IRQ0 */
+	irq_install_handler(0, timer_handler);
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////            ATA             ////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-typedef struct {
-    uint8_t     status;
-    uint8_t     first_chs[3];
-    uint8_t     type;
-    uint8_t     last_chs[3];
-    uint32_t    first_lba;
-    uint32_t    num_sectors;
-} __attribute((packed)) partition_entry_t;
+bool primary_detected = false;
+unsigned short disk_info[256];
+bool pio_48_supported = false;
+unsigned int sector_count = 0;
 
-#define NUM_PARTITIONS_MAX  4
-typedef struct {
-    uint8_t             bootstrap[436];
-    uint8_t             unique_disk[10];
-    partition_entry_t   partition[NUM_PARTITIONS_MAX];
-    uint16_t            signature;
-} __attribute__((packed)) mbr_t;
+void ata_pio_install() {
+	char detect;
+	unsigned short tmp;
+	unsigned int i, tmp2;
 
-// in-memory copy of a partition entry
-typedef struct {
-    bool        valid;
-    bool        bootable;
-    uint32_t    starting_sec_lba;
-    uint32_t    num_secs;
-} mpe_t;
+	print("ata_pio_install()\n");
+	print("initialising disk\n");
+	//timer_install_tick_handler(ata_pio_poller); // register our callback.
+	//To use the IDENTIFY command, select a target drive by sending 0xA0 for the master drive, or 0xB0 for the slave, to the "drive select" IO port.
+	//On the Primary bus, this would be port 0x1F6.
+	outb(0x1F6, 0xA0);
 
-static mpe_t _partition_entry[NUM_PARTITIONS_MAX];
-static bool _bootable_partition_found;
+	//Then set the Sectorcount, LBAlo, LBAmid, and LBAhi IO ports to 0 (port 0x1F2 to 0x1F5).
+	outb(0x1F2, 0);
+	outb(0x1F3, 0);
+	outb(0x1F4, 0);
+	outb(0x1F5, 0);
 
-// check whether all the bytes that make up the given partition entry are zero
-static bool _is_all_zero(const partition_entry_t *pe)
-{
-    uint8_t *p;
-    size_t i;
+	//Then send the IDENTIFY command (0xEC) to the Command IO port (0x1F7).
+	outb(0x1F7, 0xEC);
 
-    for (i = 0, p = (uint8_t *) pe; i < sizeof(*pe); i++, p++)
-        if (*p)
-            return false;
+	//Then read the Status port (0x1F7) again. If the value read is 0, the drive does not exist.
+	detect = inb(0x1F7);
 
-    return true;
-}
+	if (detect != 0) {
+		primary_detected = true;
+		print("primary drive detected\n");
+	} else {
+		print("drive does not exist\n");
+		return;
+	}
 
-static inline
-bool _is_bootable(const partition_entry_t *pe)
-{
-    if (0x80 == pe->status)
-        return true;
+	//For any other value: poll the Status port (0x1F7) until bit 7 (BSY, value = 0x80) clears.
+	while ((inb(0x1F7) & 0x80) == 0x80) ; //wait until BUS BUSY bit to be cleared
+	
+	//Because of some ATAPI drives that do not follow spec, at this point you need to check the LBAmid and LBAhi ports (0x1F4 and 0x1F5)
+	//to see if they are non-zero. If so, the drive is not ATA, and you should stop polling.
 
-    return false;
-}
-
-static
-int _set_partition_info(unsigned int pnum, const partition_entry_t *pe)
-{
-    // if an entry of the partition table is unused, 
-    // then it should be set to all 0
-    if (_is_all_zero(pe)) {
-        _partition_entry[pnum].valid = false;
-        return 0;
-    }
-
-    _partition_entry[pnum].starting_sec_lba = pe->first_lba;
-    _partition_entry[pnum].num_secs = pe->num_sectors;
-
-    // set whether partition is bootable
-    if (_is_bootable(pe)) {
-        // any one of the partitions may be bootable,
-        // but at most one partition should be bootable
-        if (_bootable_partition_found)
-            return 1;
-        _bootable_partition_found = true;
-        _partition_entry[pnum].bootable = true;
-    } else
-        _partition_entry[pnum].bootable = false;
+	detect = inb(0x1F4);
+	detect += inb(0x1F5);
     
-    _partition_entry[pnum].valid = true;
-    return 0;
-}
+	if (detect > 0) {
+		print("primary disk detected is ATAPI (CD-ROM style) not PATA\n");
+		return;
+	}
 
-int mbr_init(void)
-{
-    // TODO move this out from the stack
-    mbr_t mbr;
-    partition_entry_t *pe;
-    size_t i;
-
-    for (i = 0; i < NUM_PARTITIONS_MAX; i++)
-        _partition_entry[i].valid = false;
+	//Otherwise, continue polling one of the
+	//Status ports until bit 3 (DRQ, value = 8) sets, or until bit 0 (ERR, value = 1) sets.
+	//do {
+	//   detect = inb(0x1F7);
+	//} while (detect && 0x04);
+	//while ((inb(0x1F7) & 0x40) == 0x40) ; // wait for DRIVE READY bit to be set
     
-    if (sizeof(mbr_t) != sizeof(ata_sector_t))
-        return 1;
-    if (ata_read_sector_lba(0, (ata_sector_t *) &mbr))
-        return 1;
-
-    _bootable_partition_found = false;
-    for (i = 0, pe = mbr.partition; i < NUM_PARTITIONS_MAX; i++, pe++)
-        _set_partition_info(i, pe);
-
-    return 0;
-}
-
-int mbr_get_partition_info(unsigned int pnum,
-                           uint32_t *start_sec, uint32_t *num_secs)
-{
-    if (!_partition_entry[pnum].valid)
-        return 1;   // unused entry
-
-    if (start_sec)
-        *start_sec = _partition_entry[pnum].starting_sec_lba;
-    
-    if (num_secs)
-        *num_secs = _partition_entry[pnum].num_secs;
-
-    return 0;
-}
-
-static void _display_partition_entry(const mpe_t *pe)
-{
-    if (!pe->valid) {
-        printf("unused\n");
-        return;
-    }
-
-    if (pe->bootable)
-        printf(" * \n");
-    printf("starting sector lba:   %d\n", pe->starting_sec_lba);
-    printf("size in sectors:       %d\n", pe->num_secs);
-}
-
-void mbr_display(void)
-{
-    size_t i;
-
-    for (i = 0; i < NUM_PARTITIONS_MAX; i++) {
-        printf("partition %d\n", i);
-        _display_partition_entry(&_partition_entry[i]);
-    }
-}
-/////////////////////////////
-static inline
-bool _within_partition(unsigned int pnum, uint32_t sec_num_lba)
-{
-    uint32_t num_secs;
-
-    if (mbr_get_partition_info(pnum, 0, &num_secs))
-        return false;   // unused partition
-
-    if (sec_num_lba >= num_secs)    // out of partition bounds
-        return false;
-
-    return true;
-}
-
-
-static inline
-int _rel2abs_sector(unsigned int pnum, uint32_t rsec_num, uint32_t *asec_num)
-{
-    uint32_t start_asec;
-    
-    if (!_within_partition(pnum, rsec_num))
-        return 1;
-
-    if (mbr_get_partition_info(pnum, &start_asec, 0))
-        return 1;
-
-    *asec_num = start_asec + rsec_num;
-    return 0;
-}
-
-int hdd_read_sector(unsigned int pnum, uint32_t rsec_num, ata_sector_t *buf)
-{ 
-    uint32_t asec_num;
-
-    if (_rel2abs_sector(pnum, rsec_num, &asec_num))
-        return 1;       
-
-    return ata_read_sector_lba(asec_num, buf);
-}
-
-void hdd_display_mbr(void)
-{
-    mbr_display();
-}
-///////////////////////////
-#define DATA        0x1f0 // [r/w]  data register
-#define ERR         0x1f1 // [r]    error register
-#define FEATURES    0x1f1 // [w]    features register
-#define SEC_CNT     0x1f2 // [r/w]  how many sectors to read/write
-#define SEC_NUM     0x1f3 // [r/w]  sector number   / LBAlo
-#define LBA_LO      SEC_NUM
-#define CYL_LO      0x1f4 // [r/w]  cylinder low    / LBAmid
-#define LBA_MID     CYL_LO
-#define CYL_HI      0x1f5 // [r/w]  cylinder high   / LBAhi
-#define LBA_HI      CYL_HI
-#define DRV_HD      0x1f6 // [r/w]  drive/head
-#define CMD         0x1f7 // [w]    command port
-#define STATUS      0x1f7 // [r]    status register
-#define CONTROL     0x3f6 // [w]    control register
-#define ASTATUS     0x3f6 // [r]    alternate status register
-
-
-typedef struct {
-    // 0-3  head select bits
-    unsigned int head_sel   : 4;
-
-    // 4    drive select
-    //          0 -> drive select 0
-    //          1 -> drive select 1
-    unsigned int drive_sel  : 1;
-   
-    // 5    set to one
-    unsigned int one0       : 1;
-   
-    // 6    set to zero
-    unsigned int zero       : 1;
-   
-    // 7     set to one
-    unsigned int one1       : 1;
-} __attribute__((packed)) ata_drv_hd_t;
-
-
-typedef struct {
-    // 0    ERR: previous command ended in an error
-    unsigned int  err   : 1;
-    
-    //  1 IDX
-    unsigned int idx    : 1;
-
-    // 2    CORR
-    unsigned int corr   : 1; 
-
-    // 3    DRQ: set when the drive has PIO data to transfer
-    //           or is ready to accept PIO data
-    unsigned int drq    : 1; 
-
-    // 4    SRV: overlapped mode service request
-    unsigned int srv    : 1;
-
-    // 5    DF: Drive Fault Error (does not set ERR)
-    unsigned int df     : 1;
-
-    // 6    RDY: drive is ready
-    unsigned int rdy    : 1;
- 
-    // 7    BSY: controller executing a command 
-    //           wait for it to clear, in case of hang => sw reset
-    unsigned int bsy    : 1; 
-} __attribute__((packed)) ata_status_t;
-
-
-typedef struct {
-    unsigned int        : 1;
-    // 1    nIEN enable bit for the drive interrupt to the host
-    //              0 -> INTRQ enabled
-    //              1 -> INTRQ disabled
-    unsigned int n_ien   : 1;
-
-    // 2    host software reset bit
-    //      when set to 1 the drive is reset
-    unsigned int srst   : 1;
-    unsigned int        : 4;
-    unsigned int hob    : 1;
-} __attribute__((packed)) ata_control_t;
-
-
-
-// commands:
-#define CMD_FT          0x50    // format track
-#define CMD_RSWR        0x20    // read sectors with retry
-#define CMD_RSWOR       0x21    // read sectors without retry
-#define CMD_RLWR        0x22    // read long with retry
-#define CMD_RLWOR       0x23    // read long without retry
-#define CMD_WSWR        0x30    // write sectors with retry
-#define CMD_WSWOR       0x31    // write sectors without retry
-#define CMD_WLWR        0x32    // write long with retry
-#define CMD_WLWOR       0x32    // write long without retry
-#define CMD_IDENTIFY    0xec
-
-static void _set_control(ata_control_t control)
-{
-    uint8_t reg;
-
-    memcpy(&reg, &control, sizeof(control));
-    outb(CONTROL, reg);
-}
-
-static inline
-ata_status_t _read_status(void)
-{
-    ata_status_t status;
-    uint8_t reg;
-
-    reg = inb(STATUS);
-    memcpy(&status, &reg, sizeof(reg));
-
-    return status;   
-}
-
-static inline
-bool _is_busy(void)
-{
-    ata_status_t status;
-
-    status = _read_status();
-    return status.bsy;
-}
-
-static inline
-bool _is_drq(void)
-{
-    ata_status_t status;
-
-    status = _read_status();
-    return status.drq;    
-}
-
-// check BSY & DRQ before trying to send a command
-
-static void _reset(void)
-{
-    ata_control_t control;
-
-    memset(&control, 0, sizeof(control)); 
-
-    control.srst = 1;
-    _set_control(control);
-
-    // TODO introduce a delay??
-
-    // the reset bit has to be cleared manually
-    control.srst = 0;
-    _set_control(control);
-
-    
-    while (_is_busy());
-}
-
-static ata_drv_hd_t _read_drv_hd(void)
-{
-    ata_drv_hd_t drv_hd;
-    uint8_t reg;
-
-    reg = inb(DRV_HD);
-    memcpy(&drv_hd, &reg, sizeof(reg));
-
-    return drv_hd;
-}
-
-static void _write_drv_hd(ata_drv_hd_t drv_hd)
-{
-    uint8_t reg;
-
-    memcpy(&reg, &drv_hd, sizeof(reg));
-    outb(DRV_HD, reg); 
-}
-
-static uint16_t _read_data(void)
-{
-    ata_status_t status;
-int timeout = 0;
-    // TODO timeout
-    do { 
-        status = _read_status();
-        timeout++;
-            if (timeout > 999999) 
-            {
-                print("Timeout\n");
-                goto SSS;
-            }
-    } while (!status.drq);
-SSS:
-    return inw(DATA);
-}
-
-
-static int _send_cmd(unsigned int cmd)
-{
-    ata_status_t status;
-
-    // check DRQ bit before issuing a command
-    status = _read_status();
-    if (status.drq)
-        return 1;
-
-    // TODO timeout
-    while (_is_busy())
-        ;
-
-    outb(CMD, cmd);
-
-    return 0;
-}
-
-static int _select_head(unsigned int head_num)
-{
-    ata_drv_hd_t drv_hd;
-    
-    if (head_num > 15)
-        return 1;
-
-    drv_hd = _read_drv_hd();
-    drv_hd.head_sel = head_num;
-    _write_drv_hd(drv_hd);
-
-    return 0;
-}
-
-// TODO disable optimizations for this function
-int ata_select_drive(unsigned int drive_num)
-{
-    ata_drv_hd_t drv_hd;
-
-    if (drive_num > 1)
-        return 1;
-    
-    drv_hd = _read_drv_hd();
-    drv_hd.drive_sel = drive_num;
-    _write_drv_hd(drv_hd);
-
-    // read 4 times the status register in order to achieve the 400ns delay 
-    // before reading the actual value of the status register
-    {
-        int i;
-        for (i = 0; i < 4; i++)
-            (void) _read_status(); // TODO optimized away???
-    }
-    
-    // TODO ensure drive is RDY before returning from here
-    // ??
-    {
-        ata_status_t status;
-
-        int timeout = 0;
-        do { 
-            status = _read_status();
-            timeout++;
-            if (timeout > 999999) 
-            {
-                print("Timeout\n");
-                goto nessss;
-            }
-        } while (!status.rdy);
-        nessss: 
-        if (status.err)
-            return 1;
-    }
-    
-    return 0;
-}
-
-// read sector buffer data 
-static void _read_buffer_data(ata_sector_t *dest)
-{
-    unsigned int i;
-    uint16_t *data;
-
-    for (i = 0, data = (uint16_t *) dest;
-         i < sizeof(ata_sector_t)/sizeof(*data);
-         i++, data++)
-    {
-        *data = _read_data();
-    }
-}
-
-#define MODEL_NUMBER_STR_LEN    40
-#define MODEL_NUMBER_STR_OFF    27
-
-#define SERIAL_NUMBER_STR_LEN   20
-#define SERIAL_NUMBER_STR_OFF   10
-static struct {
-    bool        valid;
-
-    uint32_t    num_sectors;    // capacity
-
-    uint16_t    cylinders;
-    uint16_t    heads;
-    uint16_t    spt;
-
-    uint16_t    bytes_per_sector;   // unformatted
-
-    bool        lba_supported;  // user-addressable sectors
-    uint32_t    lba_max;
-
-    bool        dma_supported;
-    
-    char        model_number[MODEL_NUMBER_STR_LEN+1];
-    char        serial_number[SERIAL_NUMBER_STR_LEN+1];
-    
-} _id_data;
-int strncmp(const char *s1, const char *s2, size_t n)
-{
-    size_t i;
-
-    for (i = 0; i++ < n && *s1; s1++, s2++) {
-        if (!*s2)
-            return 1;
-
-        if (*s2 > *s1)
-            return -1;
-
-        if (*s1 > *s2)
-            return 1;
-    }
-
-    return 0;
-}
-char *strncpy(char *dest, const char *src, size_t n)
-{
-    size_t i;
-
-    for (i = 0; n; i++, n--) {
-        dest[i] = src[i];
-        if ('\0' == src[i])
-            break;
-    }
-
-    return dest;  
-}
-
-static void _set_identify_data(const ata_sector_t *id_data)
-{
-    uint16_t *p;
-
-    p = (uint16_t *) id_data;
-
-    // TODO only valid if bit 0 of word 53 is set to 1 
-    _id_data.num_sectors = (uint32_t) p[58] << 16 | p[57];
-
-    _id_data.cylinders = p[1];
-    _id_data.heads = p[3];
-    _id_data.spt = p[6];
-
-
-    strncpy(_id_data.model_number, (char *) (p + 27), MODEL_NUMBER_STR_LEN);
-    _id_data.model_number[MODEL_NUMBER_STR_LEN] = '\0';
-
-    _id_data.valid = true;
-}
-
-static inline
-void _swap_str_bytes(char *str, size_t len)
-{
-    char tmp;
-    size_t i;
-
-    for (i = 0; i < len; i += 2) {
-        tmp = str[i];
-        str[i] = str[i+1];
-        str[i+1] = tmp;
-    }
-}
-
-static int _identify(unsigned int drive_num)
-{
-    // TODO move this out from the stack
-    // TODO write a memory manager to solve this kind of problems
-    ata_sector_t identify_sector;
-
-    ata_status_t status;
-    uint8_t reg;
-
-    // so far only one and the first device is supported
-    if (drive_num)
-        return 1;
-    
-    if (ata_select_drive(drive_num))
-        return 1;
-    
-    // set CHS to zero (LBAlo, LBAmid, LBAhi)
-    outb(SEC_NUM,  0);
-    outb(CYL_LO, 0);
-    outb(CYL_HI,  0); 
-
-    _send_cmd(CMD_IDENTIFY);
-
-    status = _read_status();
-    memcpy(&reg, &status, sizeof(reg));
-    if (!reg)
-        return 1;   // drive does not exist
-    
-    while (_is_busy())
-        ;
-
-    // TODO check check LBAmid, LBAhi to see if the are non-zero
-    //      if so, the drive is not ATA
-
-    while (!_is_drq())
-        ;
-
-    // read data
-    _read_buffer_data(&identify_sector);
-   
-    // lower byte of a 16-bit word is the second character: 
-    // "Generic 1234" appears as "eGenir c2143"
-    // fix this issue before retrieving the string
-    _swap_str_bytes((char *)
-                        ((uint16_t *) &identify_sector + MODEL_NUMBER_STR_OFF),
-                        MODEL_NUMBER_STR_LEN);
-    _swap_str_bytes((char *)
-                        ((uint16_t *) &identify_sector + SERIAL_NUMBER_STR_OFF),
-                        SERIAL_NUMBER_STR_LEN);
-
-    _set_identify_data(&identify_sector);
-    
-    return 0;
-}
-
-void ata_display_info(void)
-{
-    if (!_id_data.valid) {
-        printf("no info to display\n");
-        return;
-    }
-
-    printf("model: %s\n", _id_data.model_number);
-    printf("capacity:  %d sectors\n", _id_data.num_sectors);
-    printf("cylinders: %d\n", _id_data.cylinders);
-    printf("heads:     %d\n", _id_data.heads);
-    printf("spt:       %d\n", _id_data.spt);
+	//At that point, if ERR is clear, the data is ready to read from the Data port (0x1F0). Read 256 words, and store them.
+	for (i = 0; i < 256; i++) {
+		disk_info[i] = inw(0x1F0);
+	}
+
+	//bit 10 of word 83 determines if the disk supports read48 mode.
+	if ((disk_info[83] & 0x10) == 0x10) {
+		pio_48_supported = true;
+		print("pio 48 read supported\n");
+	} else {
+		print("pio 48 read NOT supported\n");
+		tmp2 = disk_info[83];
+		printf("word 83 = 0x%x\n", tmp2);
+	}
+
+	tmp2 = disk_info[60]; //word size
+	tmp2 = tmp2 << 16;
+	tmp2 += disk_info[61];
+	printf("disk supports 0x%x total lba addressable sectors in pio 28 mode\n");
+	sector_count = tmp2;
 
 }
 
-int ata_init(void)
-{
-    print("ATA Driver Init\n");
-    _reset();
-    print("ATA reset ok\n");
-    if (_identify(0)){
-        print("There is a drive 0\n");
-        ata_display_info();
-        return 1;
-    }
-    return 0;
-}
+void ata_pio_read(size_t lba, void *buffer, size_t count) {
+	size_t bytes_read;
+	char *buff = (char*)buffer;
+	unsigned short word;
+	char chr;
+	int tmp;
+	//primary bus
+	unsigned short port = 0x1F0;
+	unsigned short slavebit = 0;
 
-int ata_read_sector_chs(unsigned int cyl_num, unsigned int head_num,
-                        unsigned int sec_num, ata_sector_t *buf)
-{
-    if (cyl_num > 1023)
-        return 1;
+	printf("ata_pio_read: 0x%x, 0x%x, %d\n", lba, buff, count);
 
-    if (head_num > 15)
-        return 1;
+	if (count == 0) { //nothing to read.
+		printf("nothing to read..\n");
+		return;
+	}
 
-    if (sec_num < 1 || sec_num > 256)
-        return 1;
+	//Send 0xE0 for the "master" or 0xF0 for the "slave", ORed with the highest 4 bits of the LBA to port 0x1F6:
+	outb(0x1F6, 0xE0 | (slavebit << 4) | ((lba >> 24) & 0x0F));
+	//outb(0x1F6, 0xE0 | ((lba >> 24) & 0x0F));
 
-    if (_select_head(head_num))
-        return 1;
+	//Send a NULL byte to port 0x1F1, if you like (it is ignored and wastes lots of CPU time):
+	outb(0x1F1, 0x00);
 
-    // one sector to read
-    outb(SEC_CNT, 1);
-    outb(SEC_NUM, sec_num);
-    outb(CYL_LO, cyl_num & 0xff);
-    // cylinder high (2 bits)
-    outb(CYL_HI, (cyl_num & 0x300) >> 8); 
+	outb(0x1F2, 0x01); // Read one sector
 
-    if (_send_cmd(CMD_RSWOR))
-        return 1;
-    
-    // wait until the sector buffer requires service
-    {
-        ata_status_t status;
+	//Send the low 8 bits of the LBA to port 0x1F3:
+	outb(0x1F3, (unsigned char) lba);
 
-        do {
-            status = _read_status();
-        } while (!status.drq || status.bsy);
-    
-        if (status.err)
-            return 1;
-    }
+	//Send the next 8 bits of the LBA to port 0x1F4:
+	outb(0x1F4, (unsigned char)(lba >> 8));
 
-    _read_buffer_data(buf);
-    return 0;
-}
+	//Send the next 8 bits of the LBA to port 0x1F5:
+	outb(0x1F5, (unsigned char)(lba >> 16));
 
-static inline
-int _lba2chs(const lba_t lba,
-                    unsigned int *c, unsigned int *h, unsigned int *s)
-{
-    if (lba >= _id_data.num_sectors)
-        return 1;
+	//outb(0x1F6, 0xE0 | (1 << 4) | ((lba >> 24) & 0x0F));
 
-    *c = lba / (_id_data.heads * _id_data.spt);
+	//Send the "READ SECTORS" command (0x20) to port 0x1F7:
+	outb(0x1F7, 0x20);
 
-    *h = (lba - *c * _id_data.heads * _id_data.spt) / _id_data.spt;
+	//Wait for an IRQ or poll.
+	for(tmp = 0; tmp < 3000; tmp++)
+	{}
 
-    *s = (lba - *c * _id_data.heads * _id_data.spt - *h * _id_data.spt) + 1;
+	while ((inb(0x1F7) & 0x80) != 0x0) {} //wait until BUS BUSY bit to be cleared
+	while ((inb(0x1F7) & 0x40) != 0x40) {} // wait for DRIVE READY bit to be set
 
-    return 0;
-}
+	//Transfer 256 words, a word at a time, into your buffer from I/O port 0x1F0. (In assembler, REP INSW works well for this.)
+	//(word = 2 bytes to 256 word = 512 bytes)
 
-// this is only software-translated LBA
-int ata_read_sector_lba(lba_t lba, ata_sector_t *buf)
-{
-    unsigned int c, h, s;
+	bytes_read = 0;
 
-    if (_lba2chs(lba, &c, &h, &s))
-        return 1;
+	while (bytes_read < 256 ) {
 
-    return ata_read_sector_chs(c, h, s, buf);     
+		word = 0;
+		word = inw(0x1F0);
+
+		buff[bytes_read * 2] = word & 0xFF;
+		buff[(bytes_read * 2) + 1] = word >> 8;
+
+		bytes_read++;
+	}
+
+	printf("%d bytes read!\n", bytes_read);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
