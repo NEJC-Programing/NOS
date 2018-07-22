@@ -85,7 +85,6 @@ void ata_pio_install() {
 	unsigned short tmp;
 	unsigned int i, tmp2;
 
-	print("ata_pio_install()\n");
 	print("initialising disk\n");
 	//timer_install_tick_handler(ata_pio_poller); // register our callback.
 	//To use the IDENTIFY command, select a target drive by sending 0xA0 for the master drive, or 0xB0 for the slave, to the "drive select" IO port.

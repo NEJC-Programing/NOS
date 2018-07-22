@@ -1267,37 +1267,24 @@ void PutRect(int X, int Y, int Width, int Height, char color)
 		for (int w = X; w<=Width; w++)
 			PutPixel(w,h,color);
 }
-void PutCercle(int X, int Y, int Width, int Height, char color, int fill)
+void PutCercle(int X, int Y, int Radius, char color)
 {
-	if(Width>= g_wd)
-		Width = g_wd;
-	if(Height>= g_ht)
-		Height = g_ht;
-	for (int h = Y; h<=Height;h++)
-		for (int w = X; w<=Width; w++)
-			PutPixel(w,h,color);
+	for(int y=-Radius; y<=Radius; y++)
+    for(int x=-Radius; x<=Radius; x++)
+        if(x*x+y*y <= Radius*Radius)
+            PutPixel(X+x, Y+y,color);
 }
 
 void PutBitmap(int x,int y,Bitmap bitmap)
 {
-	int w = bitmap.Width;
-	int h = bitmap.Height;
-	int cd = bitmap.ColorDepth;
-	char * pix = bitmap.Pixels;
-	int i = 0;
-	for (;y!=h;y++)
-	{
-		for(;x!=w;x++)
-		{
-			PutPixel(x,y,pix[i]);
-			i++;
-		}
-	}
+	for(int w = 0;w<bitmap.header.Width;w++)
+		for(int h = 0;h<bitmap.header.Height;h++)
+			PutPixel(x+w,y+h,bitmap.img[w+h]);
 }
 
 
 void PutChar(int x,int y,char ch){
-	int a[9*16] = {
+	bool a[9*16] = {
 		0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,
