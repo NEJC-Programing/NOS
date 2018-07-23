@@ -20,4 +20,6 @@ Date_and_Time Get_Date_and_Time();
 void ata_pio_read(size_t lba, void *buffer, size_t count);
 /////////////////////   TIMER   ///////////////////////
 void timer_wait(int ticks);
+/////////////////////   MOUSE   ///////////////////////
+
 #endif

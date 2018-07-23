@@ -16,8 +16,7 @@ start:
     call irq_install
     mov esp, sys_stack
     jmp kmain      ;send processor to continue execution from the kamin funtion in c code
-    extern die
-    call die
+	hlt
 
 ; extern void entering_v86(uint32_t ss, uint32_t esp, uint32_t cs, uint32_t eip);
 entering_v86:
