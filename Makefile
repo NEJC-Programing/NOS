@@ -39,6 +39,7 @@ all:
 	$(COMPILER) $(CFLAGS) scr/src/drivers.c -o scr/obj/drivers.o
 	$(COMPILER) $(CFLAGS) scr/src/iqr.c -o scr/obj/iqr.o
 	$(LINKER) $(LDFLAGS) -o $(ELFOUT) $(OBJS)
+	strip $(ELFOUT)
 	objcopy -O binary $(ELFOUT) $(OUTPUT)
 	make boot
 	make disk

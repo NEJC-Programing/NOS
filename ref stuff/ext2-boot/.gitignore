@@ -1,0 +1,8 @@
+*.bin
+bootloader
+boot
+*.img
+ext2util
+kernel
+boot.img
+boot.img.bak
