@@ -1,12 +1,9 @@
 *.elf
 *.o
 *.md5
-<<<<<<< HEAD
 *.bin
 *.img
-=======
 .vscode/*
->>>>>>> 45d5869dcd442c9e018fc1adad07d7f1fdc1a1d8
 *.bin
 *.bin
 *.img
