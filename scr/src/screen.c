@@ -206,6 +206,7 @@ int printf (const char* str, ...) {
 					i++;
 					continue;
 				}
+                                /** hex **/
 				case 'x': {
 					int c = va_arg(ap, int);
 					print(decToHexa((int)c));

@@ -33,6 +33,7 @@ void launch_shell()
 				print("\n");
 				print(remove_form_start(ch, 5));
 				print("\n");
+				ch = clean(200);
 			}
 			else if (strEqle(ch, "cls", 3))
 				clearScreen();
@@ -42,37 +43,10 @@ void launch_shell()
 			{
 				vga_setgmode(1);
 				clearScreen();
-				//PutRect(0,0,10,10,0x11);
-				
-				unsigned char s[144] = {
-		0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,
-		0,0,0x11,0x11,0x11,0x11,0,0,0,
-		0,0,0,0,0,0x11,0x11,0,0,
-		0,0,0x11,0x11,0x11,0x11,0x11,0,0,
-		0,0x11,0x11,0,0,0x11,0x11,0,0,
-		0,0x11,0x11,0,0,0x11,0x11,0,0,
-		0,0x11,0x11,0,0,0x11,0x11,0,0,
-		0,0,0x11,0x11,0x11,0,0x11,0x11,0,
-		0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,
-	};
-				Bitmap_Head bh;
-				bh.Height=16;
-				bh.Width=9;
-				Bitmap img;
-				img.header = bh;
-				for(int i =0;i<144;i++)
-					img.img[i] = s[i];
-				PutBitmap(0,0,img);
-				//PutCercle(20, 20, 10, 0x11);
+				PutCercle(20, 20, 10, 0x11);
 				//PutChar(0,0,"x");
-				//set_text_mode(0);
+				readStr();
+				set_text_mode(0);
 			}
 			else if (strlength(ch) == 0)
 				print("\n");
