@@ -8,6 +8,7 @@ nasm = ""
 ld = ""
 ldfile = ""
 objcopy = ""
+strip = ""
 
 def gcc(filepath,out):
     return os.system(gcc+" -m32 -c -ffreestanding +filepath+" -o +out)
@@ -40,3 +41,12 @@ def get_object_files(dirpath):
     return glob.glob(dirpath+"/*.o")
 
 
+"""
+make dir tree
+
+for each inner dir compile all into object files
+
+for each dir make object file
+
+link root objects into kernel and strip
+"""
