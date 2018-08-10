@@ -38,3 +38,5 @@ def get_asm_files(dirpath):
 
 def get_object_files(dirpath):
     return glob.glob(dirpath+"/*.o")
+
+
