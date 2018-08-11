@@ -57,10 +57,12 @@ def run(dir_to_run, notroot = True):
     o = ""
     for x in objects:
         o = o+" \""+x+'"'
-    ld(o,dir_to_run+"../",notroot)
+    ld(o,dir_to_run+"../"+dirname,notroot)
 
 
 run(root,False)
+
+
 
 """
 make dir tree
