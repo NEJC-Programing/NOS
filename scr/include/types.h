@@ -32,7 +32,7 @@ typedef unsigned char BYTE;
 typedef unsigned int DWORD;
 
 typedef char* string; 
-#define NULL 0
+#define NULL ((void*) 0)
 typedef enum {false, true} bool;
 
 typedef struct _devmgr_generic {
