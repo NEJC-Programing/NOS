@@ -8,11 +8,15 @@ LDFLAGS = -m elf_i386 -T scr/src/link.ld
 EMULATOR = qemu-system-i386
 EMULATOR_FLAGS = -device isa-debug-exit,iobase=0xf4,iosize=0x04 -kernel
 
-OBJS = scr/obj/kasm.o scr/obj/kc.o scr/obj/idt.o scr/obj/isr.o scr/obj/kb.o scr/obj/screen.o scr/obj/string.o scr/obj/system.o scr/obj/util.o scr/obj/shell.o scr/obj/fs.o scr/obj/graphics.o scr/obj/serial.o scr/obj/drivers.o scr/obj/iqr.o
+OBJS = scr/obj/kasm.o scr/obj/kc.o scr/obj/idt.o scr/obj/isr.o scr/obj/kb.o scr/obj/screen.o scr/obj/string.o scr/obj/system.o scr/obj/util.o scr/obj/shell.o scr/obj/fs.o scr/obj/graphics.o scr/obj/serial.o scr/obj/drivers.o scr/obj/iqr.o \
+
+EXT2UTIL= ../ref\ stuff/ext2util/ext2util
+
 OUTPUT = nos/kernel.bin
+IMG = nos/nos.img
 ELFOUT = nos/kernel.elf
 
-FS = fat16
+FS = ext2
 
 
 default: all
@@ -46,13 +50,19 @@ all:
 
 boot:
 	$(ASSEMBLER) -o nos/bootloader.bin scr/boot/bootloader_$(FS).asm
+ifneq ($(FS),ext2)
 	$(ASSEMBLER) -o nos/boot.bin scr/boot/boot_stage_2/stage_2_$(FS).asm
+else
+	cp scr/boot/boot_stage_2/ext2_stage2.bin nos/boot.bin
+endif
 
 disk:
-	dd if=/dev/zero of=nos/nos.img bs=16777216 count=1
-	mkdosfs -F 16 nos/nos.img
-	#mkfs.ext2 nos/nos.img
-	#dd if=nos/bootloader.bin of=nos/nos.img bs=512 conv=notrunc
+	dd if=/dev/zero of=$(IMG) bs=1k count=16k
+	mkfs.ext2 $(IMG)
+	cd nos; $(EXT2UTIL) -x $(IMG) -wf boot.bin -i 5
+	cd nos; $(EXT2UTIL) -x $(IMG) -wf boot.conf
+	cd nos; $(EXT2UTIL) -x $(IMG) -wf kernel.elf
+	cd nos; $(EXT2UTIL) -x $(IMG) -wf kernel.bin
 
 test:
 	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) nos/nos.img

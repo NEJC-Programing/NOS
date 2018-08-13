@@ -40,7 +40,7 @@ compile: stage2
 	#cp ../crunchy/bin/kernel.bin ./kernel
 
 	$(EXT2UTIL) -x $(DISK) -wf stage2.bin -i 5
-	$(EXT2UTIL) -x $(DISK) -wf kernel
+#	$(EXT2UTIL) -x $(DISK) -wf kernel
 	$(EXT2UTIL) -x $(DISK) -wf boot.conf
 
 new:
