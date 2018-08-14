@@ -53,8 +53,12 @@ boot:
 ifneq ($(FS),ext2)
 	$(ASSEMBLER) -o nos/boot.bin scr/boot/boot_stage_2/stage_2_$(FS).asm
 else
-	
-	cp scr/boot/boot_stage_2/ext2_stage2 nos/boot.bin
+	gcc -w -fno-pic -fno-builtin -nostdlib -ffreestanding -std=gnu99 -m32 -c scr/boot/boot_stage_2/ext2-boot/main.c -o scr/obj/boot_main.o
+	gcc -w -fno-pic -fno-builtin -nostdlib -ffreestanding -std=gnu99 -m32 -c scr/boot/boot_stage_2/ext2-boot/ext2.c -o scr/obj/boot_ext2.o
+	gcc -w -fno-pic -fno-builtin -nostdlib -ffreestanding -std=gnu99 -m32 -c scr/boot/boot_stage_2/ext2-boot/lib.c -o scr/obj/boot_lib.o
+	gcc -w -fno-pic -fno-builtin -nostdlib -ffreestanding -std=gnu99 -m32 -c scr/boot/boot_stage_2/ext2-boot/vga.c -o scr/obj/boot_vga.o
+	gcc -w -fno-pic -fno-builtin -nostdlib -ffreestanding -std=gnu99 -m32 -c scr/boot/boot_stage_2/ext2-boot/elf.c -o scr/obj/boot_elf.o
+	ld -m elf_i386 -N -e stage2_main -Ttext 0x00050000 -o nos/boot.bin scr/obj/boot_main.o scr/obj/boot_ext2.o scr/obj/boot_lib.o scr/obj/boot_vga.o scr/obj/boot_elf.o --oformat binary
 endif
 
 disk:
