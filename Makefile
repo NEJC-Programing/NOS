@@ -10,7 +10,7 @@ EMULATOR_FLAGS = -device isa-debug-exit,iobase=0xf4,iosize=0x04 -kernel
 
 OBJS = scr/obj/kasm.o scr/obj/kc.o scr/obj/idt.o scr/obj/isr.o scr/obj/kb.o scr/obj/screen.o scr/obj/string.o scr/obj/system.o scr/obj/util.o scr/obj/shell.o scr/obj/fs.o scr/obj/graphics.o scr/obj/serial.o scr/obj/drivers.o scr/obj/iqr.o \
 
-EXT2UTIL= ../ref\ stuff/ext2util/ext2util
+EXT2UTIL = ref\ stuff/ext2util/ext2util
 
 OUTPUT = nos/kernel.bin
 IMG = nos/nos.img
@@ -53,19 +53,21 @@ boot:
 ifneq ($(FS),ext2)
 	$(ASSEMBLER) -o nos/boot.bin scr/boot/boot_stage_2/stage_2_$(FS).asm
 else
-	cp scr/boot/boot_stage_2/ext2_stage2.bin nos/boot.bin
+	cp scr/boot/boot_stage_2/ext2_stage2 nos/boot.bin
 endif
 
 disk:
 	dd if=/dev/zero of=$(IMG) bs=1k count=16k
 	mkfs.ext2 $(IMG)
-	cd nos; $(EXT2UTIL) -x $(IMG) -wf boot.bin -i 5
-	cd nos; $(EXT2UTIL) -x $(IMG) -wf boot.conf
-	cd nos; $(EXT2UTIL) -x $(IMG) -wf kernel.elf
-	cd nos; $(EXT2UTIL) -x $(IMG) -wf kernel.bin
+	dd if=nos/bootloader.bin of=$(IMG) conv=notrunc
+	cd nos; ../$(EXT2UTIL) -x nos.img -wf boot.bin -i 5
+	cd nos; ../$(EXT2UTIL) -x nos.img -wf kernel.elf
+	cd nos; ../$(EXT2UTIL) -x nos.img -wf boot.conf
+	
 
 test:
-	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) nos/nos.img
+	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) $(IMG)
+	$(EMULATOR) $(IMG)
 	clear
 
 clean:
