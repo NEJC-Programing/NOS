@@ -53,6 +53,7 @@ boot:
 ifneq ($(FS),ext2)
 	$(ASSEMBLER) -o nos/boot.bin scr/boot/boot_stage_2/stage_2_$(FS).asm
 else
+	
 	cp scr/boot/boot_stage_2/ext2_stage2 nos/boot.bin
 endif
 
@@ -66,8 +67,8 @@ disk:
 	
 
 test:
-	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) $(IMG)
-	$(EMULATOR) $(IMG)
+	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) -hdb $(IMG)
+	$(EMULATOR) -hdb $(IMG)
 	clear
 
 clean:
