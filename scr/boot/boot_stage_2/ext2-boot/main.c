@@ -66,8 +66,18 @@ void stage2_main(uint32_t* mem_info, vid_info* v) {
 
 void parse_config(char* config) {
 	vga_puts(config);
-	
-
+	vga_puts(itoa(stage2_main, 16));
+	char** lines = str_split(config, "\n");
+	char* fname = lines[0];
+	vga_puts("\nLoading ");
+	vga_puts(fname);
+	int boot_conf_inode = ext2_find_child(fname, 2);
+	char* file = (char*)0x1;
+	file = ext2_read_file(ext2_inode(1, boot_conf_inode));
+	typedef void func(void);
+	func* f = (func*)0x1;
+	f();
+	//vga_putc(file[1]);vga_putc(file[2]);vga_putc(file[3]);
 }
 
 static void putpixel(unsigned char* screen, int x,int y, int color) {

@@ -1,7 +1,7 @@
 COMPILER = gcc
 LINKER = ld
 ASSEMBLER = nasm
-CFLAGS = -m32 -c -ffreestanding
+CFLAGS = -m32 -c -ffreestanding -fno-pic -fno-builtin -nostdlib -std=gnu99
 ASFLAGS = -f elf32
 LDFLAGS = -m elf_i386 -T scr/src/link.ld
 
@@ -67,12 +67,13 @@ disk:
 	dd if=nos/bootloader.bin of=$(IMG) conv=notrunc
 	cd nos; ../$(EXT2UTIL) -x nos.img -wf boot.bin -i 5
 	cd nos; ../$(EXT2UTIL) -x nos.img -wf kernel.elf
+	cd nos; ../$(EXT2UTIL) -x nos.img -wf kernel.bin
 	cd nos; ../$(EXT2UTIL) -x nos.img -wf boot.conf
 	
 
 test:
 	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) -hdb $(IMG)
-	$(EMULATOR) -hdb $(IMG)
+	$(EMULATOR) -hdb $(IMG) -d guest_errors
 	clear
 
 clean:

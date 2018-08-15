@@ -36,7 +36,7 @@ extern char* strtok(char* s, const char* delim);
 extern inline uint8_t inb(uint16_t port);
 extern inline void outb(uint16_t port, uint16_t data);
 extern inline void insl(int port, void *addr, int cnt);
-
+extern char** str_split(char* a_str, const char a_delim);
 extern uint32_t HEAP;
 extern uint32_t HEAP_START;
 
