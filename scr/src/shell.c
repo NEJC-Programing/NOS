@@ -50,6 +50,8 @@ void launch_shell()
 			}
 			else if (strlength(ch) == 0)
 				print("\n");
+			else if (strEqle(ch, "ls", 2))
+				lsroot();
 		    else
 		    {
 		        print("\n \"");

@@ -1,4 +1,4 @@
-#include "../include/serial.h"
+#include "../../include/serial.h"
 
 int serial_received() {
    return inportb(PORT_COM1 + 5) & 1;

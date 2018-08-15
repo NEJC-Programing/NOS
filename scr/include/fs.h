@@ -4,18 +4,107 @@
 #include "system.h"
 #include "util.h"
 #include "drivers.h"
-struct dirent{
-    struct dirent *next;
-    char *name;
-    uint32_t byte_size;
-    uint8_t is_dir;
-    uint32_t cluster_no;
-};
-struct fs {
-	const char *fs_name;
-    int     (*fs_load)(const char *path, uint8_t *buf, uint32_t buf_size);
-    int     (*fs_store)(const char *path, uint8_t *buf);
-};
-int fat_load(const char *path, uint8_t *buf, uint32_t buf_size);
-int fat_store(const char *path, uint8_t *buf);
+
+#define free(x)
+
+#define assert(e)	((e) ? (void) 0 : print(#e))
+
+#define BLOCK_SIZE		1024
+#define SECTOR_SIZE		512
+#define EXT2_BOOT		0			// Block 0 is bootblock
+#define EXT2_SUPER		1			// Block 1 is superblock
+#define EXT2_MAGIC		0x0000EF53
+
+
+
+typedef struct superblock_s {
+	uint32_t inodes_count;			// Total # of inodes
+	uint32_t blocks_count;			// Total # of blocks
+	uint32_t r_blocks_count;		// # of reserved blocks for superuser
+	uint32_t free_blocks_count;	
+	uint32_t free_inodes_count;
+	uint32_t first_data_block;
+	uint32_t log_block_size;		// 1024 << Log2 block size  = block size
+	uint32_t log_frag_size;
+	uint32_t blocks_per_group;
+	uint32_t frags_per_group;
+	uint32_t inodes_per_group;
+	uint32_t mtime;					// Last mount time, in POSIX time
+	uint32_t wtime;					// Last write time, in POSIX time
+	uint16_t mnt_count;				// # of mounts since last check
+	uint16_t max_mnt_count;			// # of mounts before fsck must be done
+	uint16_t magic;					// 0xEF53
+	uint16_t state;
+	uint16_t errors;
+	uint16_t minor_rev_level;
+	uint32_t lastcheck;
+	uint32_t checkinterval;
+	uint32_t creator_os;
+	uint32_t rev_level;
+	uint16_t def_resuid;
+	uint16_t def_resgid;
+} __attribute__((packed)) superblock;
+
+/*
+Inode bitmap size = (inodes_per_group / 8) / BLOCK_SIZE
+block_group = (block_number - 1)/ (blocks_per_group) + 1
+*/
+typedef struct block_group_descriptor_s {
+	uint32_t block_bitmap;
+	uint32_t inode_bitmap;
+	uint32_t inode_table;
+	uint16_t free_blocks_count;
+	uint16_t free_inodes_count;
+	uint16_t used_dirs_count;
+	uint16_t pad[7];
+} block_group_descriptor;
+
+
+/*
+maximum value of inode.block[index] is inode.blocks / (2 << log_block_size)
+
+Locating an inode:
+block group = (inode - 1) / s_inodes_per_group
+
+inside block:
+local inode index = (inode - 1) % s_inodes_per_group
+
+containing block = (index * INODE_SIZE) / BLOCK_SIZE
+*/
+typedef struct inode_s {
+	uint16_t mode;			// Format of the file, and access rights
+	uint16_t uid;			// User id associated with file
+	uint32_t size;			// Size of file in bytes
+	uint32_t atime;			// Last access time, POSIX
+	uint32_t ctime;			// Creation time
+	uint32_t mtime;			// Last modified time
+	uint32_t dtime;			// Deletion time
+	uint16_t gid;			// POSIX group access
+	uint16_t links_count;	// How many links
+	uint32_t blocks;		// # of 512-bytes blocks reserved to contain the data
+	uint32_t flags;			// EXT2 behavior
+	uint32_t osdl;			// OS dependent value
+	uint32_t block[15];		// Block pointers. Last 3 are indirect
+	uint32_t generation;	// File version
+	uint32_t file_acl;		// Block # containing extended attributes
+	uint32_t dir_acl;
+	uint32_t faddr;			// Location of file fragment
+	uint32_t osd2[3];
+} inode;
+
+#define INODE_SIZE (sizeof(inode))
+
+typedef struct dirent_s {
+	uint32_t inode;			// Inode
+	uint16_t rec_len;		// Total size of entry, including all fields
+	uint8_t name_len;		// Name length, least significant 8 bits
+	uint8_t file_type;		// Type indicator
+	uint8_t name[];
+} __attribute__((packed)) dirent;
+
+typedef struct ide_buffer {
+	uint32_t block;				// block number
+	uint8_t data[BLOCK_SIZE];	// 1 disk sector of data
+} buffer;
+
 #endif

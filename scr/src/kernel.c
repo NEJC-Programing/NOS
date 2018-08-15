@@ -26,8 +26,6 @@ void kmain()
 	driver_init();
 	syscall_init();
 	timer_install();
-	ata_pio_install();
-	fs_init();
 	Date_and_Time s = Get_Date_and_Time();
 	printf("Date: %d/%d/%d\nTime: %d:%d \nSec: %d\n",s.day,s.month,s.year,s.hour,s.minute,s.second);
 	delay(3);

@@ -50,6 +50,12 @@ uint8 strEqle(string ch1,string ch2, int chars)
         }
         return result;
 }
+int strncmp(char* s1, char* s2, size_t n) {
+	for (size_t i = 0; i < n && *s1 == *s2; s1++, s2++, i++)
+		if (*s1 == '\0')
+			return 0;
+	return ( *(unsigned char*)s1 - *(unsigned char*)s2 );
+}
 
 string remove_form_start(string str, int chars_to_remove)
 {
