@@ -77,7 +77,7 @@ disk:
 	
 
 test:
-	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) -hdb $(IMG) -d guest_errors
+#	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) -hdb $(IMG) -d guest_errors
 	$(EMULATOR) -hdb $(IMG) -d guest_errors
 	clear
 

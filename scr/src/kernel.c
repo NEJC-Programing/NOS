@@ -97,6 +97,9 @@ void add_syscall(uint32_t syscall_function)
 void syscall_init()
 {
 	print("Registering syscall interface\n");
+	// will not work
+	// need to use int 0x80
+	// use for wrapper functions
 	add_syscall((uint32_t)print);
 	add_syscall((uint32_t)print_colored);
 	add_syscall((uint32_t)printf); 
