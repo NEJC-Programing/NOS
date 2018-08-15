@@ -1,6 +1,6 @@
 #include "../include/screen.h"
 int cursorX = 0, cursorY = 0;
-const uint8 sw = 80,sh = 25,sd = 2; 
+const uint8 sw = 80,sh = 26,sd = 2; 
 int color = 0x0F;
 extern int Graphics_Mode;
 void clearLine(uint8 from,uint8 to)

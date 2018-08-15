@@ -95,9 +95,9 @@ void elf_objdump(void* data) {
 }
 
 
-void elf_load(mmap* one, gfx_context* two) {
-	inode* ki = ext2_inode(1,12);
-	uint32_t* data = ext2_read_file(ki);
+void elf_load(void* data, mmap* one, gfx_context* two) {
+	//inode* ki = ext2_inode(1,12);
+	//uint32_t* data = ext2_read_file(ki);
 	//uint32_t* data = ext2_file_seek(ext2_inode(1,12), 1024, 0);
 
 	elf32_ehdr * ehdr = (elf32_ehdr*) data; 
@@ -132,6 +132,10 @@ void elf_load(mmap* one, gfx_context* two) {
 
 
 	printx("entry: ", entry);
+	int i = 0;
+	while(i<0xFFFFFFF)
+		i++;
+
 	asm volatile("cli");
 	entry(one, two);
 

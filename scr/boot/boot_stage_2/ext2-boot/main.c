@@ -54,10 +54,14 @@ void stage2_main(uint32_t* mem_info, vid_info* v) {
 		m++;
 	}
 
-	int boot_conf_inode = ext2_find_child("boot.conf", 2);
+	int kernel_inode = ext2_find_child("kernel.elf", 2);
+	void* kernel = (void*)0x1;
+	kernel = ext2_read_file(ext2_inode(1, kernel_inode));
+	elf_load(kernel,m);
 
+	int boot_conf_inode = ext2_find_child("boot.conf", 2);
 	char* config = ext2_read_file(ext2_inode(1, boot_conf_inode));
-	parse_config(config);
+	//parse_config(config);
 
 
 	/* We should never reach this point */
@@ -72,10 +76,10 @@ void parse_config(char* config) {
 	vga_puts("\nLoading ");
 	vga_puts(fname);
 	int boot_conf_inode = ext2_find_child(fname, 2);
-	char* file = (char*)0x1;
+	char* file = (char*)0x100000;
 	file = ext2_read_file(ext2_inode(1, boot_conf_inode));
 	typedef void func(void);
-	func* f = (func*)0x1;
+	func* f = (func*)0x100000;
 	f();
 	//vga_putc(file[1]);vga_putc(file[2]);vga_putc(file[3]);
 }

@@ -21,6 +21,7 @@ int last_syscall = 0;
 void kmain()
 {
 	clearScreen();
+	memset(0x0, 0,0x100000);
 	printf("start = 0x%x  kmain = 0x%x\n",start,kmain);
 	driver_init();
 	syscall_init();
@@ -33,6 +34,8 @@ void kmain()
 	print("Press enter to continue\n");
 	readStr();
 	clearScreen();
+	serial_init();
+	qemu_print("test");
 	print("Welcome to NOS\nType \"help\" for help\n\n");
     launch_shell();
 	die("out");
@@ -77,7 +80,7 @@ void syscall()
 			str[edx+1]=0;
 			print(str);
 			break;*/
-		case 3:
+		case 0xFF:
 			ecx = (int)Get_Syscall_Table;
 			__asm__ __volatile__ ("movl %0, %%ecx"::"dN"(ecx));
 			break;

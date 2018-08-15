@@ -48,6 +48,12 @@ all:
 	make boot
 	make disk
 
+bootloader:
+	make boot
+	make disk
+	$(EMULATOR) -hdb $(IMG) -d guest_errors
+	clear
+
 boot:
 	$(ASSEMBLER) -o nos/bootloader.bin scr/boot/bootloader_$(FS).asm
 ifneq ($(FS),ext2)
@@ -72,7 +78,7 @@ disk:
 	
 
 test:
-	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) -hdb $(IMG)
+	$(EMULATOR) $(EMULATOR_FLAGS) $(ELFOUT) -hdb $(IMG) -d guest_errors
 	$(EMULATOR) -hdb $(IMG) -d guest_errors
 	clear
 

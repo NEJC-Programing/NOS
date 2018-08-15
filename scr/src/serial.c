@@ -1,41 +1,44 @@
 #include "../include/serial.h"
 
-static void init_serial(void)
-{
-	static int done = 0;
-	if (done) return;
-
-	// Switch the serial controller to normal state
-	outb(0x0f, 0x3f8 + 4);
-
-	// Disable interrupts
-	outb(0, 0x3f8 + 1);
-
-	// Setup the baud rate to 115200 (divisor = 1)
-	outb(0x83, 0x3f8 + 3);
-	outb(1, 0x3f8);
-	outb(0, 0x3f8 + 1);
-
-	// Setup 8 bit transfer, no parity, 1 stop bit
-	outb(0x03, 0x3f8 + 3);
-
-	done = 1;
+int serial_received() {
+   return inportb(PORT_COM1 + 5) & 1;
 }
 
-void write_com1(int c)
-{
-	init_serial();
-	while ((inb(0x3f8 + 5) & 0x20) == 0);
-	outb(c, 0x3f8);
+char read_serial() {
+   while (serial_received() == 0);
+   return inportb(PORT_COM1);
 }
 
-int read_com1(void)
-{
-	int c;
-	init_serial();
-	do {
-		c = inb(0x3f8 + 5);
-	} while ((c & 0x1e) || ((c & 1) == 0));
-	c = inb(0x3f8);
-	return c;
+// Send
+
+int is_transmit_empty() {
+   return inportb(PORT_COM1 + 5) & 0x20;
+}
+
+void write_serial(char a) {
+   while (is_transmit_empty() == 0);
+   outportb(PORT_COM1,a);
+}
+
+/*
+* Print to QEMU's log
+ * */
+void qemu_print(const char * s) {
+    
+	uint16 i = 0;
+    uint8 length = strlength(s);              //Updated (Now we store string length on a variable to call the function only once)
+    for(i;i<length;i++)
+    {
+        write_serial(s[i]);
+    }
+}
+
+void serial_init() {
+   outportb(PORT_COM1 + 1, 0x00);
+   outportb(PORT_COM1 + 3, 0x80);
+   outportb(PORT_COM1 + 0, 0x03);
+   outportb(PORT_COM1 + 1, 0x00);
+   outportb(PORT_COM1 + 3, 0x03);
+   outportb(PORT_COM1 + 2, 0xC7);
+   outportb(PORT_COM1 + 4, 0x0B);
 }
