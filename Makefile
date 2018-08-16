@@ -1,7 +1,7 @@
 COMPILER = gcc
 LINKER = ld
 ASSEMBLER = nasm
-CFLAGS = -m32 -c -ffreestanding -fno-pic -fno-builtin -nostdlib -std=gnu99
+CFLAGS = -m32 -c -ffreestanding -fno-pic -fno-builtin -nostdlib -std=gnu99 -I ../include/
 ASFLAGS = -f elf32
 LDFLAGS = -m elf_i386 -T scr/src/link.ld
 
