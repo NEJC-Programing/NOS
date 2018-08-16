@@ -1,13 +1,4 @@
-#include "../../../include/system.h"
-
-
-
-#define REBASE(x) (void*)(0x7c00 + (void*)x - (uint32_t)bios32_helper)
-
-#define BIOS_GRAPHICS_SERVICE 0x10
-
-void bios32_init();
-void bios32_service(uint8_t int_num, register16_t * in_reg, register16_t * out_reg);
+#include "sys.h"
 
 idt_ptr_t real_idt_ptr;
 idt_ptr_t real_gdt_ptr;
@@ -73,4 +64,3 @@ void bios32_service(uint8_t int_num, register16_t * in_reg, register16_t * out_r
     gdt_init();
     idt_init();
 }
-

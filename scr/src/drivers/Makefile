@@ -1,6 +1,6 @@
 CC = gcc
 ASSEMBLER = nasm
-CCF = -m32 -c -ffreestanding -fno-pic -fno-builtin -nostdlib -std=gnu99
+CCF = -m32 -c -ffreestanding -fno-pic -fno-builtin -nostdlib -std=gnu99 -I ../../include/
 ASFLAGS = -f elf32 -O0
 
 
@@ -11,11 +11,15 @@ all:
 	$(CC) $(CCF) serial.c -o objs/serial.o
 	$(CC) $(CCF) ide.c -o objs/ide.o
 	$(CC) $(CCF) sound.c -o objs/sound.o
-	mkdir bios/objs/ -p
-	#$(CC) $(CCF) bios/bios32.c -o bios/objs/bios32.o
-	#$(ASSEMBLER) $(ASFLAGS) bios/bios32.asm -o bios/objs/asmbios32.o
+	mkdir system/objs/ -p
+	$(CC) $(CCF) system/bios32.c -o system/objs/bios32.o
+	$(CC) $(CCF) system/gdt.c -o system/objs/gdt.o
+	$(CC) $(CCF) system/idt.c -o system/objs/idt.o
+	$(CC) $(CCF) system/tss.c -o system/objs/tss.o
+	$(ASSEMBLER) $(ASFLAGS) system/bios32.asm -o system/objs/asmbios32.o
+	$(ASSEMBLER) $(ASFLAGS) system/helpers.asm -o system/objs/helpers.o
 	make link
 
 link:
-	ld -m elf_i386 -r -o objs/bios32.o bios/objs/asmbios32.o bios/objs/bios32.o
-	ld -m elf_i386 -r -o ../../obj/drivers.o objs/cmos.o objs/serial.o objs/drivers.o objs/ide.o objs/sound.o objs/bios32.o
+	ld -m elf_i386 -r -o objs/sys.o system/objs/asmbios32.o system/objs/bios32.o system/objs/helpers.o system/objs/gdt.o system/objs/idt.o system/objs/tss.o
+	ld -m elf_i386 -r -o ../../obj/drivers.o objs/cmos.o objs/serial.o objs/drivers.o objs/ide.o objs/sound.o objs/sys.o

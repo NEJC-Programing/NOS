@@ -1,4 +1,4 @@
-#include "../../include/system.h"
+#include <system.h>
 
 #define IDE_BSY 		(1<<7)	// Drive is preparing to send/receive data
 #define IDE_RDY 		(1<<6)	// Clear when drive is spun down, or after error

@@ -1,4 +1,4 @@
- #include "../../include/system.h"
+ #include <system.h>
  
  //Play sound using built in speaker
  static void play_sound(uint32_t nFrequence) {
