@@ -56,13 +56,23 @@ void syscall()
 	int ebx = 0;
 	int ecx = 0;
 	int edx = 0;
+	char al = 0;
+	short ax = 0;
 	__asm__ __volatile__ ("movl %%eax, %0":"=m"(eax));
 	__asm__ __volatile__ ("movl %%ebx, %0":"=m"(ebx));
 	__asm__ __volatile__ ("movl %%ecx, %0":"=m"(ecx));
 	__asm__ __volatile__ ("movl %%edx, %0":"=m"(edx));
+	__asm__ __volatile__ ("mov %%al, %0":"=m"(al));
+	__asm__ __volatile__ ("mov %%ax, %0":"=m"(ax));
 	switch(eax){
 		case 0:
 			switch(ebx){
+				case 6:
+					outb(ax,al);
+					break;
+				case 5:
+					__asm__ __volatile__ ("mov %0, %%ah"::"dN"(inb(ax)));
+					break;
 				case 4:
 					SetCursor(ecx, edx);
 					break;
@@ -83,10 +93,13 @@ void syscall()
 		case 1:
 			switch(ebx){
 				case 0:
-					__asm__ __volatile__ ("movl %0, %%ecx"::"dN"(toupper(ecx)));
+					__asm__ __volatile__ ("mov %0, %%ah"::"dN"(toupper(ecx)));
 					break;
 				case 1:
-					__asm__ __volatile__ ("movl %0, %%ecx"::"dN"(tolower(ecx)));
+					__asm__ __volatile__ ("mov %0, %%ah"::"dN"(tolower(ecx)));
+					break;
+				case 2:
+					memset(ecx, al, edx);
 					break;
 			}
 			break;
