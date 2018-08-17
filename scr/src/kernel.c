@@ -63,6 +63,15 @@ void syscall()
 	switch(eax){
 		case 0:
 			switch(ebx){
+				case 4:
+					SetCursor(ecx, edx);
+					break;
+				case 3:
+					set_screen_color(ecx, edx);
+					break;
+				case 2:
+					printch(ecx);
+					break;
 				case 1:
 					reboot();
 					break;
@@ -71,13 +80,16 @@ void syscall()
 					break;
 			}
 			break;
-		/*case 1:
-			//char *str = malloc(edx + 1);
-			string str;
-			memory_copy(ebx,str,edx);
-			str[edx+1]=0;
-			print(str);
-			break;*/
+		case 1:
+			switch(ebx){
+				case 0:
+					__asm__ __volatile__ ("movl %0, %%ecx"::"dN"(toupper(ecx)));
+					break;
+				case 1:
+					__asm__ __volatile__ ("movl %0, %%ecx"::"dN"(tolower(ecx)));
+					break;
+			}
+			break;
 		case 0xFF:
 			ecx = (int)Get_Syscall_Table;
 			__asm__ __volatile__ ("movl %0, %%ecx"::"dN"(ecx));

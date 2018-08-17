@@ -3,7 +3,6 @@ ASSEMBLER = nasm
 CCF = -m32 -c -ffreestanding -fno-pic -fno-builtin -nostdlib -std=gnu99 -I ../../include/
 ASFLAGS = -f elf32 -O0
 
-
 all:
 	mkdir objs/ -p
 	$(CC) $(CCF) cmos.c -o objs/cmos.o

@@ -24,6 +24,9 @@ default: all
 	make test
 	clear
 
+installdep:
+	sudo apt update
+	sudo apt install nasm gcc binutils
 
 all:
 	mkdir nos/ -p
