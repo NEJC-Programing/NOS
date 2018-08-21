@@ -25,7 +25,57 @@ There are 8 32-bit registers: eax, ebx, ecx, edx, esi, edi, ebp, esp.
 There are 8 16-bit registers: ax, bx, cx, dx, si, di, bp, sp.
 There are 8 8-bit registers: ah, al, bh, bl, ch, cl, dh, dl.
 */
-extern "C" SYSCALL_t reg_syscall(
+class NOS{
+    public:
+        void put_ch(char c,int x, int y, int text_c, int bg_c)
+        {
+            syscall(0,4,x,y);
+            syscall(0,3,text_c,bg_c);
+            syscall(0,2,c,0);
+        }
+        void reboot()
+        {
+            syscall(0,1);
+        }
+        void shutdown()
+        {
+            syscall(0,0);
+        }
+        char toupper(char c)
+        {
+            return (char)syscall(1,0,c).ah;
+        }
+        char tolower(char c)
+        {
+            return (char)syscall(1,1,c).ah;
+        }
+        void memset(unsigned char dest, unsigned char val, unsigned int len)
+        {
+            syscall(1,2,dest,len,val);
+        }
+        unsigned char inb(unsigned short port)
+        {
+            return syscall(0,5,0,0,0,port).ah;
+        }
+        void outb(unsigned short port, unsigned char data)
+        {
+            syscall(0,6,0,0,data,port);
+        }
+        unsigned char strlen(char* ch)
+        {
+            int_strlen(ch);
+        }
+        unsigned short strcmp(char* ch1, char* ch2)
+        {
+            int_strcmp(ch1, ch2);
+        }
+        unsigned char screen_width = syscall(2,0).ah;
+        unsigned char screen_height = syscall(2,1).ah;
+    private:
+        unsigned int * (*get_syscalls)(void) = (unsigned int * (*)())syscall(0xFF).ecx;
+        unsigned char (*int_strlen)(char* ch) = (unsigned char (*)(char* ch))get_syscalls()[8];
+        unsigned short (*int_strcmp)(char* ch1, char* ch2) = (unsigned short (*)(char* ch1, char* ch2))get_syscalls()[11];
+        SYSCALL_t reg_syscall(
     // 32 bit
     unsigned int eax = 0,
     unsigned int ebx = 0,
@@ -83,8 +133,7 @@ extern "C" SYSCALL_t reg_syscall(
     __asm__ __volatile__ ("mov %%dl, %0":"=m"(ret.dl));
     return ret;
 }
-
-extern "C" SYSCALL_t syscall(
+SYSCALL_t syscall(
     unsigned int eax = 0,
     unsigned int ebx = 0,
     unsigned int ecx = 0,
@@ -110,56 +159,6 @@ extern "C" SYSCALL_t syscall(
     __asm__ __volatile__ ("mov %%ax, %0":"=m"(ret.ax));
     return ret;
 }
-class NOS{
-    public:
-        void put_ch(char c,int x, int y, int text_c, int bg_c)
-        {
-            syscall(0,4,x,y);
-            syscall(0,3,text_c,bg_c);
-            syscall(0,2,c,0);
-        }
-        void reboot()
-        {
-            syscall(0,1);
-        }
-        void shutdown()
-        {
-            syscall(0,0);
-        }
-        char toupper(char c)
-        {
-            return (char)syscall(1,0,c).ah;
-        }
-        char tolower(char c)
-        {
-            return (char)syscall(1,1,c).ah;
-        }
-        void memset(unsigned char dest, unsigned char val, unsigned int len)
-        {
-            syscall(1,2,dest,len,val);
-        }
-        unsigned char inb(unsigned short port)
-        {
-            return syscall(0,5,0,0,0,port).ah;
-        }
-        void outb(unsigned short port, unsigned char data)
-        {
-            syscall(0,6,0,0,data,port);
-        }
-        unsigned char strlen(char* ch)
-        {
-            int_strlen(ch);
-        }
-        unsigned short strcmp(char* ch1, char* ch2)
-        {
-            int_strcmp(ch1, ch2);
-        }
-        unsigned char screen_width = syscall(2,0).ah;
-        unsigned char screen_height = syscall(2,1).ah;
-    private:
-        unsigned int * (*get_syscalls)(void) = (unsigned int * (*)())syscall(0xFF).ecx;
-        unsigned char (*int_strlen)(char* ch) = (unsigned char (*)(char* ch))get_syscalls()[8];
-        unsigned short (*int_strcmp)(char* ch1, char* ch2) = (unsigned short (*)(char* ch1, char* ch2))get_syscalls()[11];
 };
 
 extern "C" void* NOS_create()
