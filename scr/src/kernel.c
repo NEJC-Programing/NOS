@@ -48,6 +48,8 @@ uint32_t * Get_Syscall_Table()
 {
 	return syscalls;
 }
+extern const uint8 sh;
+extern const uint8 sw;
 void syscall()
 {
 	__asm__ __volatile__ ("add $0x2c, %esp");
@@ -100,6 +102,17 @@ void syscall()
 					break;
 				case 2:
 					memset(ecx, al, edx);
+					break;
+			}
+			break;
+		case 2:
+			switch(ebx)
+			{
+				case 0:
+					__asm__ __volatile__ ("mov %0, %%ah"::"dN"(sw));
+					break;
+				case 1:
+					__asm__ __volatile__ ("mov %0, %%ah"::"dN"(sh));
 					break;
 			}
 			break;

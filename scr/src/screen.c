@@ -3,6 +3,8 @@ int cursorX = 0, cursorY = 0;
 const uint8 sw = 80,sh = 26,sd = 2; 
 int color = 0x0F;
 extern int Graphics_Mode;
+
+
 void clearLine(uint8 from,uint8 to)
 {
         uint16 i = sw * from * sd;
@@ -63,6 +65,8 @@ void newLineCheck()
                 scrollUp(1);
         }
 }
+
+
 
 void printch(char c)
 {
