@@ -10,6 +10,7 @@ all:
 	$(CC) $(CCF) serial.c -o objs/serial.o
 	$(CC) $(CCF) ide.c -o objs/ide.o
 	$(CC) $(CCF) sound.c -o objs/sound.o
+	$(CC) $(CCF) kb.c -o objs/kb.o
 	mkdir system/objs/ -p
 	$(CC) $(CCF) system/bios32.c -o system/objs/bios32.o
 	$(CC) $(CCF) system/gdt.c -o system/objs/gdt.o
@@ -21,4 +22,4 @@ all:
 
 link:
 	ld -m elf_i386 -r -o objs/sys.o system/objs/asmbios32.o system/objs/bios32.o system/objs/helpers.o system/objs/gdt.o system/objs/idt.o system/objs/tss.o
-	ld -m elf_i386 -r -o ../../obj/drivers.o objs/cmos.o objs/serial.o objs/drivers.o objs/ide.o objs/sound.o objs/sys.o
+	ld -m elf_i386 -r -o ../../obj/drivers.o objs/cmos.o objs/serial.o objs/drivers.o objs/ide.o objs/sound.o objs/sys.o objs/kb.o

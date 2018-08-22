@@ -24,6 +24,7 @@ void kmain()
 	memset(0x0, 0,0x100000);
 	printf("start = 0x%x  kmain = 0x%x\n",start,kmain);
 	driver_init();
+	keyboard_init();
 	syscall_init();
 	timer_install();
 	Date_and_Time s = Get_Date_and_Time();
