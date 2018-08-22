@@ -33,8 +33,6 @@ void panic(string reason, int bsod);
 void delay(int sec);
 extern void entering_v86(uint32 ss, uint32 esp, uint32 cs, uint32 eip);
 
-#define cli()\
-    asm ("cli");
-#define sti()\
-    asm ("sti");
+#define cli() asm ("cli");
+#define sti() asm ("sti");
 #endif

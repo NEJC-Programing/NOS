@@ -28,7 +28,6 @@ void kmain()
 	timer_install();
 	Date_and_Time s = Get_Date_and_Time();
 	printf("Date: %d/%d/%d\nTime: %d:%d \nSec: %d\n",s.day,s.month,s.year,s.hour,s.minute,s.second);
-	delay(3);
 	print("Press enter to continue\n");
 	readStr();
 	clearScreen();
@@ -163,4 +162,5 @@ void syscall_init()
 	add_syscall((uint32_t)SetCursor);
 	add_syscall((uint32_t)set_screen_color_from_color_code);
 	set_int(0x80, (uint32_t)syscall);
+	
 }
