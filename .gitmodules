@@ -1,0 +1,3 @@
+[submodule "scr/libs/newlib"]
+	path = scr/libs/newlib
+	url = https://github.com/bminor/newlib.git
