@@ -61,7 +61,7 @@ boot:
 ifneq ($(FS),ext2)
 	$(ASSEMBLER) -o nos/boot.bin scr/boot/boot_stage_2/stage_2_$(FS).asm
 else
-	make -c scr/boot/boot_stage_2/EXT2-ELF-bootloader/
+	make -C scr/boot/boot_stage_2/EXT2-ELF-bootloader/
 	mv scr/boot/boot_stage_2/EXT2-ELF-bootloader/boot.bin nos/boot.bin
 endif
 
