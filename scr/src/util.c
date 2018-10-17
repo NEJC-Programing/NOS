@@ -69,7 +69,8 @@ void * malloc(int nbytes)
 void * clean(int size)
 {
 	char s[size];
-	for (int i = 0; i!=size;i++)
+	s[1] = ' ';
+	for (int i = 1; i!=size;i++)
 	{
 		s[i] = 0x00;
 	}
