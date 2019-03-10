@@ -1,6 +1,0 @@
-[submodule "scr/libs/newlib"]
-	path = scr/libs/newlib
-	url = https://github.com/bminor/newlib.git
-[submodule "scr/boot/boot_stage_2/EXT2-ELF-Bootloader"]
-	path = scr/boot/boot_stage_2/EXT2-ELF-Bootloader
-	url = https://github.com/NEJC-Programing/EXT2-ELF-Bootloader.git
