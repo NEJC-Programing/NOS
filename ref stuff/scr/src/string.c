@@ -1,7 +1,7 @@
 #include "../include/string.h"
 uint16 strlength(string ch){
         uint16 i = 0;           //Changed counter to 0
-        while(ch[i++]);  
+        while(ch[i++]);
         return i-1;               //Changed counter to i instead of i--
 }
 
@@ -11,12 +11,12 @@ uint16 strlen(string ch)
 }
 
 
-uint8 strEql(string ch1,string ch2)                     
+uint8 strEql(string ch1,string ch2)
 {
         uint8 result = 1;
         uint8 size = strlength(ch1);
         if(size != strlength(ch2)) result =0;
-        else 
+        else
         {
         uint8 i = 0;
         for(i;i<=size;i++)
@@ -30,7 +30,7 @@ uint8 strcmp(string ch1, string ch2){
        uint8 result = 0;
         uint8 size = strlength(ch1);
         if(size != strlength(ch2)) result =0;
-        else 
+        else
         {
         uint8 i = 0;
         for(i;i<=size;i++)
@@ -38,9 +38,9 @@ uint8 strcmp(string ch1, string ch2){
                 if(ch1[i] != ch2[i]) result = 1;
         }
         }
-        return result; 
+        return result;
 }
-uint8 strEqle(string ch1,string ch2, int chars)                     
+uint8 strEqle(string ch1,string ch2, int chars)
 {
         uint8 result = 1;
         int i = 0;
@@ -93,20 +93,20 @@ char toupper(char c)
  };
 
 string decToHexa(int n)
-{   
+{
     // char array to store hexadecimal number
     char hexaDeciNum[100];
-     
+
     // counter for hexadecimal number array
     int i = 0;
     while(n!=0)
-    {   
+    {
         // temporary variable to store remainder
         int temp  = 0;
-         
+
         // storing remainder in temp variable.
         temp = n % 16;
-         
+
         // check if temp < 10
         if(temp < 10)
         {
@@ -118,10 +118,10 @@ string decToHexa(int n)
             hexaDeciNum[i] = temp + 55;
             i++;
         }
-         
+
         n = n/16;
     }
-     
+
     // printing hexadecimal number array in reverse order
     string buff;
     int f = 0;

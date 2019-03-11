@@ -1,6 +1,6 @@
 #include "../include/screen.h"
 int cursorX = 0, cursorY = 0;
-const uint8 sw = 80,sh = 26,sd = 2; 
+const uint8 sw = 80,sh = 26,sd = 2;
 int color = 0x0F;
 extern int Graphics_Mode;
 
@@ -45,12 +45,12 @@ void scrollUp(uint8 lineNumber)
                 vidmem[i] = vidmem[i+sw*2*lineNumber];
         }
         clearLine(sh-1-lineNumber,sh-1);
-        if((cursorY - lineNumber) < 0 ) 
+        if((cursorY - lineNumber) < 0 )
         {
                 cursorY = 0;
                 cursorX = 0;
-        } 
-        else 
+        }
+        else
         {
                 cursorY -= lineNumber;
         }
@@ -72,18 +72,18 @@ void printch(char c)
 {
     if (Graphics_Mode)
     {
-    string vidmem = (string) 0xb8000;     
+    string vidmem = (string) 0xb8000;
     switch(c)
     {
         case (0x08):
-                if(cursorX > 0) 
+                if(cursorX > 0)
                 {
-	                cursorX--;									
-                        vidmem[(cursorY * sw + cursorX)*sd]=0;	     //(0xF0 & color)                          
+	                cursorX--;
+                        vidmem[(cursorY * sw + cursorX)*sd]=0;	     //(0xF0 & color)
 	        }
 	        break;
        /* case (0x09):
-                cursorX = (cursorX + 8) & ~(8 - 1); 
+                cursorX = (cursorX + 8) & ~(8 - 1);
                 break;*/
         case ('\r'):
                 cursorX = 0;
@@ -95,20 +95,20 @@ void printch(char c)
         default:
                 vidmem [((cursorY * sw + cursorX))*sd] = c;
                 vidmem [((cursorY * sw + cursorX))*sd+1] = color;
-                cursorX++; 
+                cursorX++;
                 break;
-	
+
     }
-    if(cursorX >= sw)                                                                   
+    if(cursorX >= sw)
     {
-        cursorX = 0;                                                                
-        cursorY++;                                                                    
+        cursorX = 0;
+        cursorY++;
     }
     updateCursor();
     newLineCheck();
     }else
     {
-        
+
     }
 }
 
@@ -122,7 +122,7 @@ void print (string ch)
         }
        /* while((ch[i] != (char)0) && (i<=length))
                 print(ch[i++]);*/
-        
+
 }
 void set_screen_color(int text_color,int bg_color)
 {
@@ -163,7 +163,7 @@ void __itoa_s(int i,unsigned base,char* buf) {
    __itoa(i,base,buf);
 }
 char tbuf[32];
-char bchars[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};      
+char bchars[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 void __itoa(unsigned i,unsigned base,char* buf) {
 	int pos = 0;
 	int opos = 0;

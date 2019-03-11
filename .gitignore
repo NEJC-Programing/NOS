@@ -1,10 +1,5 @@
 *.elf
 *.o
 *.md5
-*.bin
 *.img
-.vscode/*
 *.bin
-*.bin
-*.img
-nos/kernel.bin
