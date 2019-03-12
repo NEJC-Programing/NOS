@@ -5,7 +5,14 @@
 Noam's Operating System
 ---
 # To do:
-* boatloader [ ]
-  * stage 1 [ ]
-  * stage 2 [ ]
-* kernel [ ]
+- [ ] boatloader
+  - [ ] stage 1
+  - [ ] stage 2
+- [ ] kernel
+ - [ ] libk
+  - [ ] string
+   - [ ] strlen
+   - [ ] strcpy
+ - [ ] libc
+ - [ ] drivers
+ - [ ] syscalls
