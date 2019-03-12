@@ -9,10 +9,10 @@ Noam's Operating System
   - [ ] stage 1
   - [ ] stage 2
 - [ ] kernel
- - [ ] libk
-  - [ ] string
-   - [ ] strlen
-   - [ ] strcpy
+  - [ ] libk
+    - [ ] string
+      - [ ] strlen
+      - [ ] strcpy
  - [ ] libc
  - [ ] drivers
  - [ ] syscalls
