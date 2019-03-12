@@ -13,6 +13,6 @@ Noam's Operating System
     - [ ] string
       - [ ] strlen
       - [ ] strcpy
- - [ ] libc
- - [ ] drivers
- - [ ] syscalls
+  - [ ] libc
+  - [ ] drivers
+  - [ ] syscalls
