@@ -10,6 +10,7 @@ Noam's Operating System
     -   [ ] stage 1
     -   [ ] stage 2
     
+    
 -   [ ] kernel
     -   [ ] libk
         -   [ ] string
