@@ -1,10 +1,10 @@
 #include <libk.h>
 
-int strlen(const char * s) {
-    int len = 0;
-    while(*s++)
-        len++;
-    return len;
+uint16_t strlen(string ch)
+{
+  uint16_t i = 0;
+  while (ch[i++]);
+  return i-1;
 }
 
 

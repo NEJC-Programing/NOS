@@ -2,7 +2,7 @@
 
 bool textmode = true;
 
-void print (const char * ch)
+void print (string ch)
 {
   if (textmode){
     TM_print(ch);

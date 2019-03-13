@@ -37,7 +37,7 @@ typedef unsigned int DWORD;
 
 ///////////////////////////////////////////
 
-typedef const char * string;
+typedef char* string;
 #define NULL ((void*) 0)
 typedef enum {false, true} bool;
 #endif

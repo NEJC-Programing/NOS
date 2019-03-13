@@ -7,7 +7,7 @@ int color = 0x0F;
 void TM_clearLine(uint8 from,uint8 to)
 {
         uint16 i = sw * from * sd;
-        char* vidmem=(char*)0xb8000;
+        string vidmem=(string)0xb8000;
         for(i;i<(sw*to*sd);i++)
         {
                 vidmem[(i / 2)*2 + 1 ] = color ;
@@ -35,7 +35,7 @@ void TM_clearScreen()
 
 void TM_scrollUp(uint8 lineNumber)
 {
-        char* vidmem = (char*)0xb8000;
+        string vidmem = (string)0xb8000;
         uint16 i = 0;
         TM_clearLine(0,lineNumber-1);                                            //updated
         for (i;i<sw*(sh-1)*2;i++)
@@ -68,7 +68,7 @@ void TM_newLineCheck()
 
 void TM_printch(char c)
 {
-    char* vidmem = (char*) 0xb8000;
+    string vidmem = (string) 0xb8000;
     switch(c)
     {
         case (0x08):
@@ -104,10 +104,10 @@ void TM_printch(char c)
     TM_newLineCheck();
 }
 
-void TM_print (const char * ch)
+void TM_print (string ch)
 {
         uint16 i = 0;
-        uint8 length = strlen(ch);              //Updated (Now we store const char * length on a variable to call the function only once)
+        uint8 length = strlen(ch);              //Updated (Now we store string length on a variable to call the function only once)
         for(i;i<length;i++)
         {
                 TM_printch(ch[i]);
@@ -119,7 +119,7 @@ void TM_setcolor(int color_code)
   color = color_code;
 }
 
-void TM_print_colored(const char * ch,int color_code)
+void TM_print_colored(string ch,int color_code)
 {
 	int current_color = color;
 	TM_setcolor(color_code);
