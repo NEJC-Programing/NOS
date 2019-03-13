@@ -36,7 +36,7 @@ int printf (const char* str, ...) {
 	char* s = 0;
 	va_list ap;
 	va_start(ap, str);
-	for(uint32 i = 0; i < strlen((string)str); i++)
+	for(uint32 i = 0; i < strlen(str); i++)
 	{
 		if(str[i] == '%')
 		{
