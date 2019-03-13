@@ -9,11 +9,13 @@ Noam's Operating System
 -   [ ] boatloader
     -   [ ] stage 1
     -   [ ] stage 2
+    
 -   [ ] kernel
     -   [ ] libk
         -   [ ] string
             -   [ ] strlen
             -   [ ] strcpy
+            
     -   [ ] libc
     -   [ ] drivers
     -   [ ] syscalls
