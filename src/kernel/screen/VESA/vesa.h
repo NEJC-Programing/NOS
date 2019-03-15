@@ -1,14 +1,23 @@
 #ifndef VESA_H
 #define VESA_H
 #include <types.h>
-struct VbeInfoBlock {
-   char VbeSignature[4];             // == "VESA"
-   uint16_t VbeVersion;                 // == 0x0300 for VBE 3.0
-   uint16_t OemStringPtr[2];            // isa vbeFarPtr
-   uint8_t Capabilities[4];
-   uint16_t VideoModePtr[2];         // isa vbeFarPtr
-   uint16_t TotalMemory;             // as # of 64KB blocks
-} __attribute__((packed));
+
+typedef struct VESA_INFO
+{
+   unsigned char  VESASignature[4]     __attribute__ ((packed));
+   unsigned short VESAVersion          __attribute__ ((packed));
+   unsigned long  OEMStringPtr         __attribute__ ((packed));
+   unsigned char  Capabilities[4]      __attribute__ ((packed));
+   unsigned long  VideoModePtr         __attribute__ ((packed));
+   unsigned short TotalMemory          __attribute__ ((packed));
+   unsigned short OemSoftwareRev       __attribute__ ((packed));
+   unsigned long  OemVendorNamePtr     __attribute__ ((packed));
+   unsigned long  OemProductNamePtr    __attribute__ ((packed));
+   unsigned long  OemProductRevPtr     __attribute__ ((packed));
+   unsigned char  Reserved[222]        __attribute__ ((packed));
+   unsigned char  OemData[256]         __attribute__ ((packed));
+} VESA_INFO;
+
 
 typedef struct MODE_INFO
    {
@@ -46,5 +55,13 @@ typedef struct MODE_INFO
       unsigned short OffScreenMemSize     __attribute__ ((packed));
       unsigned char  Reserved[206]        __attribute__ ((packed));
    } MODE_INFO;
-uint16_t findMode(int x, int y, int d);
+//////////////////////////////////////////////////////////
+void GoGraphics();
+int get_vesa_info();
+int get_mode_info(int mode);
+int find_vesa_mode(int w, int h);
+int set_vesa_mode(int w, int h);
+void set_vesa_bank(int bank_number);
+void putpixel_vesa_640x480(int x, int y, int color);
+void copy_to_vesa_screen(char *memory_buffer, int screen_size);
 #endif
