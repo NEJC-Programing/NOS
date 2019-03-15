@@ -1,5 +1,6 @@
 #include <types.h>
 extern void _start();
+extern void GoGraphics();
 void start()
 {
   /*
@@ -9,5 +10,9 @@ void start()
   * call main
   */
   print("In start\n");
-  printf("_start = %x\n", _start);
+//  printf("_start = %x\n", _start);
+  printf("%s\n", "go");
+  GoGraphics();
+  print("test\n");
+  for(;;);
 }

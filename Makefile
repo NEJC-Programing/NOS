@@ -24,7 +24,10 @@ all:
 KOP = obj/kernel/
 KSP = src/kernel/
 KELF = nos/kernel.elf
-KOBJ = $(KOP)start.asm.o $(KOP)start.c.o $(KOP)main.c.o $(KOP)system/ports.c.o $(KOP)screen/textmode.c.o $(KOP)system/libk.c.o $(KOP)screen/screen.c.o $(KOP)screen/printf.c.o
+KOBJ = $(KOP)start.asm.o $(KOP)start.c.o $(KOP)main.c.o $(KOP)system/ports.c.o $(KOP)screen/textmode.c.o $(KOP)system/libk.c.o \
+$(KOP)screen/screen.c.o $(KOP)screen/printf.c.o $(KOP)system/bios_32.asm.o $(KOP)screen/VESA/vesa.c.o
+
+
 kernel:
 	mkdir $(KOP) -p
 	$(AS) $(ASF) $(KSP)start.asm -o $(KOP)start.asm.o
@@ -35,10 +38,14 @@ kernel:
 	$(CC) $(CCF) $(KSP)screen/textmode.c -o $(KOP)screen/textmode.c.o
 	$(CC) $(CCF) $(KSP)screen/screen.c -o $(KOP)screen/screen.c.o
 	$(CC) $(CCF) $(KSP)screen/printf.c -o $(KOP)screen/printf.c.o
+	#VESA
+	mkdir $(KOP)/screen/VESA/ -p
+	$(CC) $(CCF) $(KSP)screen/VESA/vesa.c -o $(KOP)screen/VESA/vesa.c.o
 	#system
 	mkdir $(KOP)/system/ -p
 	$(CC) $(CCF) $(KSP)system/ports.c -o $(KOP)system/ports.c.o
 	$(CC) $(CCF) $(KSP)system/libk.c -o $(KOP)system/libk.c.o
+	$(AS) $(ASF) $(KSP)system/bios_32.asm -o $(KOP)system/bios_32.asm.o
 	#link
 	$(LD) $(LDF) $(KOBJ) -o $(KELF)
 
