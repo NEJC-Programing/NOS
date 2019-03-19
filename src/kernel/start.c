@@ -14,5 +14,5 @@ void start()
   printf("%s\n", "go");
   GoGraphics();
   print("test\n");
-  for(;;);
+  hlt();
 }

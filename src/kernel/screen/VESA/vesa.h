@@ -56,11 +56,12 @@ typedef struct MODE_INFO
       unsigned char  Reserved[206]        __attribute__ ((packed));
    } MODE_INFO;
 //////////////////////////////////////////////////////////
-void GoGraphics();
+int GoGraphics();
 int get_vesa_info();
 int get_mode_info(int mode);
-int find_vesa_mode(int w, int h);
-int set_vesa_mode(int w, int h);
+//int find_vesa_mode(int w, int h);
+//int set_vesa_mode(int w, int h);
+int set_vesa_mode(int mode_number);
 void set_vesa_bank(int bank_number);
 void putpixel_vesa_640x480(int x, int y, int color);
 void copy_to_vesa_screen(char *memory_buffer, int screen_size);

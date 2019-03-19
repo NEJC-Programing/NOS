@@ -40,4 +40,9 @@ typedef unsigned int DWORD;
 typedef char* string;
 #define NULL ((void*) 0)
 typedef enum {false, true} bool;
+
+/////////////////////////////////////////////
+
+#define hlt() asm("hlt")
+
 #endif
