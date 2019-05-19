@@ -27,8 +27,8 @@ int GoGraphics()
     for (size_t j = 0; j < 100; j++) {
       putpixel_vesa_640x480(i,j,10);
     }
-  }
-
+  }//*/
+   
 }
 
 int get_vesa_info()

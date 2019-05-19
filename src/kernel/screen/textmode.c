@@ -104,16 +104,7 @@ void TM_printch(char c)
     TM_newLineCheck();
 }
 
-void TM_print (string ch)
-{
-        uint16 i = 0;
-        uint8 length = strlen(ch);              //Updated (Now we store string length on a variable to call the function only once)
-        for(i;i<length;i++)
-        {
-                TM_printch(ch[i]);
-        }
 
-}
 void TM_setcolor(int color_code)
 {
   color = color_code;
@@ -123,7 +114,7 @@ void TM_print_colored(string ch,int color_code)
 {
 	int current_color = color;
 	TM_setcolor(color_code);
-	TM_print(ch);
+	print(ch);
 	TM_setcolor(current_color);
 }
 
