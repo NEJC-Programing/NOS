@@ -22,6 +22,13 @@ void printch(char ch)
   }
 }
 
+void clearScreen()
+{
+  if (textmode)
+  {
+    TM_clearScreen();
+  }
+}
 ///////////////////////////garfics/////////////////////
 
 #define sh 200
