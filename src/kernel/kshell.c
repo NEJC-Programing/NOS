@@ -4,7 +4,7 @@
 
 void kshell(void)
 {
-    printf("\nKShell v %d.%d %d\n", MAJOR, MINOR, BUILD);
+    printf("\nKShell Version %d.%d Build %d\n\n", MAJOR, MINOR, BUILD);
     bool RUNNING = true;
     while (RUNNING)
     {
