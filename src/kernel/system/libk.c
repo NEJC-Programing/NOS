@@ -90,6 +90,7 @@ void * malloc(int nbytes)
 
 int strncmp (const char *s1, const char *s2, size_t n)
 {
+  
   unsigned char c1 = '\0';
   unsigned char c2 = '\0';
   if (n >= 4)
@@ -197,3 +198,4 @@ void * memcpy (void *dstpp, const void *srcpp, size_t len)
     }
     return dstpp;
 }
+

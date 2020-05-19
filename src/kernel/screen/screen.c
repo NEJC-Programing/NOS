@@ -29,6 +29,13 @@ void clearScreen()
     TM_clearScreen();
   }
 }
+
+void print_colored(string ch, int color_code)
+{
+  if (textmode){
+    TM_print_colored(ch, color_code);
+  }
+}  
 ///////////////////////////garfics/////////////////////
 
 #define sh 200
